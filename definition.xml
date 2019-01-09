@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<game name="My Little Pony - CCG" 
+	id="65656467-b709-43b2-a5c6-80c2f216adf9" 
+	octgnVersion="3.3.106.0" 
+	scriptVersion ="3.1.0.2"
+	version="2.3.0.01"
+	markersize="16"
+	tags="My Little Pony MLP CCG" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	description="My Little Pony CCG for two players.
+	&#xD;&#xD;Set in the magical land of Equestria, two players compete to see who can form the best teams and solve the most problems."
+	authors="Gabby Gums/GameMasterLuna" 
+	iconurl="http://i.imgur.com/yb30u50.jpg" 
+	setsurl="http://octgn.gamersjudgement.com/wordpress/mlpccg" 
+	gameurl="http://octgn.gamersjudgement.com/wordpress/mlpccg">
+
+	<scripts>
+		<script src="scripts/actions.py" />
+		<script src="scripts/events.py" />
+	</scripts>
+	
+   	<events>
+	       <event name="OnTableLoaded" action="chkTwoSided" />
+           <event name="OnDeckLoaded" action="loadPlayerGlobalVars" />
+		   <event name="OnCardsMoved" action="chkMultiplayer" />
+		   <event name="OnCardsMoved" action="autoAT" />
+           <event name="OnCardsMoved" action="autoRotateDilemma" />
+   	</events>
+	
+	<sounds>
+		<sound name="endturn" src="sounds/endturn.wav"/>
+	</sounds>
+	
+	<fonts>
+	</fonts>
+
+	<proxygen definitionsrc="proxy/proxydef.xml">
+	</proxygen>
+	
+	<documents>
+	</documents>
+	
+	<globalvariables>
+		<globalvariable name="FirstTurn" value="True" />
+		<globalvariable name="TurnStarted" value="False" />
+		<globalvariable name="Phase" value="Start" />
+		<globalvariable name="Exhausted" value="Start" />
+		<globalvariable name="PermExhausted" value="Start" />
+		<globalvariable name="VillainChallengeActive" value="False" />
+		<globalvariable name="mainPlayerId" value="0" />
+		<globalvariable name="villainPlayerId" value="0" />
+		<!-- <globalvariable name="Challenger1No" value="0" /> -->
+		<!-- <globalvariable name="Challenger2No" value="0" /> -->
+		<globalvariable name="villainChoice" value="0" />
+		<globalvariable name="KSChoice" value="0" />
+		<globalvariable name="PlayerDone" value="Start" />
+		<globalvariable name="PlayerStartDone" value="Start" />
+		<globalvariable name="VillainTurn" value="False" />
+		<globalvariable name="toggleAutoAT" value="True" />
+	</globalvariables>
+	
+	<card back="cards/back.png" front="cards/front.png" width="63" height="88">
+		<property name="Number" type="String" />
+		<property name="Element" type="String" />
+		<property name="MultiPrimaryElement" type="String" />
+		<property name="MultiSecondaryElement" type="String" />
+        <property name="TriPrimaryElement" type="String" />
+        <property name="TriSecondaryElement" type="String" />
+        <property name="TriElement" type="String" />
+		<property name="Type" type="String" />
+		<property name="Subname" type="String" />
+		<property name="Text" type="String" />
+		<property name="Traits" type="String" />
+		<property name="Keywords" type="String" />
+		<property name="Cost" type="String" />
+		<property name="PlayRequiredElement" type="String" />
+		<property name="PlayRequiredPower" type="String" />
+		<property name="SecondaryPlayRequiredElement" type="String" />
+		<property name="SecondaryPlayRequiredPower" type="String" />
+		<property name="TertiaryPlayRequiredElement" type="String" />
+		<property name="TertiaryPlayRequiredPower" type="String" />
+		<property name="Power" type="String" />
+		<property name="ProblemBonus" type="String" />
+		<property name="ProblemOpponentPower" type="String" />
+		<property name="ProblemPlayerElement1" type="String" />
+		<property name="ProblemPlayerElement1Power" type="String" />
+		<property name="ProblemPlayerElement2" type="String" />
+		<property name="ProblemPlayerElement2Power" type="String" />
+		<property name="Rarity" type="String" />
+	</card>
+	
+	<table name="Table" visibility="undefined" ordered="False" width="960" height="540" board="background/background.jpg" background="background/background.jpg" backgroundStyle="uniformToFill">
+		
+		<groupactions menu="Setup / Phases">
+			<groupaction menu="Game Setup" shortcut="F12" execute="setup" />
+			<groupaction menu="Jump to Start Turn" shortcut="F1" execute="turnStart" />
+			<groupaction menu="Jump to Troublemaker Phase" shortcut="F2" execute="turnTroublemaker" />
+			<groupaction menu="Jump to Main Phase" shortcut="F3" execute="turnMain" />
+			<groupaction menu="Jump to Score Phase" shortcut="F4" execute="turnScore" />
+			<groupaction menu="End Turn" shortcut="F5" execute="turnDone" />
+		</groupactions>
+		
+		<groupaction menu="Next Phase" shortcut="tab" execute="nextPhase" />
+		<groupaction menu="Declare Response" shortcut="F6" execute="holdOn" />
+
+		<groupactions menu="Special Abilities">
+			<groupaction menu="Inspired" shortcut="ALT+I" execute="inspired" />
+		</groupactions>
+		
+		<groupactions menu="Faceoff Actions">
+			<groupaction menu="Faceoff Flip" shortcut="CTRL+F" execute="faceoffFlipTable" />
+			<groupaction menu="Clear Faceoff Cards" shortcut="ALT+C" execute="clearFaceoff" />	
+		</groupactions>
+
+		<groupactions menu="Card actions">
+			<groupaction menu="Ready All Cards" shortcut="ALT+R" execute="readyAll" />
+			<groupaction menu="Scoop All Cards" shortcut="ALT+S" execute="scoop" />
+			<groupaction menu="Peek All Cards" shortcut="CTRL+SHIFT+P" execute="peekAll" />
+		</groupactions>
+		
+		<groupactions menu="Coins/Dice">
+			<groupaction menu="Flip a Coin" shortcut="ALT+F" execute="flipCoin" />
+			<groupaction menu="Roll a 6-sided" shortcut="ALT+6" execute="sixSided" />
+			<groupaction menu="Roll a x-sided" shortcut="ALT+X" execute="xSided" />
+		</groupactions>
+		
+		<groupactions menu="Points/Actions">
+			<groupaction menu="Gain Point" shortcut="CTRL+Q" execute="gainPoint" />
+			<groupaction menu="Subtract Point" shortcut="CTRL+W" execute="losePoint" />
+			<groupaction menu="Spend Action" shortcut="Enter" execute="spendAction" />
+			<groupaction menu="Gain Action" shortcut="CTRL+Enter" execute="increaseAction" />
+		</groupactions>
+		<!-- Token Gen (EDIT BY: GAMEMASTERLUNA) -->
+		<groupaction menu="Add Token" shortcut="ALT+T" execute="addToken" />
+		<!-- Villian Challenge  (EDIT BY: GAMEMASTERLUNA) -->
+		<groupaction menu="Start Villain Challenge" shortcut="CTRL+ALT+V" execute="activateVC" />
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		<cardaction menu="Exhaust/Ready/Replace" shortcut="F7" default="True" execute="exhaust" />
+		<cardaction menu="Permanently Exhaust" shortcut="CTRL+F7" default="True" execute="permExhaust" />
+		<cardaction menu="Flip Card" shortcut="F9" execute="flipcard" />
+		<cardaction menu="Flag/Unflag Pumped" shortcut="F8" execute="markPumped" />
+		<cardaction menu="Flag/Unflag Cutie Mark" shortcut="CTRL+F8" execute="markCutieMark" />
+		<cardaction menu="Duplicate" shortcut="SHIFT+F8" execute="duplicate" />
+		
+		<cardactions menu="Markers">
+			<cardaction menu="Add Marker" shortcut="CTRL+1" execute="addAction" />
+			<cardaction menu="Sub Marker" shortcut="CTRL+SHIFT+1" execute="subAction" />
+		</cardactions>
+		
+		<!-- Card Colour Selection (EDIT BY: GAMEMASTERLUNA) -->
+		<cardactions menu="Colours">
+			<cardaction menu="Add Loyalty" shortcut="CTRL+ALT+B" execute="addBlue" />
+			<cardaction menu="Add Honesty" shortcut="CTRL+ALT+O" execute="addOrange" />
+			<cardaction menu="Add Laughter" shortcut="CTRL+ALT+P" execute="addPink" />
+			<cardaction menu="Add Magic" shortcut="CTRL+ALT+U" execute="addPurple" />
+			<cardaction menu="Add Generosity" shortcut="CTRL+ALT+W" execute="addWhite" />
+			<cardaction menu="Add Kindness" shortcut="CTRL+ALT+Y" execute="addYellow" />
+			<cardaction menu="Remove Colour" shortcut="CTRL+ALT+R" execute="removeColour" />
+		</cardactions>
+		
+		<cardactions menu="Card Rotation">
+			<cardaction menu="Rotate Card Up" shortcut="UP" execute="rotUp" />
+			<cardaction menu="Rotate Card Right" shortcut="RIGHT" execute="rotRight" />
+			<cardaction menu="Rotate Card Down" shortcut="DOWN" execute="rotDown" />
+			<cardaction menu="Rotate Card Left" shortcut="LEFT" execute="rotLeft" />
+		</cardactions>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+	</table>
+	
+    <!-- width="63" height="88" for hand and group by default but OCTGN is complaining about it for now -->
+	<player summary="Hand: {#Hand} / Points: {#Points} / Action Tokens: {#Actions}">
+		<counter name="Points" default="0" icon="counters/Points.png" />
+		<counter name="Actions" default="0" icon="counters/Action_Marker.png" />
+		
+		<hand name="Hand" visibility="me" ordered="False" icon="groups/hand.png">
+			<groupaction menu="Random Discard" shortcut="ALT+D" execute="randomDiscard" />
+			<groupaction menu="Random Discard Many" shortcut="ALT+SHIFT+D" execute="discardMany" />
+			<groupaction menu="Take a Mulligan" shortcut="CTRL+M" execute="mulligan" />
+			<groupaction menu="Toggle Auto AT and Color Req Check" shortcut="CTRL+C" execute="toggleAutoAT" />
+		</hand>
+
+		<group name="Deck" visibility="none" icon="groups/deck.png">
+			<groupaction menu="Faceoff Flip" shortcut="F10" execute="faceoffFlip" />				
+			<groupaction menu="Shuffle" shortcut="CTRL+S" execute="shuffle" />
+			<groupaction menu="Draw" shortcut="CTRL+D" default="True" execute="draw" />
+			<groupaction menu="Pay 1 and Draw" shortcut="CTRL+A" execute="payDraw" />
+			<groupaction menu="Draw Many" shortcut="CTRL+SHIFT+D" execute="drawMany" />
+			<groupaction menu="Discard Many From Top" execute="discardManyFromTop" />
+		</group>
+
+		<group name="Problem Deck" visibility="none" icon="groups/problem.png">
+			<groupaction menu="Shuffle" shortcut="CTRL+P" execute="shuffle" />
+		</group>
+
+		<group name="Discard Pile" visibility="all" icon="groups/discard.png"> 
+			<groupaction menu="Reshuffle into Deck" execute="reshuffle" />
+			<groupaction menu="Move One Random to Hand" execute="moveOneRandom" />
+		</group>
+		
+		<group name="Banished Pile" visibility="all" icon="groups/banished.png">      
+		</group>
+
+	</player>
+	
+	<deck>
+		<section name="Mane Character" group="Hand" />
+		<section name="Friends" group="Deck" />
+		<section name="Resources" group="Deck" />
+		<section name="Events" group="Deck" />
+		<section name="Troublemakers" group="Deck" />
+		<section name="Problems" group="Problem Deck" />
+	</deck>
+	
+</game>

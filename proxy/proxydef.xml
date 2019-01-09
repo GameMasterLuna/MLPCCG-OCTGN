@@ -1,0 +1,2783 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates>
+	
+	<blocks>
+		<!-- Dummy blocks used if a template section only looks for conditionals -->
+		<block type="overlay" id="dummyOverlay" src="proxy/proxyImages/dummy.png">
+			<location x="0" y="0" /> 
+		</block>
+		<block type="text" id="dummyText">
+			<location x="0" y="0" />
+			<text color="#FFFFFF" size="0" />
+			<border color="#FFFFFF" size="0" />
+		</block>
+		<block type="text" id="default">
+			<location x="10" y="25" />
+			<text color="#000000" size="30" />
+		</block>	
+		
+		<!-- Overlay for Card Type Backgrounds -->
+		<block type="overlay" id="eventBack" src="proxy/proxyImages/cardTemplates/card-event.png">
+			<location x="0" y="0" />
+		</block>		
+
+		<block type="overlay" id="resourceBack" src="proxy/proxyImages/cardTemplates/card-resource.png">
+			<location x="0" y="0" />
+		</block>		
+
+		<block type="overlay" id="troublemakerBack" src="proxy/proxyImages/cardTemplates/card-troublemaker.png">
+			<location x="0" y="0" />
+		</block>
+		
+		<!-- Card Type Background for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="overlay" id="dilemmaBack" src="proxy/proxyImages/cardTemplates/card-dilemma.png">
+			<location x="0" y="0" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+		
+		<!-- Overlay for Card Type Symbol -->
+		
+		<block type="overlay" id="typeFriend" src="proxy/proxyImages/cardTemplates/type-friend.png">
+			<location x="33" y="30" />
+		</block>
+		
+		<block type="overlay" id="typeEvent" src="proxy/proxyImages/cardTemplates/type-event.png">
+			<location x="33" y="30" />
+		</block>
+		
+		<block type="overlay" id="typeMane" src="proxy/proxyImages/cardTemplates/type-mane-char.png">
+			<location x="33" y="30" />
+		</block>
+		
+		<block type="overlay" id="typeProblem" src="proxy/proxyImages/cardTemplates/type-problem.png">
+			<location x="33" y="30" />
+		</block>
+		
+		<block type="overlay" id="typeResource" src="proxy/proxyImages/cardTemplates/type-resource.png">
+			<location x="33" y="30" />
+		</block>
+		<!-- Type Symbol for multicolored friends (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="overlay" id="typeFriendMulti" src="proxy/proxyImages/cardTemplates/type-friend-multi.png">
+			<location x="33" y="30" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		<!-- Type Symbol for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="overlay" id="typeDilemma" src="proxy/proxyImages/cardTemplates/type-dilemma.png">
+			<location x="30" y="30" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		<!-- Overlay for Mane colors -->
+		<block type="overlay" id="maneLoyalty" src="proxy/proxyImages/cardTemplates/card-mane-char-blue.png">
+			<location x="0" y="0" />
+		</block>
+		
+		<block type="overlay" id="maneKindness" src="proxy/proxyImages/cardTemplates/card-mane-char-yellow.png">
+			<location x="0" y="0" />
+		</block>		
+		
+		<block type="overlay" id="maneMagic" src="proxy/proxyImages/cardTemplates/card-mane-char-purple.png">
+			<location x="0" y="0" />
+		</block>		
+		
+		<block type="overlay" id="maneGenerosity" src="proxy/proxyImages/cardTemplates/card-mane-char-white.png">
+			<location x="0" y="0" />
+		</block>		
+		
+		<block type="overlay" id="maneHonesty" src="proxy/proxyImages/cardTemplates/card-mane-char-orange.png">
+			<location x="0" y="0" />
+		</block>		
+		
+		<block type="overlay" id="maneLaughter" src="proxy/proxyImages/cardTemplates/card-mane-char-pink.png">
+			<location x="0" y="0" />
+		</block>
+		
+		<!-- Overlay for Mane Start/Boosted -->
+		
+		<block type="overlay" id="maneStart" src="proxy/proxyImages/cardTemplates/card-mane-banner-startside.png">
+			<location x="33" y="90" />
+		</block>
+		
+		<block type="overlay" id="maneBoosted" src="proxy/proxyImages/cardTemplates/card-mane-banner-boostedside.png">
+			<location x="33" y="90" />
+		</block>		
+		
+		
+		<!-- Overlay for Friend colors -->
+		<block type="overlay" id="friendLoyalty" src="proxy/proxyImages/cardTemplates/card-friend-blue.png">
+			<location x="0" y="0" />
+		</block>
+	
+		<block type="overlay" id="friendKindness" src="proxy/proxyImages/cardTemplates/card-friend-yellow.png">
+					<location x="0" y="0" />
+		</block>
+
+		<block type="overlay" id="friendMagic" src="proxy/proxyImages/cardTemplates/card-friend-purple.png">
+					<location x="0" y="0" />
+		</block>
+
+		<block type="overlay" id="friendGenerosity" src="proxy/proxyImages/cardTemplates/card-friend-white.png">
+					<location x="0" y="0" />
+		</block>
+
+		<block type="overlay" id="friendHonesty" src="proxy/proxyImages/cardTemplates/card-friend-orange.png">
+					<location x="0" y="0" />
+		</block>
+
+		<block type="overlay" id="friendLaughter" src="proxy/proxyImages/cardTemplates/card-friend-pink.png">
+					<location x="0" y="0" />
+		</block>
+
+		<block type="overlay" id="friendNone" src="proxy/proxyImages/cardTemplates/card-friend-none.png">
+					<location x="0" y="0" />
+		</block>
+		<!-- Overlay for Friend colors for multicolored friends (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="overlay" id="friendMulti" src="proxy/proxyImages/cardTemplates/card-friend-multi.png">
+					<location x="0" y="0" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		
+		<!-- Element overlay for card power -->
+		
+		<block type="overlay" id="powerLoyalty" src="proxy/proxyImages/generalIcons/Loyalty_Power_Icon.png">
+			<location x="368" y="37" />
+		</block>
+		
+		<block type="overlay" id="requiredPowerLoyalty" src="proxy/proxyImages/generalIcons/Loyalty_Power_Icon.png">
+			<location x="33" y="170" />
+		</block>
+		
+		<block type="overlay" id="powerKindness" src="proxy/proxyImages/generalIcons/Kindness_Power_Icon.png">
+			<location x="368" y="37" />
+		</block>
+		
+		<block type="overlay" id="requiredPowerKindness" src="proxy/proxyImages/generalIcons/Kindness_Power_Icon.png">
+			<location x="33" y="170" />
+		</block>
+		
+		<block type="overlay" id="powerMagic" src="proxy/proxyImages/generalIcons/Magic_Power_Icon.png">
+			<location x="368" y="37" />
+		</block>
+		
+		<block type="overlay" id="requiredPowerMagic" src="proxy/proxyImages/generalIcons/Magic_Power_Icon.png">
+			<location x="33" y="170" />
+		</block>
+			
+		<block type="overlay" id="powerGenerosity" src="proxy/proxyImages/generalIcons/Generosity_Power_Icon.png">
+			<location x="368" y="37" />
+		</block>
+		
+		<block type="overlay" id="requiredPowerGenerosity" src="proxy/proxyImages/generalIcons/Generosity_Power_Icon.png">
+			<location x="33" y="170" />
+		</block>	
+		
+		<block type="overlay" id="powerHonesty" src="proxy/proxyImages/generalIcons/Honesty_Power_Icon.png">
+			<location x="368" y="37" />
+		</block>
+		
+		<block type="overlay" id="requiredPowerHonesty" src="proxy/proxyImages/generalIcons/Honesty_Power_Icon.png">
+			<location x="33" y="170" />
+		</block>	
+		
+		<block type="overlay" id="powerLaughter" src="proxy/proxyImages/generalIcons/Laughter_Power_Icon.png">
+			<location x="368" y="37" />
+		</block>
+		
+		<block type="overlay" id="requiredPowerLaughter" src="proxy/proxyImages/generalIcons/Laughter_Power_Icon.png">
+			<location x="33" y="170" />
+		</block>
+		
+		<!-- Element overlay for multicolored friends (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="overlay" id="powerMulti" src="proxy/proxyImages/generalIcons/Multi_Power_Icon.png">
+			<location x="318" y="37" />
+		</block>
+		
+		<block type="overlay" id="primaryPowerLoyalty" src="proxy/proxyImages/generalIcons/Multi_Loyalty_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryPowerLoyalty" src="proxy/proxyImages/generalIcons/Multi_Loyalty_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryRequiredPowerLoyalty" src="proxy/proxyImages/generalIcons/Loyalty_Power_Icon.png">
+			<location x="33" y="220" />
+		</block>
+		
+		<block type="overlay" id="primaryPowerKindness" src="proxy/proxyImages/generalIcons/Multi_Kindness_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryPowerKindness" src="proxy/proxyImages/generalIcons/Multi_Kindness_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryRequiredPowerKindness" src="proxy/proxyImages/generalIcons/Kindness_Power_Icon.png">
+			<location x="33" y="220" />
+		</block>
+		
+		<block type="overlay" id="primaryPowerMagic" src="proxy/proxyImages/generalIcons/Multi_Magic_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryPowerMagic" src="proxy/proxyImages/generalIcons/Multi_Magic_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+
+		<block type="overlay" id="secondaryRequiredPowerMagic" src="proxy/proxyImages/generalIcons/Magic_Power_Icon.png">
+			<location x="33" y="220" />
+		</block>
+		
+		<block type="overlay" id="primaryPowerGenerosity" src="proxy/proxyImages/generalIcons/Multi_Generosity_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryPowerGenerosity" src="proxy/proxyImages/generalIcons/Multi_Generosity_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryRequiredPowerGenerosity" src="proxy/proxyImages/generalIcons/Generosity_Power_Icon.png">
+			<location x="33" y="220" />
+		</block>
+		
+		<block type="overlay" id="primaryPowerHonesty" src="proxy/proxyImages/generalIcons/Multi_Honesty_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryPowerHonesty" src="proxy/proxyImages/generalIcons/Multi_Honesty_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryRequiredPowerHonesty" src="proxy/proxyImages/generalIcons/Honesty_Power_Icon.png">
+			<location x="33" y="220" />
+		</block>	
+		
+		<block type="overlay" id="primaryPowerLaughter" src="proxy/proxyImages/generalIcons/Multi_Laughter_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryPowerLaughter" src="proxy/proxyImages/generalIcons/Multi_Laughter_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+		
+		<block type="overlay" id="secondaryRequiredPowerLaughter" src="proxy/proxyImages/generalIcons/Laughter_Power_Icon.png">
+			<location x="33" y="220" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+        
+        <!-- Element overlay for tri-colored friends (EDIT BY: GAMEMASTERLUNA) -->
+        <block type="overlay" id="powerMultiTri" src="proxy/proxyImages/generalIcons/Multi_Power_Tri_Icon.png">
+			<location x="270" y="37" />
+		</block>
+		
+		<block type="overlay" id="triPrimaryPowerLoyalty" src="proxy/proxyImages/generalIcons/Multi_Loyalty_Symbol.png">
+			<location x="296" y="34" />
+		</block>
+		
+		<block type="overlay" id="triSecondaryPowerLoyalty" src="proxy/proxyImages/generalIcons/Multi_Loyalty_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+        
+        <block type="overlay" id="tertiaryPowerLoyalty" src="proxy/proxyImages/generalIcons/Multi_Loyalty_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+		
+        <block type="overlay" id="tertiaryRequiredPowerLoyalty" src="proxy/proxyImages/generalIcons/Loyalty_Power_Icon.png">
+			<location x="33" y="270" />
+		</block>
+        
+        <block type="overlay" id="triPrimaryPowerKindness" src="proxy/proxyImages/generalIcons/Multi_Kindness_Symbol.png">
+			<location x="296" y="34" />
+		</block>
+		
+		<block type="overlay" id="triSecondaryPowerKindness" src="proxy/proxyImages/generalIcons/Multi_Kindness_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+        
+        <block type="overlay" id="tertiaryPowerKindness" src="proxy/proxyImages/generalIcons/Multi_Kindness_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+		
+        <block type="overlay" id="tertiaryRequiredPowerKindness" src="proxy/proxyImages/generalIcons/Kindness_Power_Icon.png">
+			<location x="33" y="270" />
+		</block>
+        
+        <block type="overlay" id="triPrimaryPowerMagic" src="proxy/proxyImages/generalIcons/Multi_Magic_Symbol.png">
+			<location x="296" y="34" />
+		</block>
+		
+		<block type="overlay" id="triSecondaryPowerMagic" src="proxy/proxyImages/generalIcons/Multi_Magic_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+        
+        <block type="overlay" id="tertiaryPowerMagic" src="proxy/proxyImages/generalIcons/Multi_Magic_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+		
+        <block type="overlay" id="tertiaryRequiredPowerMagic" src="proxy/proxyImages/generalIcons/Magic_Power_Icon.png">
+			<location x="33" y="270" />
+		</block>
+        
+        <block type="overlay" id="triPrimaryPowerGenerosity" src="proxy/proxyImages/generalIcons/Multi_Generosity_Symbol.png">
+			<location x="296" y="34" />
+		</block>
+		
+		<block type="overlay" id="triSecondaryPowerGenerosity" src="proxy/proxyImages/generalIcons/Multi_Generosity_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+        
+        <block type="overlay" id="tertiaryPowerGenerosity" src="proxy/proxyImages/generalIcons/Multi_Generosity_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+		
+        <block type="overlay" id="tertiaryRequiredPowerGenerosity" src="proxy/proxyImages/generalIcons/Generosity_Power_Icon.png">
+			<location x="33" y="270" />
+		</block>
+        
+        <block type="overlay" id="triPrimaryPowerHonesty" src="proxy/proxyImages/generalIcons/Multi_Honesty_Symbol.png">
+			<location x="296" y="34" />
+		</block>
+		
+		<block type="overlay" id="triSecondaryPowerHonesty" src="proxy/proxyImages/generalIcons/Multi_Honesty_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+		
+        <block type="overlay" id="tertiaryPowerHonesty" src="proxy/proxyImages/generalIcons/Multi_Honesty_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+
+        <block type="overlay" id="tertiaryRequiredPowerHonesty" src="proxy/proxyImages/generalIcons/Honesty_Power_Icon.png">
+			<location x="33" y="270" />
+		</block>
+        
+		<block type="overlay" id="triPrimaryPowerLaughter" src="proxy/proxyImages/generalIcons/Multi_Laughter_Symbol.png">
+			<location x="296" y="34" />
+		</block>
+		
+		<block type="overlay" id="triSecondaryPowerLaughter" src="proxy/proxyImages/generalIcons/Multi_Laughter_Symbol.png">
+			<location x="344" y="34" />
+		</block>
+		
+        <block type="overlay" id="tertiaryPowerLaughter" src="proxy/proxyImages/generalIcons/Multi_Laughter_Symbol.png">
+			<location x="392" y="34" />
+		</block>
+        
+        <block type="overlay" id="tertiaryRequiredPowerLaughter" src="proxy/proxyImages/generalIcons/Laughter_Power_Icon.png">
+			<location x="33" y="270" />
+		</block>
+        
+		<block type="text" id="cardName">
+			<location x="95" y="32" />
+			<text color="#FFFFFF" size="20" font="fonts/name.ttf" />
+		</block>
+		<block type="text" id="cardSubname">
+			<location x="95" y="62" />
+			<text color="#FFFFFF" size="16" font="fonts/name.ttf" />
+		</block>
+		<!-- Adding Black Text for multicolored friends' Name and subtext (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="text" id="cardNameMulti">
+			<location x="95" y="32" />
+			<text color="#000000" size="20" font="fonts/name.ttf" />
+		</block>
+		<block type="text" id="cardSubnameMulti">
+			<location x="95" y="62" />
+			<text color="#000000" size="16" font="fonts/name.ttf" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		<block type="text" id="cardPower">
+			<location x="370" y="38" />
+			<text color="#000000" size="30" font="fonts/text.ttf" />
+		</block>
+		
+		<!-- Shifting card power for multicolored friends(EDIT BY: GAMEMASTERLUNA) -->
+		<block type="text" id="multiCardPower">
+			<location x="320" y="38" />
+			<text color="#000000" size="30" font="fonts/text.ttf" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+        
+        <!-- Shifting card power for tri colored friends(EDIT BY: GAMEMASTERLUNA) -->
+		<block type="text" id="multiCardTriPower">
+			<location x="272" y="38" />
+			<text color="#000000" size="30" font="fonts/text.ttf" />
+		</block>
+    
+		<block type="text" id="noneCardPower">
+			<location x="390" y="38" />
+			<text color="#FFFFFF" size="30" font="fonts/text.ttf" />
+		</block>
+		
+		<block type="text" id="cardCost">
+			<location x="42" y="126" />
+			<text color="#000000" size="30" font="fonts/name.ttf" />
+		</block>
+		
+		<block type="text" id="cardRequiredPower">
+			<location x="33" y="171" />
+			<text color="#000000" size="30" font="fonts/name.ttf" />
+		</block>
+		<!-- Adding Black Text for Secondary Required Power for multicolored friends (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="text" id="secondaryCardRequiredPower">
+			<location x="33" y="221" />
+			<text color="#000000" size="30" font="fonts/name.ttf" />
+		</block>
+        
+        <block type="text" id="tertiaryCardRequiredPower">
+			<location x="33" y="271" />
+			<text color="#000000" size="30" font="fonts/name.ttf" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		<!-- Mane text overlays -->
+		<block type="text" id="maneCardName">
+			<location x="170" y="32" />
+			<text color="#FFFFFF" size="20" font="fonts/name.ttf" />
+		</block>
+		<block type="text" id="maneCardSubname">
+			<location x="170" y="62" />
+			<text color="#FFFFFF" size="16" font="fonts/name.ttf" />
+		</block>		
+
+		<!-- Overlays for Events, Resources, and TMs -->
+		
+		<block type="text" id="eventCardName">
+			<location x="95" y="40" />
+			<text color="#000000" size="20" font="fonts/name.ttf" />
+		</block>
+		
+		<block type="text" id="resourceCardName">
+			<location x="95" y="40" />
+			<text color="#FFFFFF" size="20" font="fonts/name.ttf" />
+		</block>
+		
+		<!-- Adding Black Text for dilemma card Name (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="text" id="dilemmaCardName">
+			<location x="95" y="40" />
+			<text color="#000000" size="20" font="fonts/name.ttf" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		<block type="text" id="troublemakerCardName">
+			<location x="100" y="42" />
+			<text color="#FFFFFF" size="25" font="fonts/name.ttf" />
+		</block>
+		
+		<block type="text" id="troublemakerCardNameWithSubname">
+			<location x="100" y="38" />
+			<text color="#FFFFFF" size="20" font="fonts/name.ttf" />
+		</block>
+		
+		<block type="text" id="troublemakerCardSubname">
+			<location x="100" y="61" />
+			<text color="#FFFFFF" size="16" font="fonts/name.ttf" />
+		</block>
+
+		<block type="text" id="eventCardType">
+			<location x="190" y="308" />
+			<text color="#000000" size="25" font="fonts/name.ttf" />
+		</block>
+
+		<block type="text" id="resourceCardType">
+			<location x="175" y="308" />
+			<text color="#000000" size="25" font="fonts/name.ttf" />
+		</block>
+		
+		<!-- Moving Resource text down for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="text" id="dilemmaCardType">
+			<location x="175" y="350" />
+			<text color="#000000" size="25" font="fonts/name.ttf" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+		<block type="text" id="troublemakerCardType">
+			<location x="150" y="330" />
+			<text color="#FFFFFF" size="25" font="fonts/name.ttf" />
+		</block>
+
+		<block type="text" id="troublemakerCardTraits">
+			<location x="210" y="358" />
+			<text color="#FFFFFF" size="20" font="fonts/traits.ttf" />
+			<wordwrap height="34" width="270" />
+		</block>
+
+		<block type="text" id="troublemakerBonus">
+			<location x="55" y="322" />
+			<text color="#000000" size="25" font="fonts/traits.ttf" />
+		</block>
+		
+		
+		<!-- Overlays for Event Power Symbols -->
+		<block type="overlay" id="eventPower0" src="proxy/proxyImages/EventPowerNumbers/outline-0.png">
+			<location x="384" y="45" />
+		</block>
+		<block type="overlay" id="eventPower1" src="proxy/proxyImages/EventPowerNumbers/outline-1.png">
+			<location x="384" y="45" />
+		</block>
+		<block type="overlay" id="eventPower2" src="proxy/proxyImages/EventPowerNumbers/outline-2.png">
+			<location x="384" y="45" />
+		</block>
+		<block type="overlay" id="eventPower3" src="proxy/proxyImages/EventPowerNumbers/outline-3.png">
+			<location x="384" y="45" />
+		</block>
+		<block type="overlay" id="eventPower4" src="proxy/proxyImages/EventPowerNumbers/outline-4.png">
+			<location x="384" y="45" />
+		</block>
+		<block type="overlay" id="eventPower5" src="proxy/proxyImages/EventPowerNumbers/outline-5.png">
+			<location x="384" y="45" />
+		</block>
+		<block type="overlay" id="eventPower6" src="proxy/proxyImages/EventPowerNumbers/outline-6.png">
+			<location x="384" y="45" />
+		</block>
+		<block type="overlay" id="eventPower7" src="proxy/proxyImages/EventPowerNumbers/outline-7.png">
+			<location x="384" y="45" />
+		</block>
+		<block type="overlay" id="eventPower8" src="proxy/proxyImages/EventPowerNumbers/outline-8.png">
+			<location x="384" y="45" />
+		</block>
+		<block type="overlay" id="eventPower9" src="proxy/proxyImages/EventPowerNumbers/outline-9.png">
+			<location x="384" y="45" />
+		</block>
+
+		<!-- Overlays for racial icons -->
+		<block type="overlay" id="raceUnicorn" src="proxy/proxyImages/raceIcons/race-unicorn.png">
+			<location x="100" y="335" />
+		</block>
+		<block type="overlay" id="racePegasus" src="proxy/proxyImages/raceIcons/race-pegasus.png">
+			<location x="100" y="335" />
+		</block>
+		<block type="overlay" id="raceEarthPony" src="proxy/proxyImages/raceIcons/race-earthpony.png">
+			<location x="100" y="335" />
+		</block>
+		<block type="overlay" id="raceCritter" src="proxy/proxyImages/raceIcons/race-critter.png">
+			<location x="100" y="335" />
+		</block>
+		<block type="overlay" id="raceAlicorn" src="proxy/proxyImages/raceIcons/race-alicorn.png">
+			<location x="100" y="335" />
+		</block>		
+		<block type="overlay" id="raceDragon" src="proxy/proxyImages/raceIcons/race-dragon.png">
+			<location x="100" y="335" />
+		</block>		
+		<block type="overlay" id="raceAlly" src="proxy/proxyImages/raceIcons/race-ally.png">
+			<location x="100" y="335" />
+		</block>
+		
+		<block type="text" id="cardTraits">
+			<location x="190" y="352" />
+			<text color="#FFFFFF" size="20" font="fonts/traits.ttf" />
+			<wordwrap height="34" width="270" />
+		</block>
+		
+		<block type="text" id="cardTraitsBlack">
+			<location x="190" y="352" />
+			<text color="#000000" size="20" font="fonts/traits.ttf" />
+			<wordwrap height="34" width="270" />
+		</block>
+		
+		<!-- Moving Traits text down for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="text" id="cardTraitsDilemma">
+			<location x="190" y="390" />
+			<text color="#000000" size="20" font="fonts/traits.ttf" />
+			<wordwrap height="34" width="270" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+		<block type="text" id="cardKeywords">
+			<location x="75" y="405" />
+			<text color="#000000" size="18" font="fonts/name.ttf" />
+			<wordwrap height="34" width="300" />
+		</block>
+		
+		<block type="text" id="cardText">
+			<location x="75" y="430" />
+			<text color="#000000" size="18" font="fonts/text.ttf" />
+			<wordwrap height="200" width="300" />
+		</block>
+		
+		<block type="text" id="cardKeywordsWhite">
+			<location x="75" y="405" />
+			<text color="#FFFFFF" size="18" font="fonts/name.ttf" />
+			<wordwrap height="34" width="300" />
+		</block>
+		
+		<block type="text" id="cardTextWhite">
+			<location x="75" y="430" />
+			<text color="#FFFFFF" size="18" font="fonts/text.ttf" />
+			<wordwrap height="200" width="270" />
+		</block>
+		
+		<!-- Editing card text for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="text" id="cardTextDilemma">
+			<location x="105" y="430" />
+			<text color="#000000" size="18" font="fonts/text.ttf" />
+			<wordwrap height="200" width="270" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		
+		<!-- Problem specific blocks -->
+		<block type="overlay" id="problemElement1Kindness" src="proxy/proxyImages/generalIcons/Kindness_Power_Icon.png">
+			<location x="250" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement2Kindness" src="proxy/proxyImages/generalIcons/Kindness_Power_Icon.png">
+			<location x="350" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement1Magic" src="proxy/proxyImages/generalIcons/Magic_Power_Icon.png">
+			<location x="250" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement2Magic" src="proxy/proxyImages/generalIcons/Magic_Power_Icon.png">
+			<location x="350" y="390" />
+		</block>
+
+		<block type="overlay" id="problemElement1Loyalty" src="proxy/proxyImages/generalIcons/Loyalty_Power_Icon.png">
+			<location x="250" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement2Loyalty" src="proxy/proxyImages/generalIcons/Loyalty_Power_Icon.png">
+			<location x="350" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement1Laughter" src="proxy/proxyImages/generalIcons/Laughter_Power_Icon.png">
+			<location x="250" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement2Laughter" src="proxy/proxyImages/generalIcons/Laughter_Power_Icon.png">
+			<location x="350" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement1Generosity" src="proxy/proxyImages/generalIcons/Generosity_Power_Icon.png">
+			<location x="250" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement2Generosity" src="proxy/proxyImages/generalIcons/Generosity_Power_Icon.png">
+			<location x="350" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement1Honesty" src="proxy/proxyImages/generalIcons/Honesty_Power_Icon.png">
+			<location x="250" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement2Honesty" src="proxy/proxyImages/generalIcons/Honesty_Power_Icon.png">
+			<location x="350" y="390" />
+		</block>		
+		
+		<block type="overlay" id="problemElement1Not" src="proxy/proxyImages/generalIcons/Problem_Not_Icon.png">
+			<location x="250" y="390" />
+		</block>
+		
+		<block type="overlay" id="problemElement2Not" src="proxy/proxyImages/generalIcons/Problem_Not_Icon.png">
+			<location x= "350" y="390" />
+		</block>
+		
+		<!-- Player Wild Problem Blocks -->
+		<block type="overlay" id="problemElementWild" src="proxy/proxyImages/generalIcons/Wild_Power_Icon.png">
+				<location x="275" y="388" />
+		</block>
+		
+		<!-- New white version of Wild Problem Block (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="overlay" id="problemElementWild2" src="proxy/proxyImages/generalIcons/Wild_Power_Icon_2.png">
+				<location x="325" y="388" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+    
+		<!-- Player Rainbow Problem Blocks -->
+		<block type="overlay" id="problemElementRainbow" src="proxy/proxyImages/generalIcons/Rainbow_Power_Icon.png">
+				<location x="90" y="388" />
+		</block>
+		
+		
+		<!-- Opponent Problem Blocks -->
+		<block type="overlay" id="problemOpponent_0" src="proxy/proxyImages/ProblemNumbers/prob-0.png">
+				<location x="315" y="44" />
+		</block>
+		
+		<block type="overlay" id="problemOpponent_1" src="proxy/proxyImages/ProblemNumbers/prob-1.png">
+				<location x="315" y="44" />
+		</block>	
+
+		<block type="overlay" id="problemOpponent_2" src="proxy/proxyImages/ProblemNumbers/prob-2.png">
+				<location x="315" y="44" />
+		</block>	
+
+		<block type="overlay" id="problemOpponent_3" src="proxy/proxyImages/ProblemNumbers/prob-3.png">
+				<location x="315" y="44" />
+		</block>	
+
+		<block type="overlay" id="problemOpponent_4" src="proxy/proxyImages/ProblemNumbers/prob-4.png">
+				<location x="315" y="44" />
+		</block>		
+
+		<block type="overlay" id="problemOpponent_5" src="proxy/proxyImages/ProblemNumbers/prob-5.png">
+				<location x="315" y="44" />
+		</block>		
+
+		<block type="overlay" id="problemOpponent_6" src="proxy/proxyImages/ProblemNumbers/prob-6.png">
+				<location x="315" y="44" />
+		</block>		
+
+		<block type="overlay" id="problemOpponent_7" src="proxy/proxyImages/ProblemNumbers/prob-7.png">
+				<location x="315" y="44" />
+		</block>		
+
+		<block type="overlay" id="problemOpponent_8" src="proxy/proxyImages/ProblemNumbers/prob-8.png">
+				<location x="315" y="44" />
+		</block>		
+
+		<block type="overlay" id="problemOpponent_9" src="proxy/proxyImages/ProblemNumbers/prob-9.png">
+				<location x="315" y="44" />
+		</block>
+		
+		<!-- Problem Blocks 10 power (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="overlay" id="problemOpponent_10" src="proxy/proxyImages/ProblemNumbers/prob-10.png">
+				<location x="315" y="44" />
+		</block>
+		
+		<block type="overlay" id="problemOpponent_18" src="proxy/proxyImages/ProblemNumbers/prob-18.png">
+				<location x="315" y="44" />
+		</block>
+		
+		<block type="overlay" id="problemOpponent_20" src="proxy/proxyImages/ProblemNumbers/prob-20.png">
+				<location x="315" y="44" />
+		</block>
+		
+		<block type="overlay" id="problemOpponent_24" src="proxy/proxyImages/ProblemNumbers/prob-24.png">
+				<location x="315" y="44" />
+		</block>
+		
+		<block type="overlay" id="problemOpponent_30" src="proxy/proxyImages/ProblemNumbers/prob-30.png">
+				<location x="315" y="44" />
+		</block>
+		
+		<block type="overlay" id="problemOpponent_infinity" src="proxy/proxyImages/ProblemNumbers/prob-infinity.png">
+				<location x="313" y="50" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+		<block type="overlay" id="problemOpponentElementRainbow" src="proxy/proxyImages/generalIcons/Opponent_Rainbow_Power_Icon.png">
+				<location x="90" y="36" />
+		</block>
+		
+		<!-- Problem Blocks for Dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="overlay" id="dilemmaOpponent_0" src="proxy/proxyImages/DilemmaNumbers/dileOpp-0.png">
+				<location x="45" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemmaOpponent_1" src="proxy/proxyImages/DilemmaNumbers/dileOpp-1.png">
+				<location x="45" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemmaOpponent_2" src="proxy/proxyImages/DilemmaNumbers/dileOpp-2.png">
+				<location x="45" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemmaOpponent_3" src="proxy/proxyImages/DilemmaNumbers/dileOpp-3.png">
+				<location x="45" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemmaOpponent_4" src="proxy/proxyImages/DilemmaNumbers/dileOpp-4.png">
+				<location x="45" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemmaOpponent_5" src="proxy/proxyImages/DilemmaNumbers/dileOpp-5.png">
+				<location x="45" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemmaOpponent_6" src="proxy/proxyImages/DilemmaNumbers/dileOpp-6.png">
+				<location x="45" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemmaOpponent_7" src="proxy/proxyImages/DilemmaNumbers/dileOpp-7.png">
+				<location x="45" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemmaOpponent_8" src="proxy/proxyImages/DilemmaNumbers/dileOpp-8.png">
+				<location x="45" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemmaOpponent_9" src="proxy/proxyImages/DilemmaNumbers/dileOpp-9.png">
+				<location x="45" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemmaOpponent_10" src="proxy/proxyImages/DilemmaNumbers/dileOpp-10.png">
+				<location x="45" y="315" />
+		</block>
+		
+		
+		<block type="overlay" id="dilemma_0" src="proxy/proxyImages/DilemmaNumbers/dile-0.png">
+				<location x="381" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemma_1" src="proxy/proxyImages/DilemmaNumbers/dile-1.png">
+				<location x="381" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemma_2" src="proxy/proxyImages/DilemmaNumbers/dile-2.png">
+				<location x="381" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemma_3" src="proxy/proxyImages/DilemmaNumbers/dile-3.png">
+				<location x="381" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemma_4" src="proxy/proxyImages/DilemmaNumbers/dile-4.png">
+				<location x="381" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemma_5" src="proxy/proxyImages/DilemmaNumbers/dile-5.png">
+				<location x="381" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemma_6" src="proxy/proxyImages/DilemmaNumbers/dile-6.png">
+				<location x="381" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemma_7" src="proxy/proxyImages/DilemmaNumbers/dile-7.png">
+				<location x="381" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemma_8" src="proxy/proxyImages/DilemmaNumbers/dile-8.png">
+				<location x="381" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemma_9" src="proxy/proxyImages/DilemmaNumbers/dile-9.png">
+				<location x="381" y="315" />
+		</block>
+		
+		<block type="overlay" id="dilemma_10" src="proxy/proxyImages/DilemmaNumbers/dile-10.png">
+				<location x="381" y="315" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+		
+		<block type="text" id="problemBonus">
+			<location x="554" y="242" />
+			<text color="#222222" size="30" font="fonts/traits.ttf" />
+		</block>
+		
+		<!-- Problem Bonus Blocks for Dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<block type="text" id="dilemmaBonus">
+			<location x="50" y="595" rotate="270" />
+			<text color="#222222" size="30" font="fonts/traits.ttf" />
+		</block>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		<block type="text" id="problemElement1Power">
+			<location x="252" y="390" />
+			<text color="#000000" size="30" font="fonts/text.ttf" />
+		</block>
+		
+		<block type="text" id="problemElement2Power">
+			<location x="352" y="390" />
+			<text color="#000000" size="30" font="fonts/text.ttf" />
+		</block>
+		
+		<block type="text" id="problemSinglePower">
+			<location x="303" y="392" />
+			<text color="#FFFFFF" size="30" font="fonts/text.ttf" />
+		</block>
+			
+		<block type="text" id="problemCardTitle">
+			<location x="190" y="250" />
+			<text color="#FFFFFF" size="25" font="fonts/name.ttf" />
+		</block>
+		
+		<block type="text" id="problemCardKeywords">
+			<location x="110" y="290" />
+			<text color="#FFFFFF" size="14" font="fonts/traits.ttf" />
+			<wordwrap height="380" width="574" />
+		</block>
+		
+		<block type="text" id="problemCardText">
+			<location x="110" y="310" />
+			<text color="#FFFFFF" size="18" font="fonts/text.ttf" />
+			<wordwrap height="200" width="400" />
+		</block>
+		
+	</blocks>
+	
+	<!-- Default template -->
+	<template src="proxy/proxyImages/cardTemplates/card-outline.png" default="True">
+		<matches>
+			<match name="dummy" value="dummy" />
+		</matches>
+		<overlayblocks>
+			<link block="dummyOverlay" />
+		</overlayblocks>
+		<textblocks>
+			<link block="default">
+				<property name="Name" />
+			</link>
+			<link block="dummyText" />
+		</textblocks>
+	</template>
+	
+	<!-- Event Card template -->
+	<template src="proxy/proxyImages/cardTemplates/card-outline.png" default="False">
+		<matches>
+		<match name="Type" value="Event" />
+		</matches>
+
+		<overlayblocks>
+		
+		<link block="eventBack" />
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Loyalty">
+				<link block="requiredPowerLoyalty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Kindness">
+				<link block="requiredPowerKindness" /> 
+			</if>
+		</conditional>			
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Magic">
+				<link block="requiredPowerMagic" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="PlayRequiredElement" contains="Generosity">
+				<link block="requiredPowerGenerosity" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Honesty">
+				<link block="requiredPowerHonesty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Laughter">
+				<link block="requiredPowerLaughter" /> 
+			</if>
+		</conditional>
+		
+		<!-- Secondary Required Element Selection for multicolored events (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Loyalty">
+				<link block="secondaryRequiredPowerLoyalty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Kindness">
+				<link block="secondaryRequiredPowerKindness" /> 
+			</if>
+		</conditional>			
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Magic">
+				<link block="secondaryRequiredPowerMagic" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Generosity">
+				<link block="secondaryRequiredPowerGenerosity" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Honesty">
+				<link block="secondaryRequiredPowerHonesty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Laughter">
+				<link block="secondaryRequiredPowerLaughter" /> 
+			</if>
+		</conditional>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+        
+        <!-- Tertiary Required Element Selection for multicolored events (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Loyalty">
+				<link block="tertiaryRequiredPowerLoyalty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Kindness">
+				<link block="tertiaryRequiredPowerKindness" /> 
+			</if>
+		</conditional>			
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Magic">
+				<link block="tertiaryRequiredPowerMagic" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Generosity">
+				<link block="tertiaryRequiredPowerGenerosity" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Honesty">
+				<link block="tertiaryRequiredPowerHonesty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Laughter">
+				<link block="tertiaryRequiredPowerLaughter" /> 
+			</if>
+		</conditional>
+		
+	<!-- Event Power Number Overlays -->
+	
+		<conditional>
+			<if property="Power" value="0">
+				<link block="eventPower0" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="1">
+				<link block="eventPower1" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="2">
+				<link block="eventPower2" />
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="Power" value="3">
+				<link block="eventPower3" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="4">
+				<link block="eventPower4" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="5">
+				<link block="eventPower5" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="6">
+				<link block="eventPower6" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="7">
+				<link block="eventPower7" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="8">
+				<link block="eventPower8" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="9">
+				<link block="eventPower9" />
+			</if>
+		</conditional>
+		
+		<link block="typeEvent" />
+
+		</overlayblocks>
+
+		<textblocks>
+
+		<link block="eventCardType">
+			<property name="Type" />
+		</link>
+
+		<link block="cardCost">
+			<property name="Cost" />
+		</link>
+
+		<conditional>
+			<if property="PlayRequiredPower" value="">
+				<link block="dummyOverlay" /> 
+			</if>
+			<else>
+				<link block="cardRequiredPower">
+					<property name="PlayRequiredPower" />
+				</link> 
+			</else>
+		</conditional>
+		
+		<!-- Adding text for Secondary Required Power for multicolored events (EDIT BY: GAMEMASTERLUNA) -->
+			<conditional>
+				<if property="SecondaryPlayRequiredPower" value="0">
+					<link block="dummyOverlay" /> 
+				</if>
+				<else>
+					<link block="secondaryCardRequiredPower">
+						<property name="SecondaryPlayRequiredPower" />
+					</link> 
+				</else>
+			</conditional>
+            
+            <conditional>
+				<if property="TertiaryPlayRequiredPower" value="0">
+					<link block="dummyOverlay" /> 
+				</if>
+				<else>
+					<link block="tertiaryCardRequiredPower">
+						<property name="TertiaryPlayRequiredPower" />
+					</link> 
+				</else>
+			</conditional>
+			<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+		<link block="cardTraits">
+			<property name="Traits" />
+		</link>
+
+		<link block="cardKeywords">
+			<property name="Keywords" />
+		</link>		
+
+		<link block="eventCardName">
+			<property name="Name" />
+		</link>
+
+		<link block="cardTextWhite">
+			<property name="Text" />
+		</link>
+	</textblocks>
+	</template>
+	
+	<!-- Resource Card template -->
+	<template src="proxy/proxyImages/cardTemplates/card-outline.png" default="False">
+	<matches>
+		<match name="Type" value="Resource" />
+	</matches>
+
+	<overlayblocks>
+		
+		<!-- Resource Background for both non-dilemma and dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="Traits" value="Dilemma">
+				<link block="dilemmaBack" />
+				<link block="typeDilemma" />
+			</if>
+			<else>
+				<link block="resourceBack" />
+				<link block="typeResource" />
+			</else>
+		</conditional>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		<!-- Old version of Resource background -->
+		<!-- <link block="resourceBack" />
+		<link block="typeResource" /> -->
+	
+	<!-- Event Power Number Overlays -->
+		<conditional>
+			<if property="Power" value="0">
+				<link block="eventPower0" />
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="Power" value="1">
+				<link block="eventPower1" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="2">
+				<link block="eventPower2" />
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="Power" value="3">
+				<link block="eventPower3" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="4">
+				<link block="eventPower4" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="5">
+				<link block="eventPower5" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="6">
+				<link block="eventPower6" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="7">
+				<link block="eventPower7" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="8">
+				<link block="eventPower8" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="9">
+				<link block="eventPower9" />
+			</if>
+		</conditional>
+
+        <!-- Primary Element Required for resources -->
+		<conditional>
+			<if property="PlayRequiredElement" contains="Loyalty">
+				<link block="requiredPowerLoyalty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Kindness">
+				<link block="requiredPowerKindness" /> 
+			</if>
+		</conditional>			
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Magic">
+				<link block="requiredPowerMagic" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="PlayRequiredElement" contains="Generosity">
+				<link block="requiredPowerGenerosity" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Honesty">
+				<link block="requiredPowerHonesty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Laughter">
+				<link block="requiredPowerLaughter" /> 
+			</if>
+		</conditional>
+		
+		<!-- Secondary Required Element Selection for multicolored resources (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Loyalty">
+				<link block="secondaryRequiredPowerLoyalty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Kindness">
+				<link block="secondaryRequiredPowerKindness" /> 
+			</if>
+		</conditional>			
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Magic">
+				<link block="secondaryRequiredPowerMagic" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Generosity">
+				<link block="secondaryRequiredPowerGenerosity" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Honesty">
+				<link block="secondaryRequiredPowerHonesty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Laughter">
+				<link block="secondaryRequiredPowerLaughter" /> 
+			</if>
+		</conditional>
+        
+        <!-- Tertiary Required Element Selection for multicolored resources (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Loyalty">
+				<link block="tertiaryRequiredPowerLoyalty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Kindness">
+				<link block="tertiaryRequiredPowerKindness" /> 
+			</if>
+		</conditional>			
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Magic">
+				<link block="tertiaryRequiredPowerMagic" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Generosity">
+				<link block="tertiaryRequiredPowerGenerosity" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Honesty">
+				<link block="tertiaryRequiredPowerHonesty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Laughter">
+				<link block="tertiaryRequiredPowerLaughter" /> 
+			</if>
+		</conditional>
+		
+		<!-- Problem Number overlay for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="ProblemOpponentPower" value="0">
+				<link block="dilemmaOpponent_0" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemOpponentPower" value="1">
+				<link block="dilemmaOpponent_1" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemOpponentPower" value="2">
+				<link block="dilemmaOpponent_2" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemOpponentPower" value="3">
+				<link block="dilemmaOpponent_3" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemOpponentPower" value="4">
+				<link block="dilemmaOpponent_4" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemOpponentPower" value="5">
+				<link block="dilemmaOpponent_5" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemOpponentPower" value="6">
+				<link block="dilemmaOpponent_6" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemOpponentPower" value="7">
+				<link block="dilemmaOpponent_7" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemOpponentPower" value="8">
+				<link block="dilemmaOpponent_8" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemOpponentPower" value="9">
+				<link block="dilemmaOpponent_9" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemOpponentPower" value="10">
+				<link block="dilemmaOpponent_10" /> 
+			</if>
+		</conditional>
+		
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="0">
+				<link block="dilemma_0" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="1">
+				<link block="dilemma_1" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="2">
+				<link block="dilemma_2" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="3">
+				<link block="dilemma_3" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="4">
+				<link block="dilemma_4" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="5">
+				<link block="dilemma_5" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="6">
+				<link block="dilemma_6" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="7">
+				<link block="dilemma_7" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="8">
+				<link block="dilemma_8" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="9">
+				<link block="dilemma_9" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="ProblemPlayerElement1Power" value="10">
+				<link block="dilemma_10" /> 
+			</if>
+		</conditional>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+	
+	</overlayblocks>
+
+	<textblocks>
+		<link block="cardCost">
+			<property name="Cost" />
+		</link>
+
+		<conditional>
+			<if property="PlayRequiredPower" value="">
+				<link block="dummyOverlay" /> 
+			</if>
+			<else>
+				<link block="cardRequiredPower">
+					<property name="PlayRequiredPower" />
+				</link> 
+			</else>
+		</conditional>
+		
+		<!-- Adding text for Secondary Required Power for multicolored resources (EDIT BY: GAMEMASTERLUNA) -->
+			<conditional>
+				<if property="SecondaryPlayRequiredPower" value="0">
+					<link block="dummyOverlay" /> 
+				</if>
+				<else>
+					<link block="secondaryCardRequiredPower">
+						<property name="SecondaryPlayRequiredPower" />
+					</link> 
+				</else>
+			</conditional>
+            
+            <conditional>
+				<if property="TertiaryPlayRequiredPower" value="0">
+					<link block="dummyOverlay" /> 
+				</if>
+				<else>
+					<link block="tertiaryCardRequiredPower">
+						<property name="TertiaryPlayRequiredPower" />
+					</link> 
+				</else>
+			</conditional>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		<!-- Lowering Resource text for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="Traits" value="Dilemma">
+				<link block="dilemmaCardType">
+					<property name="Type" />
+				</link>
+			</if>
+			<else>
+				<link block="resourceCardType">
+					<property name="Type" />
+				</link>
+			</else>
+		</conditional>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		<!-- Old version of text for resource type -->
+		<!-- <link block="resourceCardType">
+			<property name="Type" />
+		</link> -->
+		
+		<!-- Lowering Traits text for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="Traits" value="Dilemma">
+				<link block="cardTraitsDilemma">
+					<property name="Traits" />
+				</link>
+			</if>
+			<else>
+				<link block="cardTraitsBlack">
+					<property name="Traits" />
+				</link>
+			</else>
+		</conditional>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+		<!-- Old version of text for resource traits -->
+		<!-- <link block="cardTraitsBlack">
+			<property name="Traits" />
+		</link> -->
+
+		<link block="cardKeywords">
+			<property name="Keywords" />
+		</link>
+		
+		<!-- Black text for dilemma card name (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="Traits" value="Dilemma">
+				<link block="dilemmaCardName">
+					<property name="Name" />
+				</link>
+			</if>
+			<else>
+				<link block="resourceCardName">
+					<property name="Name" />
+				</link>
+			</else>
+		</conditional>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+		<!-- Old version of card name text for resource -->
+		<!-- <link block="resourceCardName">
+			<property name="Name" />
+		</link>  -->
+		
+		<!-- Editing card text for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="Traits" value="Dilemma">
+				<link block="cardTextDilemma">
+					<property name="Text" />
+				</link>
+			</if>
+			<else>
+				<link block="cardText">
+					<property name="Text" />
+				</link>
+			</else>
+		</conditional>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+		<!-- Old version of card text for resource -->
+		<!-- <link block="cardText">
+			<property name="Text" />
+		</link> -->
+		
+		<!-- Adding Bonus for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
+		<link block="dilemmaBonus">
+			<property name="ProblemBonus" />
+		</link>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+	</textblocks>
+	</template>
+	
+	<!-- Mane Character Card template -->
+	<template src="proxy/proxyImages/cardTemplates/card-outline.png" default="False">
+		<matches>
+			<match name="Type" value="Mane Character" />
+		</matches>
+		
+		<overlayblocks>
+			
+		<!-- Element power selection -->
+		<conditional>
+			<if property="Element" contains="Generosity">
+				<link block="maneGenerosity" />
+				<link block="powerGenerosity" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="Element" contains="Kindness">
+				<link block="maneKindness" />
+				<link block="powerKindness" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="Element" contains="Honesty">
+				<link block="maneHonesty" />
+				<link block="powerHonesty" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="Element" contains="Magic">
+				<link block="maneMagic" />
+				<link block="powerMagic" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="Element" contains="Laughter">
+				<link block="maneLaughter" />
+				<link block="powerLaughter" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="Element" contains="Loyalty">
+				<link block="maneLoyalty" />
+				<link block="powerLoyalty" /> 
+				</if>
+		</conditional>
+		
+		<link block="typeMane" />
+		<link block="maneStart" />
+		
+		<conditional>
+			<if property="Traits" contains="Unicorn">
+			<link block="raceUnicorn" /> </if>
+		</conditional>	
+		
+		<conditional>
+			<if property="Traits" contains="Pegasus">
+			<link block="racePegasus" /> </if>
+		</conditional>
+		
+		<conditional>
+			<if property="Traits" contains="Earth">
+			<link block="raceEarthPony" /> </if>
+		</conditional>
+		
+		<conditional>
+			<if property="Traits" contains="Critter">
+			<link block="raceCritter" /> </if>
+		</conditional>
+		
+		<conditional>
+			<if property="Traits" contains="Alicorn">
+			<link block="raceAlicorn" /> </if>
+		</conditional>		
+
+		<conditional>
+			<if property="Traits" contains="Dragon">
+			<link block="raceDragon" /> </if>
+		</conditional>	
+		
+		</overlayblocks>
+		
+		<textblocks>		
+			<link block="maneCardName">
+				<property name="Name" />
+			</link>
+			
+			<link block="maneCardSubname">
+				<property name="Subname" />
+			</link>
+			
+			<link block="cardPower">
+				<property name="Power" />
+			</link>
+						
+			<link block="cardTraits">
+				<property name="Traits" />
+			</link>
+
+			<link block="cardKeywords">
+				<property name="Keywords" />
+			</link>
+			
+			<link block="cardText">
+				<property name="Text" />
+			</link>
+		</textblocks>
+	</template>
+
+	<!-- Mane Character Boosted Card template -->
+	<template src="proxy/proxyImages/cardTemplates/card-outline.png" default="False">
+		<matches>
+			<match name="Type" value="Mane Character Boosted" />
+		</matches>
+		
+		<overlayblocks>
+		<!-- Element power selection -->
+		<conditional>
+			<if property="Element" contains="Generosity">
+				<link block="maneGenerosity" />
+				<link block="powerGenerosity" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="Element" contains="Kindness">
+				<link block="maneKindness" />
+				<link block="powerKindness" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="Element" contains="Honesty">
+				<link block="maneHonesty" />
+				<link block="powerHonesty" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="Element" contains="Magic">
+				<link block="maneMagic" />
+				<link block="powerMagic" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="Element" contains="Laughter">
+				<link block="maneLaughter" />
+				<link block="powerLaughter" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="Element" contains="Loyalty">
+				<link block="maneLoyalty" />
+				<link block="powerLoyalty" /> 
+				</if>
+		</conditional>
+		
+		<link block="typeMane" />
+		<link block="maneBoosted" />
+			
+		<conditional>
+			<if property="Traits" contains="Unicorn">
+			<link block="raceUnicorn" /> </if>
+		</conditional>	
+		
+		<conditional>
+			<if property="Traits" contains="Pegasus">
+			<link block="racePegasus" /> </if>
+		</conditional>
+		
+		<conditional>
+			<if property="Traits" contains="Earth">
+			<link block="raceEarthPony" /> </if>
+		</conditional>
+		
+		<conditional>
+			<if property="Traits" contains="Critter">
+			<link block="raceCritter" /> </if>
+		</conditional>
+		
+		<conditional>
+			<if property="Traits" contains="Alicorn">
+			<link block="raceAlicorn" /> </if>
+		</conditional>		
+
+		<conditional>
+			<if property="Traits" contains="Dragon">
+			<link block="raceDragon" /> </if>
+		</conditional>	
+		</overlayblocks>
+		
+		<textblocks>		
+			<link block="maneCardName">
+				<property name="Name" />
+			</link>
+			
+			<link block="maneCardSubname">
+				<property name="Subname" />
+			</link>
+			
+			<link block="cardPower">
+				<property name="Power" />
+			</link>
+						
+			<link block="cardTraits">
+				<property name="Traits" />
+			</link>
+
+			<link block="cardKeywords">
+				<property name="Keywords" />
+			</link>
+			<link block="cardText">
+				<property name="Text" />
+			</link>
+		</textblocks>
+	</template>
+
+	<!-- Friend Card template -->
+	<template src="proxy/proxyImages/cardTemplates/card-outline.png" default="False">
+		<matches>
+			<match name="Type" value="Friend" />
+		</matches>
+		
+		<overlayblocks>
+	
+		<!-- Element power selection -->
+		<conditional>
+            <if property="Element" value="None">
+                <link block="friendNone" />
+            </if>
+            <!-- Shifting element placement for single colored friends -->
+            <elseif property="Element" value="Loyalty">
+                <link block="friendLoyalty" />
+				<link block="powerLoyalty" /> 
+            </elseif>
+            <elseif property="Element" value="Kindness">
+                <link block="friendKindness" />
+				<link block="powerKindness" /> 
+            </elseif>
+            <elseif property="Element" value="Generosity">
+                <link block="friendGenerosity" />
+				<link block="powerGenerosity" /> 
+            </elseif>
+            <elseif property="Element" value="Honesty">
+                <link block="friendHonesty" />
+				<link block="powerHonesty" /> 
+            </elseif>
+            <elseif property="Element" value="Laughter">
+                <link block="friendLaughter" />
+				<link block="powerLaughter" /> 
+            </elseif>
+            <elseif property="Element" value="Magic">
+                <link block="friendMagic" />
+				<link block="powerMagic" /> 
+            </elseif>
+            <!-- Shifting element placement for multicolored friends -->
+            <elseif property="TertiaryPlayRequiredPower" value="#NULL#">
+                <link block="friendMulti" />
+                <link block="powerMulti" />
+            </elseif>
+            <elseif property="TertiaryPlayRequiredPower" value="1">
+                <link block="friendMulti" />
+                <link block="powerMultiTri" />
+            </elseif>
+            <elseif property="TertiaryPlayRequiredPower" value="2">
+                <link block="friendMulti" />
+                <link block="powerMultiTri" />
+            </elseif>
+            <elseif property="TertiaryPlayRequiredPower" value="3">
+                <link block="friendMulti" />
+                <link block="powerMultiTri" />
+            </elseif>
+            <elseif property="TertiaryPlayRequiredPower" value="4">
+                <link block="friendMulti" />
+                <link block="powerMultiTri" />
+            </elseif>
+            <elseif property="TertiaryPlayRequiredPower" value="5">
+                <link block="friendMulti" />
+                <link block="powerMultiTri" />
+            </elseif>
+		</conditional>
+
+		<conditional>
+			<if property="MultiPrimaryElement" contains="Generosity">
+				<link block="primaryPowerGenerosity" />
+				</if>
+		</conditional>
+		<conditional>
+			<if property="MultiPrimaryElement" contains="Kindness">
+				<link block="primaryPowerKindness" />
+				</if>
+		</conditional>
+		<conditional>
+			<if property="MultiPrimaryElement" contains="Honesty">
+				<link block="primaryPowerHonesty" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="MultiPrimaryElement" contains="Magic">
+				<link block="primaryPowerMagic" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="MultiPrimaryElement" contains="Laughter">
+				<link block="primaryPowerLaughter" /> 
+			</if>
+		</conditional>
+		<conditional>
+			<if property="MultiPrimaryElement" contains="Loyalty">
+				<link block="primaryPowerLoyalty" /> 
+				</if>
+		</conditional>
+
+		
+		<conditional>
+			<if property="MultiSecondaryElement" contains="Generosity">
+				<link block="secondaryPowerGenerosity" />
+				</if>
+		</conditional>
+		<conditional>
+			<if property="MultiSecondaryElement" contains="Kindness">
+				<link block="secondaryPowerKindness" />
+				</if>
+		</conditional>
+		<conditional>
+			<if property="MultiSecondaryElement" contains="Honesty">
+				<link block="secondaryPowerHonesty" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="MultiSecondaryElement" contains="Magic">
+				<link block="secondaryPowerMagic" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="MultiSecondaryElement" contains="Laughter">
+				<link block="secondaryPowerLaughter" /> 
+			</if>
+		</conditional>
+		<conditional>
+			<if property="MultiSecondaryElement" contains="Loyalty">
+				<link block="secondaryPowerLoyalty" /> 
+				</if>
+		</conditional>
+        
+        <!-- Element power selection for tri colored friends -->
+        <conditional>
+			<if property="TriPrimaryElement" contains="Generosity">
+				<link block="triPrimaryPowerGenerosity" />
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriPrimaryElement" contains="Kindness">
+				<link block="triPrimaryPowerKindness" />
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriPrimaryElement" contains="Honesty">
+				<link block="triPrimaryPowerHonesty" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriPrimaryElement" contains="Magic">
+				<link block="triPrimaryPowerMagic" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriPrimaryElement" contains="Laughter">
+				<link block="triPrimaryPowerLaughter" /> 
+			</if>
+		</conditional>
+		<conditional>
+			<if property="TriPrimaryElement" contains="Loyalty">
+				<link block="triPrimaryPowerLoyalty" /> 
+				</if>
+		</conditional>
+
+		
+		<conditional>
+			<if property="TriSecondaryElement" contains="Generosity">
+				<link block="triSecondaryPowerGenerosity" />
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriSecondaryElement" contains="Kindness">
+				<link block="triSecondaryPowerKindness" />
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriSecondaryElement" contains="Honesty">
+				<link block="triSecondaryPowerHonesty" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriSecondaryElement" contains="Magic">
+				<link block="triSecondaryPowerMagic" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriSecondaryElement" contains="Laughter">
+				<link block="triSecondaryPowerLaughter" /> 
+			</if>
+		</conditional>
+		<conditional>
+			<if property="TriSecondaryElement" contains="Loyalty">
+				<link block="triSecondaryPowerLoyalty" /> 
+				</if>
+		</conditional>
+        
+        <conditional>
+			<if property="TriElement" contains="Generosity">
+				<link block="tertiaryPowerGenerosity" />
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriElement" contains="Kindness">
+				<link block="tertiaryPowerKindness" />
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriElement" contains="Honesty">
+				<link block="tertiaryPowerHonesty" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriElement" contains="Magic">
+				<link block="tertiaryPowerMagic" /> 
+				</if>
+		</conditional>
+		<conditional>
+			<if property="TriElement" contains="Laughter">
+				<link block="tertiaryPowerLaughter" /> 
+			</if>
+		</conditional>
+		<conditional>
+			<if property="TriElement" contains="Loyalty">
+				<link block="tertiaryPowerLoyalty" /> 
+				</if>
+		</conditional>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		
+		
+		<!-- Type Symbol -->
+		<conditional>
+			<if property="Element" value="None">
+				<link block="dummyOverlay" />
+			</if>
+			<!-- Adding Multi Type Symbol for multicolored friends (EDIT BY: GAMEMASTERLUNA) -->
+			<elseif property="Element" value="Multicolor">
+				<link block="typeFriendMulti" />
+			</elseif>
+			<!-- (EDIT BY: GAMEMASTERLUNA) -->
+			<else>
+				<link block="typeFriend" />
+			</else>
+		</conditional>
+
+		<!-- Race icon selection -->
+		<conditional>
+			<if property="Traits" contains="Unicorn">
+			<link block="raceUnicorn" /> </if>
+		</conditional>	
+		<conditional>
+			<if property="Traits" contains="Pegasus">
+			<link block="racePegasus" /> </if>
+		</conditional>
+		<conditional>
+			<if property="Traits" contains="Earth">
+			<link block="raceEarthPony" /> </if>
+		</conditional>
+		<conditional>
+			<if property="Traits" contains="Critter">
+			<link block="raceCritter" /> </if>
+		</conditional>
+		<conditional>
+			<if property="Traits" contains="Alicorn">
+			<link block="raceAlicorn" /> </if>
+		</conditional>		
+		<conditional>
+			<if property="Traits" contains="Dragon">
+			<link block="raceDragon" /> </if>
+		</conditional>
+		<conditional>
+			<if property="Traits" contains="Ally">
+			<link block="raceAlly" /> </if>
+		</conditional>
+		
+		<!-- Required Element Selection -->
+		<conditional>
+			<if property="PlayRequiredElement" contains="Loyalty">
+				<link block="requiredPowerLoyalty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Kindness">
+				<link block="requiredPowerKindness" /> 
+			</if>
+		</conditional>			
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Magic">
+				<link block="requiredPowerMagic" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="PlayRequiredElement" contains="Generosity">
+				<link block="requiredPowerGenerosity" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Honesty">
+				<link block="requiredPowerHonesty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="PlayRequiredElement" contains="Laughter">
+				<link block="requiredPowerLaughter" /> 
+			</if>
+		</conditional>
+		
+		<!-- Secondary Required Element Selection for multicolored friends (EDIT BY: GAMEMASTERLUNA) -->
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Loyalty">
+				<link block="secondaryRequiredPowerLoyalty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Kindness">
+				<link block="secondaryRequiredPowerKindness" /> 
+			</if>
+		</conditional>			
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Magic">
+				<link block="secondaryRequiredPowerMagic" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Generosity">
+				<link block="secondaryRequiredPowerGenerosity" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Honesty">
+				<link block="secondaryRequiredPowerHonesty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="SecondaryPlayRequiredElement" contains="Laughter">
+				<link block="secondaryRequiredPowerLaughter" /> 
+			</if>
+		</conditional>
+        
+        <conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Loyalty">
+				<link block="tertiaryRequiredPowerLoyalty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Kindness">
+				<link block="tertiaryRequiredPowerKindness" /> 
+			</if>
+		</conditional>			
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Magic">
+				<link block="tertiaryRequiredPowerMagic" /> 
+			</if>
+		</conditional>
+		
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Generosity">
+				<link block="tertiaryRequiredPowerGenerosity" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Honesty">
+				<link block="tertiaryRequiredPowerHonesty" /> 
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="TertiaryPlayRequiredElement" contains="Laughter">
+				<link block="tertiaryRequiredPowerLaughter" /> 
+			</if>
+		</conditional>
+		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+		</overlayblocks>
+		
+		<textblocks>
+
+			<link block="cardCost">
+				<property name="Cost" />
+			</link>
+			
+			<conditional>
+				<if property="PlayRequiredPower" value="">
+					<link block="dummyOverlay" /> 
+				</if>
+				<elseif property="PlayRequiredPower" value="0">
+					<link block="dummyOverlay" /> 
+				</elseif>
+				<else>
+					<link block="cardRequiredPower">
+						<property name="PlayRequiredPower" />
+					</link> 
+				</else>
+			</conditional>
+			
+			<!-- Adding text for Secondary Required Power for multicolored friends (EDIT BY: GAMEMASTERLUNA) -->
+			<conditional>
+				<if property="SecondaryPlayRequiredPower" value="0">
+					<link block="dummyOverlay" /> 
+				</if>
+				<else>
+					<link block="secondaryCardRequiredPower">
+						<property name="SecondaryPlayRequiredPower" />
+					</link> 
+				</else>
+			</conditional>
+            
+            <conditional>
+				<if property="TertiaryPlayRequiredPower" value="0">
+					<link block="dummyOverlay" /> 
+				</if>
+				<else>
+					<link block="tertiaryCardRequiredPower">
+						<property name="TertiaryPlayRequiredPower" />
+					</link> 
+				</else>
+			</conditional>
+			<!-- (EDIT BY: GAMEMASTERLUNA) -->
+			
+			<conditional>
+				<if property="Element" value="None">
+					<link block="noneCardPower">
+						<property name="Power" />
+					</link>
+				</if>
+                <!-- Shifting power text for single colored friends -->
+                <elseif property="Element" value="Loyalty">
+                    <link block="cardPower">
+						<property name="Power" />
+					</link>
+				</elseif>
+                <elseif property="Element" value="Kindness">
+                    <link block="cardPower">
+						<property name="Power" />
+					</link>
+				</elseif>
+                <elseif property="Element" value="Generosity">
+                    <link block="cardPower">
+						<property name="Power" />
+					</link>
+				</elseif>
+                <elseif property="Element" value="Honesty">
+                    <link block="cardPower">
+						<property name="Power" />
+					</link>
+				</elseif>
+                <elseif property="Element" value="Laughter">
+                    <link block="cardPower">
+						<property name="Power" />
+					</link>
+				</elseif>
+                <elseif property="Element" value="Magic">
+                    <link block="cardPower">
+						<property name="Power" />
+					</link>
+				</elseif>
+				<!-- Shifting power text for multicolored friends -->
+				<elseif property="TertiaryPlayRequiredPower" value="#NULL#">
+                    <link block="multiCardPower">
+                        <property name="Power" />
+                    </link>
+				</elseif>
+                <elseif property="TertiaryPlayRequiredPower" value="1">
+                    <link block="multiCardTriPower">
+                        <property name="Power" />
+                    </link>
+				</elseif>
+                <elseif property="TertiaryPlayRequiredPower" value="2">
+                    <link block="multiCardTriPower">
+                        <property name="Power" />
+                    </link>
+				</elseif>
+                <elseif property="TertiaryPlayRequiredPower" value="3">
+                    <link block="multiCardTriPower">
+                        <property name="Power" />
+                    </link>
+				</elseif>
+                <elseif property="TertiaryPlayRequiredPower" value="4">
+                    <link block="multiCardTriPower">
+                        <property name="Power" />
+                    </link>
+				</elseif>
+                <elseif property="TertiaryPlayRequiredPower" value="5">
+                    <link block="multiCardTriPower">
+                        <property name="Power" />
+                    </link>
+				</elseif>
+			</conditional>
+            
+			<!-- Adding Black Text for multicolored friends' Traits (EDIT BY: GAMEMASTERLUNA) -->
+			<conditional>
+				<if property="Element" value="Multicolor">
+					<link block="cardTraitsBlack">
+						<property name="Traits" />
+					</link>
+				</if>
+				<else>
+					<link block="cardTraits">
+						<property name="Traits" />
+					</link>
+				</else>
+			</conditional>
+			<!-- (EDIT BY: GAMEMASTERLUNA) -->
+
+			<!-- Old version of Card Traits -->
+			<!-- <link block="cardTraits">
+				<property name="Traits" />
+			</link> -->
+			
+			<!-- Adding Black Text for multicolored friends' Name and subtext (EDIT BY: GAMEMASTERLUNA) -->
+			<conditional>
+				<if property="Element" value="Multicolor">
+					<link block="cardNameMulti">
+						<property name="Name" />
+					</link>
+				</if>
+				<else>
+					<link block="cardName">
+						<property name="Name" />
+					</link>
+				</else>
+			</conditional>
+			
+			<conditional>
+				<if property="Element" value="Multicolor">
+					<link block="cardSubnameMulti">
+						<property name="Subname" />
+					</link>
+				</if>
+				<else>
+					<link block="cardSubname">
+						<property name="Subname" />
+					</link>
+				</else>
+			</conditional>
+			<!-- (EDIT BY: GAMEMASTERLUNA) -->
+			
+			<!-- Old version of Card Name and Subtext -->
+			<!-- <link block="cardName">
+				<property name="Name" />
+			</link>
+			
+			<link block="cardSubname">
+				<property name="Subname" />
+			</link>  -->
+			
+			<link block="cardKeywords">
+				<property name="Keywords" />
+			</link>
+			<link block="cardText">
+				<property name="Text" />
+			</link>
+		</textblocks>
+	</template>
+	
+	<!-- Troublemaker Card template -->
+	<template src="proxy/proxyImages/cardTemplates/card-outline.png" default="False">
+	<matches>
+		<match name="Type" value="Troublemaker" />
+	</matches>
+
+	<overlayblocks>
+		<link block="troublemakerBack" />
+				
+	<!-- Power Number Overlays -->
+	
+		<conditional>
+			<if property="Power" value="0">
+				<link block="eventPower0" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="1">
+				<link block="eventPower1" />
+			</if>
+		</conditional>
+
+
+		<conditional>
+			<if property="Power" value="2">
+				<link block="eventPower2" />
+			</if>
+		</conditional>
+
+		<conditional>
+			<if property="Power" value="3">
+				<link block="eventPower3" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="4">
+				<link block="eventPower4" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="5">
+				<link block="eventPower5" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="6">
+				<link block="eventPower6" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="7">
+				<link block="eventPower7" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="8">
+				<link block="eventPower8" />
+			</if>
+		</conditional>
+		
+
+		<conditional>
+			<if property="Power" value="9">
+				<link block="eventPower9" />
+			</if>
+		</conditional>		
+	</overlayblocks>
+
+	<textblocks>
+
+		<link block="troublemakerCardTraits">
+			<property name="Traits" />
+		</link>
+
+		<link block="cardKeywordsWhite">
+			<property name="Keywords" />
+		</link>
+
+		<conditional>
+			<if property="Subname" value="">
+				<link block="troublemakerCardName">
+					<property name="Name" />
+				</link>
+			</if>
+			<else>
+				<link block="troublemakerCardNameWithSubname">
+					<property name="Name" />
+				</link>
+				<link block="troublemakerCardSubname">
+					<property name="Subname" />
+				</link>
+			</else>
+		</conditional>
+
+		<link block="troublemakerCardType">
+			<property name="Type" />
+		</link>	
+			
+		<link block="cardTextWhite">
+			<property name="Text" />
+		</link>
+		
+		<link block="troublemakerBonus">
+			<property name="ProblemBonus" />
+		</link>
+	</textblocks>
+</template>
+	
+	<!--Problem Card template -->
+	<template src="proxy/proxyImages/cardTemplates/card-problem.png" default="False">
+		<matches>
+			<match name="Type" value="Problem" />
+		</matches>
+		<overlayblocks>
+			<conditional>
+				<if property="ProblemPlayerElement1" contains="Rainbow">
+					<link block="problemElementRainbow" /> 
+					<link block="problemOpponentElementRainbow" />
+				</if>
+			</conditional>
+			<conditional>
+				<if property="ProblemOpponentPower" value="0">
+					<link block="problemOpponent_0" /> 
+				</if>
+			</conditional>
+			<conditional>
+				<if property="ProblemOpponentPower" value="1">
+					<link block="problemOpponent_1" /> 
+				</if>
+			</conditional>			
+			<conditional>
+				<if property="ProblemOpponentPower" value="2">
+					<link block="problemOpponent_2" /> 
+				</if>
+			</conditional>			
+			<conditional>
+				<if property="ProblemOpponentPower" value="3">
+					<link block="problemOpponent_3" /> 
+				</if>
+			</conditional>			
+			<conditional>
+				<if property="ProblemOpponentPower" value="4">
+					<link block="problemOpponent_4" /> 
+				</if>
+			</conditional>			
+			<conditional>
+				<if property="ProblemOpponentPower" value="5">
+					<link block="problemOpponent_5" /> 
+				</if>
+			</conditional>		
+			<conditional>
+				<if property="ProblemOpponentPower" value="6">
+					<link block="problemOpponent_6" /> 
+				</if>
+			</conditional>	
+			<conditional>
+				<if property="ProblemOpponentPower" value="7">
+					<link block="problemOpponent_7" /> 
+				</if>
+			</conditional>	
+			<conditional>
+				<if property="ProblemOpponentPower" value="8">
+					<link block="problemOpponent_8" /> 
+				</if>
+			</conditional>	
+			<conditional>
+				<if property="ProblemOpponentPower" value="9">
+					<link block="problemOpponent_9" /> 
+				</if>
+			</conditional>		
+			<!-- ProblemOpponentPower 10 (EDIT BY: GAMEMASTERLUNA) -->
+			<conditional>
+				<if property="ProblemOpponentPower" value="10">
+					<link block="problemOpponent_10" /> 
+				</if>
+			</conditional>
+			<conditional>
+				<if property="ProblemOpponentPower" value="18">
+					<link block="problemOpponent_18" /> 
+				</if>
+			</conditional>
+			<conditional>
+				<if property="ProblemOpponentPower" value="20">
+					<link block="problemOpponent_20" /> 
+				</if>
+			</conditional>
+			<conditional>
+				<if property="ProblemOpponentPower" value="24">
+					<link block="problemOpponent_24" /> 
+				</if>
+			</conditional>
+			<conditional>
+				<if property="ProblemOpponentPower" value="30">
+					<link block="problemOpponent_30" /> 
+				</if>
+			</conditional>
+			<conditional>
+				<if property="ProblemOpponentPower" value="infinity">
+					<link block="problemOpponent_infinity" /> 
+				</if>
+			</conditional>
+			<!-- (EDIT BY: GAMEMASTERLUNA) -->
+			
+			<conditional>
+				<if property="ProblemPlayerElement1" contains="Kindness">
+					<link block="problemElement1Kindness" /> 
+				</if>
+			</conditional>					
+			
+			<conditional>
+				<if property="ProblemPlayerElement2" contains="Kindness">
+					<link block="problemElement2Kindness" /> 
+				</if>
+			</conditional>		
+			
+			
+			<conditional>
+				<if property="ProblemPlayerElement1" contains="Magic">
+					<link block="problemElement1Magic" /> 
+				</if>
+			</conditional>					
+			
+			<conditional>
+				<if property="ProblemPlayerElement2" contains="Magic">
+					<link block="problemElement2Magic" /> 
+				</if>
+			</conditional>	
+
+			
+			<conditional>
+				<if property="ProblemPlayerElement1" contains="Loyalty">
+					<link block="problemElement1Loyalty" /> 
+				</if>
+			</conditional>					
+			
+			<conditional>
+				<if property="ProblemPlayerElement2" contains="Loyalty">
+					<link block="problemElement2Loyalty" /> 
+				</if>
+			</conditional>	
+
+			
+			<conditional>
+				<if property="ProblemPlayerElement1" contains="Honesty">
+					<link block="problemElement1Honesty" /> 
+				</if>
+			</conditional>					
+			
+			<conditional>
+				<if property="ProblemPlayerElement2" contains="Honesty">
+					<link block="problemElement2Honesty" /> 
+				</if>
+			</conditional>	
+
+			
+			<conditional>
+				<if property="ProblemPlayerElement1" contains="Generosity">
+					<link block="problemElement1Generosity" /> 
+				</if>
+			</conditional>					
+			
+			<conditional>
+				<if property="ProblemPlayerElement2" contains="Generosity">
+					<link block="problemElement2Generosity" /> 
+				</if>
+			</conditional>	
+
+			
+			<conditional>
+				<if property="ProblemPlayerElement1" contains="Laughter">
+					<link block="problemElement1Laughter" /> 
+				</if>
+			</conditional>					
+			
+			<conditional>
+				<if property="ProblemPlayerElement2" contains="Laughter">
+					<link block="problemElement2Laughter" /> 
+				</if>
+			</conditional>				
+		
+			<conditional>
+				<if property="ProblemPlayerElement1" contains="Not">
+					<link block="problemElement1Not" /> 
+				</if>
+			</conditional>							
+		
+			<conditional>
+				<if property="ProblemPlayerElement2" contains="Not">
+					<link block="problemElement2Not" /> 
+				</if>
+			</conditional>
+			
+			<conditional>
+				<if property="ProblemPlayerElement1" contains="Wild">
+					<link block="problemElementWild" /> 
+				</if>
+			</conditional>
+			
+			<!-- Adding Wild for 2nd element (EDIT BY: GAMEMASTERLUNA) -->
+			<conditional>
+				<if property="ProblemPlayerElement2" contains="Wild">
+					<link block="problemElementWild2" /> 
+				</if>
+			</conditional>
+			<!-- (EDIT BY: GAMEMASTERLUNA) -->
+		</overlayblocks>
+		
+		<textblocks>
+			<link block="problemBonus">
+				<property name="ProblemBonus" />
+			</link> 
+			
+			<conditional>
+				<if property="ProblemPlayerElement1" value="Wild">
+					<link block="problemElement1Power" />
+					<link block="problemSinglePower">
+						<property name="ProblemPlayerElement1Power" />
+					</link>
+				</if>
+				<else>
+					<link block="problemElement1Power">
+						<property name="ProblemPlayerElement1Power" />
+					</link>
+				</else>
+			</conditional>
+
+			<link block="problemElement2Power">
+				<property name="ProblemPlayerElement2Power" />
+			</link>
+      			
+			<link block="problemCardTitle">
+				<property name="Name" />
+			</link>
+			<link block="problemCardKeywords">
+				<property name="Keywords" />
+			</link>
+			<link block="problemCardText">
+				<property name="Text" />
+			</link>
+			
+		</textblocks>
+
+	</template>
+	
+</templates>

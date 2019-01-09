@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set name="Sands in Time" id="d00ef04d-61cf-49a2-8e13-e2b147ea8b59" gameId="65656467-b709-43b2-a5c6-80c2f216adf9" gameVersion="2.3.0.1" version="1.0">
+ <cards>
+  <card id="b1c6e2c1-ddae-172a-a478-66120d8140e5" name="Dr. Hooves">
+   <property name="Number" value="ST1" />
+   <property name="Type" value="Mane Character" />
+   <property name="Element" value="Loyalty" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="Time Walker" />
+   <property name="Power" value="1" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="Traits" value="Earth Pony" />
+   <property name="Keywords" value="Home Limit 4." />
+   <property name="Text" value="When you win a faceoff, put a Time counter on this card. Then, if there are at least 5 Time counters on this card, remove them, turn it over, and take an extra turn after this one." />
+   <property name="ProblemBonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="F" />
+   <alternate name="Dr. Hooves" type="Mane Character Boosted">
+    <property name="Number" value="ST1" />
+    <property name="Type" value="Mane Character Boosted" />
+    <property name="Element" value="Loyalty" />
+	<property name="MultiPrimaryElement" value="" />
+    <property name="MultiSecondaryElement" value="" />
+    <property name="Subname" value="Time Walker" />
+    <property name="Power" value="3" />
+    <property name="Cost" value="" />
+    <property name="PlayRequiredPower" value="" />
+    <property name="PlayRequiredElement" value="" />
+    <property name="Traits" value="Earth Pony" />
+    <property name="Keywords" value="Home Limit 4." />
+    <property name="Text" value="" />
+    <property name="ProblemBonus" value="" />
+    <property name="ProblemOpponentPower" value="" />
+    <property name="ProblemPlayerElement1" value="" />
+    <property name="ProblemPlayerElement1Power" value="" />
+    <property name="ProblemPlayerElement2" value="" />
+    <property name="ProblemPlayerElement2Power" value="" />
+    <property name="Rarity" value="F" />
+   </alternate>
+  </card>
+  <card id="b5d3da7f-3e95-6f7c-8bdd-3136098ec21c" name="Twilight Sparkle">
+   <property name="Number" value="ST2" />
+   <property name="Type" value="Mane Character" />
+   <property name="Element" value="Magic" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="Paradox Pony" />
+   <property name="Power" value="1" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="Traits" value="Unicorn" />
+   <property name="Keywords" value="Home Limit 3." />
+   <property name="Text" value="The first time a player scores a point each turn, put a Time counter on this card. Then, if there are at least 5 Time counters on this card, turn it over." />
+   <property name="ProblemBonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="F" />
+   <alternate name="Twilight Sparkle" type="Mane Character Boosted">
+    <property name="Number" value="ST2" />
+    <property name="Type" value="Mane Character Boosted" />
+    <property name="Element" value="Magic" />
+	<property name="MultiPrimaryElement" value="" />
+    <property name="MultiSecondaryElement" value="" />
+    <property name="Subname" value="Paradox Pony" />
+    <property name="Power" value="3" />
+    <property name="Cost" value="" />
+    <property name="PlayRequiredPower" value="" />
+    <property name="PlayRequiredElement" value="" />
+    <property name="Traits" value="Unicorn" />
+    <property name="Keywords" value="Home Limit 4" />
+    <property name="Text" value="Main Phase: Pay 3AT to put a Friend from your hand into play. At the end of your turn, put that Friend into your hand." />
+    <property name="ProblemBonus" value="" />
+    <property name="ProblemOpponentPower" value="" />
+    <property name="ProblemPlayerElement1" value="" />
+    <property name="ProblemPlayerElement1Power" value="" />
+    <property name="ProblemPlayerElement2" value="" />
+    <property name="ProblemPlayerElement2Power" value="" />
+    <property name="Rarity" value="F" />
+   </alternate>
+  </card>
+ </cards>
+</set>
