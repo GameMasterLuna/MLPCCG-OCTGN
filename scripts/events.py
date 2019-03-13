@@ -51,7 +51,7 @@ def autoAT(args):
             return
         
         #Just for debugging pos
-        whisper("Card Pos: {}".format(card.position))
+        #whisper("Card Pos: {}".format(card.position))
         
         type = card.properties["Type"]
         cardCost = card.properties["Cost"]
