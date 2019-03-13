@@ -3021,7 +3021,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="8a49c0cb-277d-0eb2-53f4-3aef92a1e693" name="Concerning Cutie Mark">
+  <card id="8a49c0cb-277d-0eb2-53f4-3aef92a1e693" size="Problem" name="Concerning Cutie Mark">
    <property name="Number" value="DE122" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3045,7 +3045,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="f1b9b180-5e24-ecfc-6f54-1ca906ea6639" name="Eight Cart Pileup">
+  <card id="f1b9b180-5e24-ecfc-6f54-1ca906ea6639" size="Problem" name="Eight Cart Pileup">
    <property name="Number" value="DE123" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3069,7 +3069,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="3afbb84d-a2ee-0dd4-b7ee-058ecdb0dd13" name="Friendship Overboard">
+  <card id="3afbb84d-a2ee-0dd4-b7ee-058ecdb0dd13" size="Problem" name="Friendship Overboard">
    <property name="Number" value="DE124" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3093,7 +3093,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="760f2e53-d2c7-7549-f086-8b907249b98c" name="Grand Opening">
+  <card id="760f2e53-d2c7-7549-f086-8b907249b98c" size="Problem" name="Grand Opening">
    <property name="Number" value="DE125" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3117,7 +3117,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="c273df13-fbc0-ee79-d3ee-e9d5e37fd7e8" name="In the Temple of Chicomoztoc">
+  <card id="c273df13-fbc0-ee79-d3ee-e9d5e37fd7e8" size="Problem" name="In the Temple of Chicomoztoc">
    <property name="Number" value="DE126" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3141,7 +3141,7 @@
    <property name="ProblemPlayerElement2Power" value="5" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="61c59109-30b4-ad9a-3c1d-e7c3c971e738" name="Infiltrating the Hive">
+  <card id="61c59109-30b4-ad9a-3c1d-e7c3c971e738" size="Problem" name="Infiltrating the Hive">
    <property name="Number" value="DE127" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3165,7 +3165,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="42930be1-1d34-28e4-f3c9-cd3030a692f2" name="Seeking the Scepter">
+  <card id="42930be1-1d34-28e4-f3c9-cd3030a692f2" size="Problem" name="Seeking the Scepter">
    <property name="Number" value="DE128" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3189,7 +3189,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="c113ef01-14ab-666e-30da-1bd940249e90" name="Thrash the Throne">
+  <card id="c113ef01-14ab-666e-30da-1bd940249e90" size="Problem" name="Thrash the Throne">
    <property name="Number" value="DE129" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3213,7 +3213,7 @@
    <property name="ProblemPlayerElement2Power" value="5" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="7411e197-e84a-6d92-031d-2f4aebcd6319" name="Too Many Fluttershys">
+  <card id="7411e197-e84a-6d92-031d-2f4aebcd6319" size="Problem" name="Too Many Fluttershys">
    <property name="Number" value="DE130" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3237,7 +3237,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="b8b95a33-33c4-c375-4746-e50bfcf267da" name="Tough Call">
+  <card id="b8b95a33-33c4-c375-4746-e50bfcf267da" size="Problem" name="Tough Call">
    <property name="Number" value="DE131" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />

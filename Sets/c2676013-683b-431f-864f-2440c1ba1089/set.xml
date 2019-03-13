@@ -3750,7 +3750,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="1e74c587-93de-5a2f-a625-9da585b0ce76" name="Banquet Baking">
+  <card id="1e74c587-93de-5a2f-a625-9da585b0ce76" size="Problem" name="Banquet Baking">
    <property name="Number" value="SB124" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3779,7 +3779,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="0128dac4-d585-9c81-2f79-0b0e9d87da71" name="Caught Off Guard">
+  <card id="0128dac4-d585-9c81-2f79-0b0e9d87da71" size="Problem" name="Caught Off Guard">
    <property name="Number" value="SB125" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3808,7 +3808,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="8df96183-2673-cbfb-2b81-647603d7b6b0" name="Daring Escape">
+  <card id="8df96183-2673-cbfb-2b81-647603d7b6b0" size="Problem" name="Daring Escape">
    <property name="Number" value="SB126" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3837,7 +3837,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="d62ae1b6-270f-4434-ff59-d921e1d27a75" name="Down the Drain">
+  <card id="d62ae1b6-270f-4434-ff59-d921e1d27a75" size="Problem" name="Down the Drain">
    <property name="Number" value="SB127" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3866,7 +3866,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="744df40a-d461-fccb-8c86-fefdb661fe7c" name="Easy as Cake">
+  <card id="744df40a-d461-fccb-8c86-fefdb661fe7c" size="Problem" name="Easy as Cake">
    <property name="Number" value="SB128" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3895,7 +3895,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="760a2c7f-2ad2-9f67-0a13-f2b5f26dccc5" name="Pearl Heist">
+  <card id="760a2c7f-2ad2-9f67-0a13-f2b5f26dccc5" size="Problem" name="Pearl Heist">
    <property name="Number" value="SB129" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3924,7 +3924,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="a9b0028d-5a22-cafa-6e74-137c08afcc95" name="Searching High and Low">
+  <card id="a9b0028d-5a22-cafa-6e74-137c08afcc95" size="Problem" name="Searching High and Low">
    <property name="Number" value="SB130" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3953,7 +3953,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="1169c145-cc45-21a3-c4b1-648a6632cb7d" name="Swaying the Seaponies">
+  <card id="1169c145-cc45-21a3-c4b1-648a6632cb7d" size="Problem" name="Swaying the Seaponies">
    <property name="Number" value="SB131" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />

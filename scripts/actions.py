@@ -923,7 +923,7 @@ def holdOn(group, x = 0, y = 0):
     
 def activateVC(group, x = 0, y = 0):
     mute()
-    villainList = ["Nightmare Moon", "King Sombra"]
+    villainList = ["Nightmare Moon", "King Sombra", "Queen Chrysalis"]
     count = 0
     playerId = me._id
     villainPicked = False
@@ -1076,7 +1076,7 @@ def activateVC(group, x = 0, y = 0):
         table.create('4c6d9ef6-7ed8-48c3-a37e-a689d1cc1648', 411, 12, quantity = 1, persist = True)
         table.create('e80d0ce7-34dd-4ec8-a57b-56c13de54889', 411, 12, quantity = 1, persist = True)
         table.create('247b7b21-60d0-4b67-8b04-7047642c0134', 411, 12, quantity = 1, persist = True)
-        table.create('1b08836a-ac8a-4cff-92bc-cc52decfdb8c', 411, 12, quantity = 1, persist = True)
+        table.create('959437c6-8899-479c-a784-53ff4ec6e897', 411, 12, quantity = 1, persist = True)
         challengerProbCards = (card for card in table if re.search(r'NM', card.Number))
 
         originalGrpControllerBanish = players[mainPlayerNo].piles['Banished Pile'].controller
@@ -1110,16 +1110,15 @@ def activateVC(group, x = 0, y = 0):
         
         #At the end to prevent challenger prob from counting these cards on the table
         challengerCard = table.create('0901c499-21b0-4863-9857-03f7f57a9efc', -167, 177, quantity = 1, persist = True)
-        challengerStartProbCard = table.create('1b08836a-ac8a-4cff-92bc-cc52decfdb8c', 130, -43, quantity = 1, persist = True)
+        challengerStartProbCard = table.create('1b08836a-ac8a-4cff-92bc-cc52decfdb8c', 130, -53, quantity = 1, persist = True)
         challengerCard.controller = players[mainPlayerNo]
         challengerStartProbCard.controller = players[mainPlayerNo]
         
         
-        villainCard = table.create('dfe40d93-60f2-4f02-a2a2-9c8909c5e9df', -33, -268, quantity = 1, persist = True)
-        villainStartProbCard = table.create('725ebc53-1252-468a-9f86-4da0d536e22c', -193, -45, quantity = 1, persist = True)
-        villainCard.controller = players[villainPlayerNo]
+        villainManeCard = table.create('dfe40d93-60f2-4f02-a2a2-9c8909c5e9df', -33, -268, quantity = 1, persist = True)
+        villainStartProbCard = table.create('725ebc53-1252-468a-9f86-4da0d536e22c', -215, -57, quantity = 1, persist = True)
+        villainManeCard.controller = players[villainPlayerNo]
         villainStartProbCard.controller = players[villainPlayerNo]
-        
         
     elif getGlobalVariable("villainChoice") == "2":
         notify("King Sombra is chosen to be the Villain.")
@@ -1177,17 +1176,111 @@ def activateVC(group, x = 0, y = 0):
             card.controller = originalCGrpControllerProb
         players[mainPlayerNo].piles['Problem Deck'].controller = originalCGrpControllerProb
         
-        challengerStartProbCard = table.create('c8c2e682-4c90-4ff0-a027-8c3dc6224330', 130, -43, quantity = 1, persist = True)
+        challengerStartProbCard = table.create('c8c2e682-4c90-4ff0-a027-8c3dc6224330', 130, -53, quantity = 1, persist = True)
         challengerStartProbCard.controller = players[mainPlayerNo]
         
-        villainStartProbCard = table.create('67cc321a-fc8d-4842-959b-4c4e4b52ed1d', -193, -45, quantity = 1, persist = True)
+        villainStartProbCard = table.create('67cc321a-fc8d-4842-959b-4c4e4b52ed1d', -215, -57, quantity = 1, persist = True)
         villainManeCard = table.create('1395b658-c0d7-4a2d-91ea-8337e94d80a8', -33, -268, quantity = 1, persist = True)
         villainCard = table.create('ea8871b9-8f90-450e-ad09-a7dc2c55d641', -167, -268, quantity = 1, persist = True)
         villainStartProbCard.controller = players[villainPlayerNo]
         villainManeCard.controller = players[villainPlayerNo]
         villainCard.controller = players[villainPlayerNo]
-    
+        
+    elif getGlobalVariable("villainChoice") == "3":
+        notify("Queen Chrysalis is chosen to be the Villain.")
+        
+        table.create('afb81798-ce55-4608-9f5b-cbeb20f52ab1', 411, 12, quantity = 2, persist = True)
+        table.create('265f3136-09dc-4ee2-aa69-b4848539668d', 411, 12, quantity = 2, persist = True)
+        table.create('87ec85b6-e92f-49f2-87bf-1b0555a717ce', 411, 12, quantity = 2, persist = True)
+        table.create('c064a952-5e92-414e-acfa-7c0aa0f80e31', 411, 12, quantity = 2, persist = True)
+        table.create('77ab8a99-392c-4011-9771-4c83829c1b2f', 411, 12, quantity = 1, persist = True)
+        villainProbCards = (card for card in table if re.search(r'QC', card.Number))
+        
+        originalVGrpControllerProb = players[villainPlayerNo].piles['Problem Deck'].controller
+        
+        players[villainPlayerNo].piles['Problem Deck'].controller = me
+        for card in villainProbCards:
+            card.controller = me
+            update()
+            card.moveTo(players[villainPlayerNo].piles['Problem Deck'])
+            update()
+            card.controller = originalVGrpControllerProb
+        shuffle(players[villainPlayerNo].piles['Problem Deck'])
+        players[villainPlayerNo].piles['Problem Deck'].controller = originalVGrpControllerProb
+        
+        rnd(1,2)
+        update()
+        
+        table.create('1ccba76c-9aaf-40ac-b55d-6085ac789f94', 411, 12, quantity = 2, persist = True)
+        table.create('98e8f98f-9628-4f9b-a1e7-369b3974f2b0', 411, 12, quantity = 2, persist = True)
+        table.create('f85aa7fd-5e7b-4e3f-809b-436f4aac4a62', 411, 12, quantity = 2, persist = True)
+        table.create('a35c9ae8-ca69-47d4-a45c-aecabdeb3e42', 411, 12, quantity = 2, persist = True)
+        table.create('08bd8c99-94fb-41ba-a6db-419ee20b943a', 411, 12, quantity = 1, persist = True)
+        challengerProbCards = (card for card in table if re.search(r'QC', card.Number))
+
+        originalCGrpControllerProb = players[mainPlayerNo].piles['Problem Deck'].controller
+        
+        mainPlayerName = players[mainPlayerNo].name
+        notify("{} is chosen to be the Main player.".format(mainPlayerName))
+        
+        players[mainPlayerNo].piles['Problem Deck'].controller = me
+        for card in challengerProbCards:
+            card.controller = me
+            update()
+            card.moveTo(players[mainPlayerNo].piles['Problem Deck'])
+            update()
+            card.controller = originalCGrpControllerProb
+        shuffle(players[mainPlayerNo].piles['Problem Deck'])
+        players[mainPlayerNo].piles['Problem Deck'].controller = originalCGrpControllerProb
+        
+        #Creation of cards that will stay on table
+        #At the end to prevent problem piles from counting these cards on the table and adding them into the pile
+        challengerCard = table.create('8ad6ef37-3af1-4c10-8982-bd0c48b195a7', -167, 177, quantity = 1, persist = True)
+        challengerStartProbCard = table.create('1318c3f4-8a57-404a-ace5-435f52099274', 130, -53, quantity = 1, persist = True)
+        challengerCard.controller = players[mainPlayerNo]
+        challengerStartProbCard.controller = players[mainPlayerNo]
+        
+        villainManeCard = table.create('dd893c2b-3b8e-4df5-a08c-0bb30d5e6a96', -33, -268, quantity = 1, persist = True)
+        villainCard = table.create('1e4ad546-c444-4007-833d-b57e6958fe0c', -167, -268, quantity = 1, persist = True)
+        villainCard1 = table.create('7f66e526-6639-4e85-8a36-812c906616df', -247, -268, quantity = 1, persist = True)
+        villainCard2 = table.create('139cb1eb-28c4-44f6-9a4e-70d1ef550522', -287, -268, quantity = 1, persist = True)
+        villainCard3 = table.create('c5a68c3a-6de3-4703-8a69-46a526fa38bc', -327, -268, quantity = 1, persist = True)
+        villainStartProbCard = table.create('a6f82c51-7bab-427c-877e-4877ec4bc6cf', -215, -57, quantity = 1, persist = True)
+        villainManeCard.controller = players[villainPlayerNo]
+        villainCard.controller = players[villainPlayerNo]
+        villainCard1.controller = players[villainPlayerNo]
+        villainCard2.controller = players[villainPlayerNo]
+        villainCard3.controller = players[villainPlayerNo]
+        villainStartProbCard.controller = players[villainPlayerNo]
+        
+        notify("\nFor Villain:\nRemember to look through each Challenger's deck one at a time and pick one Friend from each Challenger deck for your Seemingly Innocent Pony resource card.\n\nFor Challengers:\nRemember to decide on one Harmony-legal Event for your Defensive Spell resource card.\n")
+        
     whisper("Please ignore the moving errors above if any. The cards are already in the correct position, just that it's too fast for the game to track.")
+
+# NOTE: Reserved for future use when the devs allow multiple boards on the table
+# def playmat(group, x = 0, y = 0):
+    # mute()
+    # #Just wanted to replace Default option with None so it will be more clear to the user. Note that the Default playmat is transparent
+    # playmatList = ['None']
+    # playmatList.extend(table.boards)
+    # playmatList.remove('Default')
+    # playmatList = [x for x in playmatList if not 'Inverted' in x] #Remove all elements with the word "Inverted"
+    # playmatChoice = askChoice("Pick a playmat: ", playmatList)
+    
+    # if playmatChoice == 1:
+        # table.board = 'Default'
+    # elif playmatChoice == 2:
+        # if me.isInverted:
+            # table.board = 'Playmat 1 Inverted'
+        # else:
+            # table.board = 'Playmat 1'
+    # elif playmatChoice == 3:
+        # if me.isInverted:
+            # table.board = 'Playmat 2 Inverted'
+        # else:
+            # table.board = 'Playmat 2'
+    # else:
+        # return
 
 def setup(group, x = 0, y = 0):
     ManeCheck = 0
@@ -1215,7 +1308,7 @@ def setup(group, x = 0, y = 0):
                 card.moveTo(me.hand)
             elif card.Type == 'Mane Character Boosted': 
                 card.moveTo(me.hand)
-            elif re.search(r'NM', card.Number) or re.search(r'KS', card.Number):
+            elif re.search(r'NM', card.Number) or re.search(r'KS', card.Number) or re.search(r'QC', card.Number):
                 pass
             else:
                 card.moveTo(me.piles['Discard Pile'])
@@ -1404,9 +1497,9 @@ def setup(group, x = 0, y = 0):
             SelectedStart.orientation ^= Rot270
     else:
         if me.isInverted:
-            SelectedStart.moveToTable(-193,-45)
+            SelectedStart.moveToTable(-215,-57)
         else:               
-            SelectedStart.moveToTable(130,-43)
+            SelectedStart.moveToTable(130,-53)
         
     update()
             
@@ -1702,9 +1795,9 @@ def replaceProblem(card, x = 0, y = 0):
         
         newProblem = me.piles['Problem Deck'][10]
         if me.isInverted:
-            newProblem.moveToTable(-193,-45)
+            newProblem.moveToTable(-215,-57)
         else:               
-            newProblem.moveToTable(130,-43)
+            newProblem.moveToTable(130,-53)
         notify("{} moves {} to the top of their Problem Deck and Replaces it with {} from the bottom of their Problem Deck.".format(me,oldName,newProblem.Name))
         return
         
@@ -1726,24 +1819,25 @@ def replaceProblem(card, x = 0, y = 0):
             newProblem.orientation ^= Rot270
     else:
         if me.isInverted:
-            newProblem.moveToTable(-193,-45)
+            newProblem.moveToTable(-215,-57)
         else:               
-            newProblem.moveToTable(130,-43)
+            newProblem.moveToTable(130,-53)
     notify("{} moves {} to the bottom of their Problem Deck and Replaces it with {}".format(me,oldName,newProblem.Name))
 
 def flipcard(card, x = 0, y = 0):
     mute()
     #position = card.position #TEMP, REMOVE THIS
-    if card.Type == 'Mane Character':
-        card.alternate = 'Mane Character Boosted'
-        notify("{} flips {}.".format(me, card))
-        return 
-    
-    if card.Type == 'Mane Character Boosted':
+    if card.alternate == 'Mane Character Boosted':
         card.alternate = ''
         notify("{} flips {}.".format(me, card))
-        return 
-
+        return
+    else:
+        #The card models are the 3 resource cards from QC villain challenge
+        if card.Type == 'Mane Character' or card.model == '7f66e526-6639-4e85-8a36-812c906616df' or card.model == '139cb1eb-28c4-44f6-9a4e-70d1ef550522' or card.model == 'c5a68c3a-6de3-4703-8a69-46a526fa38bc':
+            card.alternate = 'Mane Character Boosted'
+            notify("{} flips {}.".format(me, card))
+            return
+    
     if card.isFaceUp:
         notify("{} turns {} face down.".format(me, card))
         card.isFaceUp = False

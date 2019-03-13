@@ -3441,7 +3441,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="f80f9e00-0be6-4dba-89c7-877de97ed3dc" name="Accessorize the Crystal Ponies">
+  <card id="f80f9e00-0be6-4dba-89c7-877de97ed3dc" size="Problem" name="Accessorize the Crystal Ponies">
    <property name="Number" value="CG167" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3461,7 +3461,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="bdb7d7a0-4721-4c2c-afcf-3563df36fa3e" name="Cart Crafting">
+  <card id="bdb7d7a0-4721-4c2c-afcf-3563df36fa3e" size="Problem" name="Cart Crafting">
    <property name="Number" value="CG168" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3481,7 +3481,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="d1aa5596-6c32-488e-a9fc-525785bf8473" name="Charge!">
+  <card id="d1aa5596-6c32-488e-a9fc-525785bf8473" size="Problem" name="Charge!">
    <property name="Number" value="CG169" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3501,7 +3501,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="a6c6039c-a6d3-4653-94a5-dda354b70a18" name="Cheer Up the Crystal Ponies">
+  <card id="a6c6039c-a6d3-4653-94a5-dda354b70a18" size="Problem" name="Cheer Up the Crystal Ponies">
    <property name="Number" value="CG170" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3521,7 +3521,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="381d8904-a60e-4986-be22-c7e55c879a44" name="Dark Magic Surge">
+  <card id="381d8904-a60e-4986-be22-c7e55c879a44" size="Problem" name="Dark Magic Surge">
    <property name="Number" value="CG171" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3541,7 +3541,7 @@
    <property name="ProblemPlayerElement2Power" value="1" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="0eeb817d-db1b-4941-8447-25fef7a0ae7b" name="Deep Dark Forest">
+  <card id="0eeb817d-db1b-4941-8447-25fef7a0ae7b" size="Problem" name="Deep Dark Forest">
    <property name="Number" value="CG172" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3561,7 +3561,7 @@
    <property name="ProblemPlayerElement2Power" value="1" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="1a8b54bf-bd7b-4eee-b808-e4351a75994c" name="Distract the Crystal Ponies">
+  <card id="1a8b54bf-bd7b-4eee-b808-e4351a75994c" size="Problem" name="Distract the Crystal Ponies">
    <property name="Number" value="CG173" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3581,7 +3581,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="252f3d26-b4a6-4e5f-bfbd-893bc947cc20" name="Encourage the Crystal Ponies">
+  <card id="252f3d26-b4a6-4e5f-bfbd-893bc947cc20" size="Problem" name="Encourage the Crystal Ponies">
    <property name="Number" value="CG174" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3601,7 +3601,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="18b938e8-3e7b-4720-88b2-9c8d5ca884be" name="Entertain the Crystal Ponies">
+  <card id="18b938e8-3e7b-4720-88b2-9c8d5ca884be" size="Problem" name="Entertain the Crystal Ponies">
    <property name="Number" value="CG175" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3621,7 +3621,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="a8aebbea-698c-41af-bb4e-e2e3f4271ed0" name="Fending Off Fiends">
+  <card id="a8aebbea-698c-41af-bb4e-e2e3f4271ed0" size="Problem" name="Fending Off Fiends">
    <property name="Number" value="CG176" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3641,7 +3641,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="1c1c9123-5604-4956-9e15-cdb9bf3154e9" name="Forced Gem Hunt">
+  <card id="1c1c9123-5604-4956-9e15-cdb9bf3154e9" size="Problem" name="Forced Gem Hunt">
    <property name="Number" value="CG177" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3661,7 +3661,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="42ebff10-23f3-49a6-8fc9-843af12a7c4b" name="Ice Cloud Calamity">
+  <card id="42ebff10-23f3-49a6-8fc9-843af12a7c4b" size="Problem" name="Ice Cloud Calamity">
    <property name="Number" value="CG178" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3681,7 +3681,7 @@
    <property name="ProblemPlayerElement2Power" value="1" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="b5f9daea-825d-4a7d-91ec-2f9f18fa1c48" name="Inspiring Magic">
+  <card id="b5f9daea-825d-4a7d-91ec-2f9f18fa1c48" size="Problem" name="Inspiring Magic">
    <property name="Number" value="CG179" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3701,7 +3701,7 @@
    <property name="ProblemPlayerElement2Power" value="1" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="1669b3d8-340e-4496-9121-00b262a850fe" name="Lost and Not Found">
+  <card id="1669b3d8-340e-4496-9121-00b262a850fe" size="Problem" name="Lost and Not Found">
    <property name="Number" value="CG180" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3721,7 +3721,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="f6d4fd7e-6e14-4a88-b73d-db729842fda5" name="Magical Tantrum">
+  <card id="f6d4fd7e-6e14-4a88-b73d-db729842fda5" size="Problem" name="Magical Tantrum">
    <property name="Number" value="CG181" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3741,7 +3741,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="9dc92984-60e3-4de0-971e-6f895ec96160" name="Overgrown Everfree">
+  <card id="9dc92984-60e3-4de0-971e-6f895ec96160" size="Problem" name="Overgrown Everfree">
    <property name="Number" value="CG182" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3761,7 +3761,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="fb3c1e23-63ad-4873-ace8-67eebf92519d" name="Ponies Without Parachutes">
+  <card id="fb3c1e23-63ad-4873-ace8-67eebf92519d" size="Problem" name="Ponies Without Parachutes">
    <property name="Number" value="CG183" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3781,7 +3781,7 @@
    <property name="ProblemPlayerElement2Power" value="1" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="a819b14c-b6ee-4e77-9290-4e99b7352a91" name="Rockslide">
+  <card id="a819b14c-b6ee-4e77-9290-4e99b7352a91" size="Problem" name="Rockslide">
    <property name="Number" value="CG184" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3801,7 +3801,7 @@
    <property name="ProblemPlayerElement2Power" value="1" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="98d37b78-fd79-4451-b5a1-477839721354" name="Runaway Pony!">
+  <card id="98d37b78-fd79-4451-b5a1-477839721354" size="Problem" name="Runaway Pony!">
    <property name="Number" value="CG185" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3821,7 +3821,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="f9e8ceea-cd70-4c6c-9f2b-a94819a8635b" name="Save the Crystal Ponies">
+  <card id="f9e8ceea-cd70-4c6c-9f2b-a94819a8635b" size="Problem" name="Save the Crystal Ponies">
    <property name="Number" value="CG186" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3841,7 +3841,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="c8394dde-340a-4828-a451-46af0db8068c" name="Swindlers in Town">
+  <card id="c8394dde-340a-4828-a451-46af0db8068c" size="Problem" name="Swindlers in Town">
    <property name="Number" value="CG187" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3861,7 +3861,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="79e66025-46d9-4452-93a3-5f01354dd958" name="The Show Must Go On">
+  <card id="79e66025-46d9-4452-93a3-5f01354dd958" size="Problem" name="The Show Must Go On">
    <property name="Number" value="CG188" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3881,7 +3881,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="23534e26-feed-4757-9b9f-2dd723304ae4" name="Through the Cave">
+  <card id="23534e26-feed-4757-9b9f-2dd723304ae4" size="Problem" name="Through the Cave">
    <property name="Number" value="CG189" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3901,7 +3901,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="9af90316-86c2-4f5b-ad38-e4eb6a213f4c" name="Wonderbolts Reserve Exam">
+  <card id="9af90316-86c2-4f5b-ad38-e4eb6a213f4c" size="Problem" name="Wonderbolts Reserve Exam">
    <property name="Number" value="CG190" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />

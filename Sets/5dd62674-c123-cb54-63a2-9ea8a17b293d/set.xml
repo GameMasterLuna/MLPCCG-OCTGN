@@ -3914,7 +3914,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="9e636145-ed3d-fdfa-8a23-8e1bb5419dc2" name="Blending In">
+  <card id="9e636145-ed3d-fdfa-8a23-8e1bb5419dc2" size="Problem" name="Blending In">
    <property name="Number" value="EO181" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3934,7 +3934,7 @@
    <property name="ProblemPlayerElement2Power" value="0" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="44a5314d-a7ac-dc9c-08e8-88444e9962f9" name="Bridging the Gap">
+  <card id="44a5314d-a7ac-dc9c-08e8-88444e9962f9" size="Problem" name="Bridging the Gap">
    <property name="Number" value="EO182" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3954,7 +3954,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="d7c26941-775c-26dd-b9f1-d6bf667075a7" name="Cult of Personality">
+  <card id="d7c26941-775c-26dd-b9f1-d6bf667075a7" size="Problem" name="Cult of Personality">
    <property name="Number" value="EO183" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3974,7 +3974,7 @@
    <property name="ProblemPlayerElement2Power" value="0" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="f4aa0481-65ea-fdaa-e70d-27491688c558" name="Dream Patrol">
+  <card id="f4aa0481-65ea-fdaa-e70d-27491688c558" size="Problem" name="Dream Patrol">
    <property name="Number" value="EO184" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3994,7 +3994,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="9b54de7d-e22c-87ce-598f-a1100e691767" name="Figuring Out Friendship">
+  <card id="9b54de7d-e22c-87ce-598f-a1100e691767" size="Problem" name="Figuring Out Friendship">
    <property name="Number" value="EO185" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4014,7 +4014,7 @@
    <property name="ProblemPlayerElement2Power" value="5" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="cff60094-6ee1-be3e-a2cf-3eec8f547769" name="Get Lost">
+  <card id="cff60094-6ee1-be3e-a2cf-3eec8f547769" size="Problem" name="Get Lost">
    <property name="Number" value="EO186" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4034,7 +4034,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="0da58468-82c2-380d-55ba-9f4ce95032a6" name="Gunked Up Gala">
+  <card id="0da58468-82c2-380d-55ba-9f4ce95032a6" size="Problem" name="Gunked Up Gala">
    <property name="Number" value="EO187" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4054,7 +4054,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="6f3f1590-a208-b5c9-ad0f-be67d9766032" name="Halfway Across Equestria">
+  <card id="6f3f1590-a208-b5c9-ad0f-be67d9766032" size="Problem" name="Halfway Across Equestria">
    <property name="Number" value="EO188" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4074,7 +4074,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="5715724a-7843-c30b-d391-06b28a9775d8" name="Hay Bale Monster Stack">
+  <card id="5715724a-7843-c30b-d391-06b28a9775d8" size="Problem" name="Hay Bale Monster Stack">
    <property name="Number" value="EO189" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4094,7 +4094,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="0802140d-4559-a925-c6b5-942087a1569e" name="Jailbreak!">
+  <card id="0802140d-4559-a925-c6b5-942087a1569e" size="Problem" name="Jailbreak!">
    <property name="Number" value="EO190" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4114,7 +4114,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="25e6181c-3c6b-4dc5-9dca-92eb391cab97" name="Locked Out">
+  <card id="25e6181c-3c6b-4dc5-9dca-92eb391cab97" size="Problem" name="Locked Out">
    <property name="Number" value="EO191" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4134,7 +4134,7 @@
    <property name="ProblemPlayerElement2Power" value="0" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="c3f71504-bc46-f88a-5b90-c3dbf30a5317" name="Mob Mentality">
+  <card id="c3f71504-bc46-f88a-5b90-c3dbf30a5317" size="Problem" name="Mob Mentality">
    <property name="Number" value="EO192" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4154,7 +4154,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="c9810b09-e80d-1ab0-bd15-1ad60b1dd120" name="Pet Primping">
+  <card id="c9810b09-e80d-1ab0-bd15-1ad60b1dd120" size="Problem" name="Pet Primping">
    <property name="Number" value="EO193" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4174,7 +4174,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="6089bfb9-9220-e459-b635-c8d3ea1b465b" name="Ready to Fight">
+  <card id="6089bfb9-9220-e459-b635-c8d3ea1b465b" size="Problem" name="Ready to Fight">
    <property name="Number" value="EO194" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4194,7 +4194,7 @@
    <property name="ProblemPlayerElement2Power" value="0" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="c71b5c62-f0dd-8f8b-2474-0a09b626d56a" name="Rodeo Ruckus">
+  <card id="c71b5c62-f0dd-8f8b-2474-0a09b626d56a" size="Problem" name="Rodeo Ruckus">
    <property name="Number" value="EO195" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4214,7 +4214,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="3127138e-d37e-63c2-0927-af13ad8b42ac" name="Spell Showdown">
+  <card id="3127138e-d37e-63c2-0927-af13ad8b42ac" size="Problem" name="Spell Showdown">
    <property name="Number" value="EO196" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4234,7 +4234,7 @@
    <property name="ProblemPlayerElement2Power" value="6" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="cee98c84-decb-8bb6-e8b3-e5923225e0f2" name="Strut Your Stuff">
+  <card id="cee98c84-decb-8bb6-e8b3-e5923225e0f2" size="Problem" name="Strut Your Stuff">
    <property name="Number" value="EO197" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4254,7 +4254,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="ac9bdac0-2702-add2-4fbd-2af9a341c987" name="Take Shelter">
+  <card id="ac9bdac0-2702-add2-4fbd-2af9a341c987" size="Problem" name="Take Shelter">
    <property name="Number" value="EO198" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4274,7 +4274,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="9264defa-5691-e6ef-32d9-91c04438a9e4" name="To Griffonstone">
+  <card id="9264defa-5691-e6ef-32d9-91c04438a9e4" size="Problem" name="To Griffonstone">
    <property name="Number" value="EO199" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4294,7 +4294,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="554d13d6-7ec0-e64d-d268-5dc7e7fb26ed" name="Totally Lost">
+  <card id="554d13d6-7ec0-e64d-d268-5dc7e7fb26ed" size="Problem" name="Totally Lost">
    <property name="Number" value="EO200" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4314,7 +4314,7 @@
    <property name="ProblemPlayerElement2Power" value="0" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="7d4ad6a8-925d-2141-d693-39e22e28d663" name="Winter is Coming">
+  <card id="7d4ad6a8-925d-2141-d693-39e22e28d663" size="Problem" name="Winter is Coming">
    <property name="Number" value="EO201" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -4334,7 +4334,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="e7a539c0-624c-b3a2-ede1-a67b6e9f011c" name="Winter Start Up">
+  <card id="e7a539c0-624c-b3a2-ede1-a67b6e9f011c" size="Problem" name="Winter Start Up">
    <property name="Number" value="EO202" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />

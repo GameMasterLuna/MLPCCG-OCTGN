@@ -2972,7 +2972,7 @@
    <property name="Rarity" value="R" />
   </card>
   
-  <card id="ed481191-c44f-4267-a049-3916358b1721" name="A Second Chance">
+  <card id="ed481191-c44f-4267-a049-3916358b1721" size="Problem" name="A Second Chance">
    <property name="Number" value="MT116" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2997,7 +2997,7 @@
    <property name="Rarity" value="C" />
   </card>
   
-  <card id="ee98717e-b93e-4127-a026-d116eeeb7f4b" name="Anxious Animals">
+  <card id="ee98717e-b93e-4127-a026-d116eeeb7f4b" size="Problem" name="Anxious Animals">
    <property name="Number" value="MT117" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3022,7 +3022,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="7c709b68-0e9d-4abc-80d7-6f15e2abc9c5" name="Awkward Cutecenara">
+  <card id="7c709b68-0e9d-4abc-80d7-6f15e2abc9c5" size="Problem" name="Awkward Cutecenara">
    <property name="Number" value="MT118" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3047,7 +3047,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="06643c9a-f3d3-447e-9c7f-6dd2af1d3407" name="Blackmail">
+  <card id="06643c9a-f3d3-447e-9c7f-6dd2af1d3407" size="Problem" name="Blackmail">
    <property name="Number" value="MT119" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3072,7 +3072,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="6240d269-3208-4eb7-ab6f-2810faabac9e" name="Blankest Flanks">
+  <card id="6240d269-3208-4eb7-ab6f-2810faabac9e" size="Problem" name="Blankest Flanks">
    <property name="Number" value="MT120" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3097,7 +3097,7 @@
    <property name="Rarity" value="R" />
   </card>
   
-  <card id="5483c4fc-58da-4b41-883a-af888725ca32" name="Changeling Clash">
+  <card id="5483c4fc-58da-4b41-883a-af888725ca32" size="Problem" name="Changeling Clash">
    <property name="Number" value="MT121" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3122,7 +3122,7 @@
    <property name="Rarity" value="R" />
   </card>
   
-  <card id="ca07f064-4a17-4b38-83db-9ab8ffeeba2c" name="Desperate Times">
+  <card id="ca07f064-4a17-4b38-83db-9ab8ffeeba2c" size="Problem" name="Desperate Times">
    <property name="Number" value="MT122" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3147,7 +3147,7 @@
    <property name="Rarity" value="R" />
   </card>
   
-  <card id="8fbdd37f-3359-49d8-89b8-8b27741a4f9b" name="Entrance Exam">
+  <card id="8fbdd37f-3359-49d8-89b8-8b27741a4f9b" size="Problem" name="Entrance Exam">
    <property name="Number" value="MT123" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3172,7 +3172,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="9b4b907e-3f46-42b5-856b-86bafe00d6b1" name="Equal, or Else">
+  <card id="9b4b907e-3f46-42b5-856b-86bafe00d6b1" size="Problem" name="Equal, or Else">
    <property name="Number" value="MT124" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3197,7 +3197,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="3e3f585c-6bd3-4060-9915-12a8ff249d5c" name="Falling Rock Zone">
+  <card id="3e3f585c-6bd3-4060-9915-12a8ff249d5c" size="Problem" name="Falling Rock Zone">
    <property name="Number" value="MT125" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3222,7 +3222,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="a257b261-59e0-434d-854d-564e1d194368" name="Family Feud">
+  <card id="a257b261-59e0-434d-854d-564e1d194368" size="Problem" name="Family Feud">
    <property name="Number" value="MT126" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3247,7 +3247,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="2cc5cdc5-4217-4924-8d1f-ba51d926a797" name="Feeding the Front Line">
+  <card id="2cc5cdc5-4217-4924-8d1f-ba51d926a797" size="Problem" name="Feeding the Front Line">
    <property name="Number" value="MT127" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3272,7 +3272,7 @@
    <property name="Rarity" value="R" />
   </card>
   
-  <card id="2dbf6bf0-60cb-4ba9-8e05-e963edc2827a" name="Guilty Until Proven Innocent">
+  <card id="2dbf6bf0-60cb-4ba9-8e05-e963edc2827a" size="Problem" name="Guilty Until Proven Innocent">
    <property name="Number" value="MT128" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3297,7 +3297,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="f54339bf-a25c-4f11-ac97-d04cb5bbd433" name="Hysterical Recreation">
+  <card id="f54339bf-a25c-4f11-ac97-d04cb5bbd433" size="Problem" name="Hysterical Recreation">
    <property name="Number" value="MT129" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3322,7 +3322,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="d983f3ca-7696-47f0-9e80-1657732801bd" name="It's a Secret to Everypony">
+  <card id="d983f3ca-7696-47f0-9e80-1657732801bd" size="Problem" name="It's a Secret to Everypony">
    <property name="Number" value="MT130" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3347,7 +3347,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="9d6c1803-8615-41f5-9c28-21044e24a94d" name="Nightmare Night, What a Fright!">
+  <card id="9d6c1803-8615-41f5-9c28-21044e24a94d" size="Problem" name="Nightmare Night, What a Fright!">
    <property name="Number" value="MT131" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3372,7 +3372,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="3116e8ff-3736-4aaf-8874-5d082e0014d9" name="On the Case">
+  <card id="3116e8ff-3736-4aaf-8874-5d082e0014d9" size="Problem" name="On the Case">
    <property name="Number" value="MT132" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3397,7 +3397,7 @@
    <property name="Rarity" value="R" />
   </card>
   
-  <card id="f9c126d5-0fbf-4141-813c-9ff4c605d1ee" name="Trading Traditions">
+  <card id="f9c126d5-0fbf-4141-813c-9ff4c605d1ee" size="Problem" name="Trading Traditions">
    <property name="Number" value="MT133" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3422,7 +3422,7 @@
    <property name="Rarity" value="U" />
   </card>
   
-  <card id="c47e1d06-f5a4-4aba-85ff-baea74e183ae" name="Unreasonable Demands">
+  <card id="c47e1d06-f5a4-4aba-85ff-baea74e183ae" size="Problem" name="Unreasonable Demands">
    <property name="Number" value="MT134" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />

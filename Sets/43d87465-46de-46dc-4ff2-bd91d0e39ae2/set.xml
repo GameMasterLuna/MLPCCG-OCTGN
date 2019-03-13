@@ -2584,7 +2584,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="e6d41d17-41bc-d5de-ce01-e78ac6f8b4e6" name="A Party for Moondance">
+  <card id="e6d41d17-41bc-d5de-ce01-e78ac6f8b4e6" size="Problem" name="A Party for Moondance">
    <property name="Number" value="HM120" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2604,7 +2604,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="d7950bf5-2503-ef28-cc21-69df5e14f826" name="Applejack's Worst Nightmare">
+  <card id="d7950bf5-2503-ef28-cc21-69df5e14f826" size="Problem" name="Applejack's Worst Nightmare">
    <property name="Number" value="HM121" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2624,7 +2624,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="2cd06c44-1b0f-bcc6-4992-ff60a9506e37" name="Call of the Cutie">
+  <card id="2cd06c44-1b0f-bcc6-4992-ff60a9506e37" size="Problem" name="Call of the Cutie">
    <property name="Number" value="HM122" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2644,7 +2644,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="f0b3c0cd-afb9-713c-1675-74df974d7f9c" name="Equalist Propaganda">
+  <card id="f0b3c0cd-afb9-713c-1675-74df974d7f9c" size="Problem" name="Equalist Propaganda">
    <property name="Number" value="HM123" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2664,7 +2664,7 @@
    <property name="ProblemPlayerElement2Power" value="0" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="202170a8-0cd8-ebee-9ed4-db99f2bb347f" name="Fluttershy's Worst Nightmare">
+  <card id="202170a8-0cd8-ebee-9ed4-db99f2bb347f" size="Problem" name="Fluttershy's Worst Nightmare">
    <property name="Number" value="HM124" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2684,7 +2684,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="ebd0d0b0-5df8-a27d-bcb4-0c8772b913c4" name="Halt Evil Doers!">
+  <card id="ebd0d0b0-5df8-a27d-bcb4-0c8772b913c4" size="Problem" name="Halt Evil Doers!">
    <property name="Number" value="HM125" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2704,7 +2704,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="40214891-143a-be82-4a76-c1e208f953a4" name="Make Yourself at Home">
+  <card id="40214891-143a-be82-4a76-c1e208f953a4" size="Problem" name="Make Yourself at Home">
    <property name="Number" value="HM126" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2724,7 +2724,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="5331284b-9efc-17ee-d128-5b3645d1afa8" name="Musical Number">
+  <card id="5331284b-9efc-17ee-d128-5b3645d1afa8" size="Problem" name="Musical Number">
    <property name="Number" value="HM127" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2744,7 +2744,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="3144fdab-8979-0913-f438-5e683bd7ee44" name="Pinkie's Worst Nightmare">
+  <card id="3144fdab-8979-0913-f438-5e683bd7ee44" size="Problem" name="Pinkie's Worst Nightmare">
    <property name="Number" value="HM128" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2764,7 +2764,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="d2aff6e6-2670-2763-9fdf-b808a452743f" name="Rainbow's Worst Nightmare">
+  <card id="d2aff6e6-2670-2763-9fdf-b808a452743f" size="Problem" name="Rainbow's Worst Nightmare">
    <property name="Number" value="HM129" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2784,7 +2784,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="8f9ed353-79d9-dd47-2594-27a379a756cd" name="Rarity's Worst Nightmare">
+  <card id="8f9ed353-79d9-dd47-2594-27a379a756cd" size="Problem" name="Rarity's Worst Nightmare">
    <property name="Number" value="HM130" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2804,7 +2804,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="9ba82c35-38fe-5ba6-06c4-4e561550ffeb" name="Save the Day">
+  <card id="9ba82c35-38fe-5ba6-06c4-4e561550ffeb" size="Problem" name="Save the Day">
    <property name="Number" value="HM131" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2824,7 +2824,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="4236f1b5-5c72-dbd2-e3ee-0f9401c1bdf3" name="Sew Tired">
+  <card id="4236f1b5-5c72-dbd2-e3ee-0f9401c1bdf3" size="Problem" name="Sew Tired">
    <property name="Number" value="HM132" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2844,7 +2844,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="3db5ea29-abef-696e-def2-5e83831a350c" name="The Frozen North">
+  <card id="3db5ea29-abef-696e-def2-5e83831a350c" size="Problem" name="The Frozen North">
    <property name="Number" value="HM133" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2864,7 +2864,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="07c9e7b3-4886-518b-00a5-f7dc9f8e5107" name="The Trouble With Trixie">
+  <card id="07c9e7b3-4886-518b-00a5-f7dc9f8e5107" size="Problem" name="The Trouble With Trixie">
    <property name="Number" value="HM134" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2884,7 +2884,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="782e7cc7-255f-4562-5b18-690b416dd770" name="Tiny Troubles">
+  <card id="782e7cc7-255f-4562-5b18-690b416dd770" size="Problem" name="Tiny Troubles">
    <property name="Number" value="HM135" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2904,7 +2904,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="671ea7b5-2f2b-6159-edfd-6a46d68dcf6d" name="Twilight's Worst Nightmare">
+  <card id="671ea7b5-2f2b-6159-edfd-6a46d68dcf6d" size="Problem" name="Twilight's Worst Nightmare">
    <property name="Number" value="HM136" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2924,7 +2924,7 @@
    <property name="ProblemPlayerElement2Power" value="4" />
    <property name="Rarity" value="U" />
   </card>
-  <card id="e11b486f-5882-0c70-93d2-30add61cbcfd" name="Under Lock and Tree">
+  <card id="e11b486f-5882-0c70-93d2-30add61cbcfd" size="Problem" name="Under Lock and Tree">
    <property name="Number" value="HM137" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -2944,7 +2944,7 @@
    <property name="ProblemPlayerElement2Power" value="0" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="6c0b3f11-b6fd-e927-b8f5-7e56952981fe" name="Utterly Transformed">
+  <card id="6c0b3f11-b6fd-e927-b8f5-7e56952981fe" size="Problem" name="Utterly Transformed">
    <property name="Number" value="HM138" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />

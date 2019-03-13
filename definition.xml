@@ -4,7 +4,7 @@
 	id="65656467-b709-43b2-a5c6-80c2f216adf9" 
 	octgnVersion="3.3.106.0" 
 	scriptVersion ="3.1.0.2"
-	version="2.3.0.01"
+	version="2.3.0.02"
 	markersize="16"
 	tags="My Little Pony MLP CCG" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -59,6 +59,13 @@
 		<globalvariable name="VillainTurn" value="False" />
 		<globalvariable name="toggleAutoAT" value="True" />
 	</globalvariables>
+    
+    <!-- <gameboards src="boards/noPlaymat.png" x="-300" y="0" width="900" height="250">
+        <gameboard name="Playmat 1" src="boards/playmat1.jpg" x="-300" y="0" width="900" height="250"/>
+        <gameboard name="Playmat 1 Inverted" src="boards/playmat1.jpg" x="-300" y="-90" width="900" height="250"/>
+        <gameboard name="Playmat 2" src="boards/playmat2.jpg" x="-300" y="0" width="900" height="250"/>
+        <gameboard name="Playmat 2 Inverted" src="boards/playmat2.jpg" x="-300" y="-90" width="900" height="250"/>
+    </gameboards>  -->
 	
 	<card back="cards/back.png" front="cards/front.png" width="63" height="88">
 		<property name="Number" type="String" />
@@ -88,6 +95,7 @@
 		<property name="ProblemPlayerElement2" type="String" />
 		<property name="ProblemPlayerElement2Power" type="String" />
 		<property name="Rarity" type="String" />
+        <size name="Problem" back="cards/back.png" front="cards/front.png" width="88" height="113" />
 	</card>
 	
 	<table name="Table" visibility="undefined" ordered="False" width="960" height="540" board="background/background.jpg" background="background/background.jpg" backgroundStyle="uniformToFill">
@@ -131,14 +139,15 @@
 			<groupaction menu="Spend Action" shortcut="Enter" execute="spendAction" />
 			<groupaction menu="Gain Action" shortcut="CTRL+Enter" execute="increaseAction" />
 		</groupactions>
-		<!-- Token Gen (EDIT BY: GAMEMASTERLUNA) -->
+        
 		<groupaction menu="Add Token" shortcut="ALT+T" execute="addToken" />
-		<!-- Villian Challenge  (EDIT BY: GAMEMASTERLUNA) -->
 		<groupaction menu="Start Villain Challenge" shortcut="CTRL+ALT+V" execute="activateVC" />
-		<!-- (EDIT BY: GAMEMASTERLUNA) -->
+        <!-- NOTE: Reserved for future use when the devs allow multiple boards on the table  
+        <groupaction menu="Add/Change Playmat" shortcut="" execute="playmat" /> -->
+        
 		<cardaction menu="Exhaust/Ready/Replace" shortcut="F7" default="True" execute="exhaust" />
 		<cardaction menu="Permanently Exhaust" shortcut="CTRL+F7" default="True" execute="permExhaust" />
-		<cardaction menu="Flip Card" shortcut="F9" execute="flipcard" />
+		<cardaction menu="Flip Card" shortcut="SHIFT+F7" execute="flipcard" />
 		<cardaction menu="Flag/Unflag Pumped" shortcut="F8" execute="markPumped" />
 		<cardaction menu="Flag/Unflag Cutie Mark" shortcut="CTRL+F8" execute="markCutieMark" />
 		<cardaction menu="Duplicate" shortcut="SHIFT+F8" execute="duplicate" />
@@ -181,7 +190,7 @@
 		</hand>
 
 		<group name="Deck" visibility="none" icon="groups/deck.png">
-			<groupaction menu="Faceoff Flip" shortcut="F10" execute="faceoffFlip" />				
+			<groupaction menu="Faceoff Flip" shortcut="CTRL+F" execute="faceoffFlip" />				
 			<groupaction menu="Shuffle" shortcut="CTRL+S" execute="shuffle" />
 			<groupaction menu="Draw" shortcut="CTRL+D" default="True" execute="draw" />
 			<groupaction menu="Pay 1 and Draw" shortcut="CTRL+A" execute="payDraw" />

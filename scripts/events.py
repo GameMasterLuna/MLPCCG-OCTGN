@@ -50,6 +50,9 @@ def autoAT(args):
         except IndexError:
             return
         
+        #Just for debugging pos
+        whisper("Card Pos: {}".format(card.position))
+        
         type = card.properties["Type"]
         cardCost = card.properties["Cost"]
         cardReqPower = card.properties["PlayRequiredPower"]

@@ -3640,7 +3640,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="R" />
   </card>
-  <card id="cf71d1c9-f9ac-90ba-72e1-50ed09ced9ae" name="Accident at the Pear Farm">
+  <card id="cf71d1c9-f9ac-90ba-72e1-50ed09ced9ae" size="Problem" name="Accident at the Pear Farm">
    <property name="Number" value="FF123" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3669,7 +3669,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="2191c97a-d17a-c17b-e990-094e6a6fe34a" name="Distracted Lead Actress">
+  <card id="2191c97a-d17a-c17b-e990-094e6a6fe34a" size="Problem" name="Distracted Lead Actress">
    <property name="Number" value="FF124" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3698,7 +3698,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="9395905f-7653-ceb3-663c-e11a27f0efac" name="Fashion Blindness">
+  <card id="9395905f-7653-ceb3-663c-e11a27f0efac" size="Problem" name="Fashion Blindness">
    <property name="Number" value="FF125" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3727,7 +3727,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="6c30df00-5d42-1495-c2db-8425b1dea469" name="Lacking Lesson Plans">
+  <card id="6c30df00-5d42-1495-c2db-8425b1dea469" size="Problem" name="Lacking Lesson Plans">
    <property name="Number" value="FF126" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3756,7 +3756,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="98932ff1-0e8a-b604-be57-a98553d54dd0" name="New Antique Store">
+  <card id="98932ff1-0e8a-b604-be57-a98553d54dd0" size="Problem" name="New Antique Store">
    <property name="Number" value="FF127" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3785,7 +3785,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="e436ab31-fe60-fbe4-8085-e1bcd1ad36b5" name="Royal Breakfast">
+  <card id="e436ab31-fe60-fbe4-8085-e1bcd1ad36b5" size="Problem" name="Royal Breakfast">
    <property name="Number" value="FF128" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3814,7 +3814,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="21e848b0-44ad-cc41-d5dc-26a438fcbbb1" name="Surprise Take Off">
+  <card id="21e848b0-44ad-cc41-d5dc-26a438fcbbb1" size="Problem" name="Surprise Take Off">
    <property name="Number" value="FF129" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -3843,7 +3843,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="C" />
   </card>
-  <card id="de03f1ea-0eb4-983e-eb9d-cce75d134147" name="Yickslurbertfest">
+  <card id="de03f1ea-0eb4-983e-eb9d-cce75d134147" size="Problem" name="Yickslurbertfest">
    <property name="Number" value="FF130" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />

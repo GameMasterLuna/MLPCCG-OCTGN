@@ -121,7 +121,7 @@
    <property name="ProblemPlayerElement2Power" value="" />
    <property name="Rarity" value="F" />
   </card>
-  <card id="32d1dd6b-b047-4555-bff1-64fadf0c5a51" name="Secret Mission">
+  <card id="32d1dd6b-b047-4555-bff1-64fadf0c5a51" size="Problem" name="Secret Mission">
    <property name="Number" value="RR7" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -141,7 +141,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="F" />
   </card>
-  <card id="e6f2fbcd-6203-47f9-af43-6859b49c67b3" name="Timber!">
+  <card id="e6f2fbcd-6203-47f9-af43-6859b49c67b3" size="Problem" name="Timber!">
    <property name="Number" value="RR8" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -161,7 +161,7 @@
    <property name="ProblemPlayerElement2Power" value="3" />
    <property name="Rarity" value="F" />
   </card>
-  <card id="d67c7284-abe9-4d9b-9563-6de84b3b1c44" name="Trade Dispute">
+  <card id="d67c7284-abe9-4d9b-9563-6de84b3b1c44" size="Problem" name="Trade Dispute">
    <property name="Number" value="RR9" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
@@ -181,7 +181,7 @@
    <property name="ProblemPlayerElement2Power" value="2" />
    <property name="Rarity" value="F" />
   </card>
-  <card id="98ddb7cb-6827-4615-88cf-61e87a1c1e7b" name="Which Pinkie is Which">
+  <card id="98ddb7cb-6827-4615-88cf-61e87a1c1e7b" size="Problem" name="Which Pinkie is Which">
    <property name="Number" value="RR10" />
    <property name="Type" value="Problem" />
    <property name="Element" value="" />
