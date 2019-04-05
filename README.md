@@ -20,4 +20,8 @@ Alright, these are the few files that is responsible for all the game code for M
 | **events**.py | It contains a unique code that will only triggers if a certain action has been performed |
 | **proxydef**.xml | It is responsible for defining all the generation of proxy cards |
 
-Currently all of the py files are using OCTGN Python 3.1.0.2 API. Documentation of that API can be found [here](https://github.com/octgn/OCTGN/wiki/OCTGN-Python-3.1.0.2-API-Reference). I will expand this more if necessary. Nevertheless, thank you for your contribution and I hope to see what you can do to improve the game!
+Currently all of the py files are using OCTGN Python 3.1.0.2 API. Documentation of that API can be found [here](https://github.com/octgn/OCTGN/wiki/OCTGN-Python-3.1.0.2-API-Reference).
+
+Other than that, I have some tips too that can help make developing on OCTGN easier. Tip one, do you know you can launch OCTGN in dev mode by adding **-x** at the end of the Target field under the exe properties? This allows you to see what functions are triggering and reload your script without restarting the game!
+
+I will expand this more if necessary. Nevertheless, thank you for your contribution and I hope to see what you can do to improve the game!

@@ -21,912 +21,270 @@ FaceoffColor4 = "#ffa500"
 PumpedColor = "#999999"
 ChaosColor = "#fc8eac"
 CutieMarkColor = "#ffccff"
+
 #---------------------------------------------------------------------------
 # Globals
 #---------------------------------------------------------------------------
 FaceoffPosition = 0
 FaceoffOffset = 0
+
 #---------------------------------------------------------------------------
-# Table group actions
+# Game Setup
 #---------------------------------------------------------------------------
-    
-def flipCoin(group, x = 0, y = 0):
+def setup(group, x = 0, y = 0):
     mute()
-    n = rnd(1, 2)
-    if n == 1:
-        notify("{} flips heads.".format(me))
-    else:
-        notify("{} flips tails.".format(me))
-        
-def sixSided(group, x = 0, y = 0):
-    mute()
-    n = rnd(1,6)
-    notify("{} rolls a {} on a 6-sided die.".format(me, n))
+    #Variables
+    ManeCheck = 0
+    PlayerNo = me._id #Get current player ID
+    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
 
-def xSided(group, x = 0, y = 0):
-    mute()
-    x = askInteger("Roll a die with how many sides?", 20)
-    if x < 1:
+    if not confirm("Setup your side of the table?"): return
+
+    #Table Setup for Villain Challenge
+    if getGlobalVariable("VillainChallengeActive") == "True":
+        mute()
+        for card in me.hand:
+            if card.Type != 'Mane Character' and card.Type != 'Mane Character Boosted': 
+                card.moveTo(me.Deck)
+        
+        for card in me.piles['Discard Pile']:
+            if card.Type == 'Mane Character': 
+                card.moveTo(me.hand)
+            elif card.Type == 'Mane Character Boosted': 
+                card.moveTo(me.hand)
+            else: 
+                card.moveTo(me.Deck)
+        
+        for card in me.piles['Problem Deck']:
+            if card.Type == 'Mane Character': 
+                card.moveTo(me.hand)
+            elif card.Type == 'Mane Character Boosted': 
+                card.moveTo(me.hand)
+            elif re.search(r'NM', card.Number) or re.search(r'KS', card.Number) or re.search(r'QC', card.Number):
+                pass
+            else:
+                card.moveTo(me.piles['Discard Pile'])
+                card.delete()
+        
+        for card in me.hand: 
+            if card.Type == 'Mane Character' or card.Type == 'Mane Character Boosted':
+                if me.isInverted:
+                    card.moveTo(me.piles['Discard Pile'])
+                    card.delete()
+                elif villainPlayerId == 1: 
+                    if PlayerNo == 2:               
+                        card.moveToTable(-33,177)
+                    elif PlayerNo == 3:
+                        card.moveToTable(-336,177)
+                    elif PlayerNo == 4:
+                        card.moveToTable(277,177)
+                elif villainPlayerId == 2: 
+                    if PlayerNo == 1:               
+                        card.moveToTable(-33,177)
+                    elif PlayerNo == 3:
+                        card.moveToTable(-336,177)
+                    elif PlayerNo == 4:
+                        card.moveToTable(277,177)
+                elif villainPlayerId == 3: 
+                    if PlayerNo == 1:               
+                        card.moveToTable(-33,177)
+                    elif PlayerNo == 2:
+                        card.moveToTable(-336,177)
+                    elif PlayerNo == 4:
+                        card.moveToTable(277,177)
+                elif villainPlayerId == 4: 
+                    if PlayerNo == 1:               
+                        card.moveToTable(-33,177)
+                    elif PlayerNo == 2:
+                        card.moveToTable(-336,177)
+                    elif PlayerNo == 3:
+                        card.moveToTable(277,177)
+                
+                if card.Type == 'Mane Character Boosted':
+                    card.alternate = ''
+
+                ManeCheck = ManeCheck + 1
+            else:
+                notify("{}: Invalid Setup! Must not have any other cards in hand but your Mane Character".format(me))
+                return
+
+        if me.isInverted:
+            pass
+        elif ManeCheck != 1:
+            notify("{}: Invalid Setup! Must have exactly one copy of a Mane Character in your deck!".format(me))
+            return  
+
+        shuffle(me.Deck)
+        
+        if len(me.Deck) == 0: return
+        if len(me.Deck) < 6:
+            drawAmount = len(group)
+        
+        for card in me.Deck.top(6):
+            card.moveTo(me.hand)
+
+        me.counters['Points'].value = 0
+        me.counters['Actions'].value = 0
+
+        notify("{} draws their opening hand of {} cards.".format(me, 6))    
+        notify("{} has set up their side of the table.".format(me))
+
+        me.setGlobalVariable("deckLoadedAndSet", "True")
         return
-    
-    n = rnd(1,x)
-    notify("{} rolls a {} on a {}-sided die.".format(me, n, x))
-
-def inspired(targetgroup, x = 0, y = 0, count = None):
-    mute()
-    
-    PlayerNo = me._id
-    
-    if len(players) == 1:
-        notify("There must be more than 1 player to use Inspired.")
-        return
-    elif len(players) == 3 and getGlobalVariable("VillainChallengeActive") == "False":
-        if PlayerNo == 3: #If last player, go back to first player
-            group = players[1].Deck
-        else:
-            group = players[PlayerNo].Deck
-    elif len(players) == 4 and getGlobalVariable("VillainChallengeActive") == "False":
-        if PlayerNo == 4: #If last player, go back to first player
-            group = players[1].Deck
-        else:
-            group = players[PlayerNo].Deck
+        #END OF VILLAIN CHALLENGE SETUP
     else:
-        group = players[1].Deck
+        #Table setup for normal games
+        for card in me.hand:
+            if card.Type == 'Problem': 
+                card.moveTo(me.piles['Problem Deck'])
+            elif card.Type != 'Mane Character' and card.Type != 'Mane Character Boosted': 
+                card.moveTo(me.Deck)
     
-    inspiredCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Inspired', card.Keywords) or re.search(r'Inspired', card.Text)))
-    
-    if count == None:
-        count = askInteger("Look at how many cards?", inspiredCount)
-    if count == None or count == 0:
-        return
-    
-    notify("{} uses Inspired to look at the top {} cards of {}'s deck.".format(me, count, players[1]))
-    
-    topCards = group.top(count)
-    
-    buttons = []  ## This list stores all the card objects for manipulations.
-    for c in topCards:
-        c.peek()  ## Reveal the cards to python
-        buttons.append(c)
-    
-    topList = []  ## This will store the cards selected for the top of the pile
-    bottomList = []  ## For cards going to the bottom of the pile
-    rnd(1,2)  ## allow the peeked card's properties to load
-    loop = 'BOTTOM'  ## Start with choosing cards to put on bottom
-    
-    while loop != None:
-        desc = "Select a card to place on {}:\n\n{}\n///////DECK///////\n{}".format(
-        loop,
-        '\n'.join([c.Name for c in topList]),
-        '\n'.join([c.Name for c in bottomList]))
-        if loop == 'TOP':
-            num = askChoice(desc, ["(" + c.Power + ") " + c.Type + ": " + c.Name + " - " + c.Subname for c in buttons], customButtons = ["Select BOTTOM","Leave Rest on BOTTOM","Reset"])
-            if num == -1:
-                loop = 'BOTTOM'         
-            elif num == -2:
-                while len(buttons) > 0:
-                    card = buttons.pop()
-                    bottomList.append(card)
-            elif num == -3:
-                topList = []
-                bottomList = []
-                buttons = []
-                for c in group.top(count):
-                    c.peek()
-                    buttons.append(c)
-            elif num > 0:
-                card = buttons.pop(num - 1)
-                topList.insert(0, card)
-        else:
-            num = askChoice(desc, ["(" + c.Power + ") " + c.Type + ": " + c.Name + " - " + c.Subname for c in buttons], customButtons = ["Select TOP","Leave Rest on TOP","Reset"])
-            if num == -1:
-                loop = 'TOP'
-            elif num == -2:
-                while len(buttons) > 0:
-                    card = buttons.pop()
-                    topList.insert(0, card)
-            elif num == -3:
-                topList = []
-                bottomList = []
-                buttons = []
-                for c in group.top(count):
-                    c.peek()
-                    buttons.append(c)
-            elif num > 0:
-                card = buttons.pop(num - 1)
-                bottomList.append(card)
-        if len(buttons) == 0: ##  End the loop
-            loop = None
-        if num == None:  ## closing the dialog window will cancel the ability, not moving any cards, but peek status will stay on.
-            return
-
-    topList.reverse()  ## Gotta flip topList so the moveTo's go in the right order
-    
-    originalOwner = group.controller
-    
-    update()
-    
-    group.controller = me
-
-    update()
-    time.sleep(.5)
-
-    for c in topList:
-        c.controller = me
-
-    update()
-    time.sleep(.2)
-
-    for c in topList:
-        c.moveTo(group,0)
-
-    update()
+        for card in me.piles['Discard Pile']:
+            if card.Type == 'Mane Character': 
+                card.moveTo(me.hand)
+            elif card.Type == 'Mane Character Boosted': 
+                card.moveTo(me.hand)
+            elif card.Type == 'Problem': 
+                card.moveTo(me.piles['Problem Deck'])
+            else: 
+                card.moveTo(me.Deck)
         
-    for c in bottomList:
-        c.moveToBottom(group)
-        
-    update()
-        
-    for c in group:  ## This removes the peek status
-        c.isFaceUp = True
-        c.isFaceUp = False
+        for card in me.piles['Banished Pile']: 
+            if card.Type == 'Mane Character': 
+                card.moveTo(me.hand)
+            elif card.Type == 'Mane Character Boosted': 
+                card.moveTo(me.hand)
+            elif card.Type == 'Problem': 
+                card.moveTo(me.piles['Problem Deck'])
+            else: 
+                card.moveTo(me.Deck)
 
-    time.sleep(.2)
-
-    for c in topList:
-        c.controller = originalOwner
-    
-    update()
-    time.sleep(.5)
-    
-    group.controller = originalOwner
-
-    update()
-    
-    whisper("{}".format(group.controller))
-
-    notify("{} looked at {} cards and put {} on top and {} on bottom.".format(me, count, len(topList), len(bottomList)))
-    
-def meticulous(targetgroup, x = 0, y = 0, count = None):
-    mute()
-    
-    PlayerNo = me._id
-    
-    group = me.Deck
-    
-    meticulousCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Meticulous', card.Keywords) or re.search(r'Meticulous', card.Text)))
-    
-    if count == None:
-        count = askInteger("Look at how many cards?", meticulousCount)
-    if count == None or count == 0:
-        return
-    
-    notify("{} uses Meticulous to look at the top {} cards of {}'s deck.".format(me, count, me))
-    
-    topCards = group.top(count)
-    
-    buttons = []  ## This list stores all the card objects for manipulations.
-    for c in topCards:
-        c.peek()  ## Reveal the cards to python
-        buttons.append(c)
-    
-    topList = []  ## This will store the cards selected for the top of the pile
-    bottomList = []  ## For cards going to the bottom of the pile
-    rnd(1,2)  ## allow the peeked card's properties to load
-    loop = 'BOTTOM'  ## Start with choosing cards to put on bottom
-    
-    while loop != None:
-        desc = "Select a card to place on {}:\n\n{}\n///////DECK///////\n{}".format(
-        loop,
-        '\n'.join([c.Name for c in topList]),
-        '\n'.join([c.Name for c in bottomList]))
-        if loop == 'TOP':
-            num = askChoice(desc, ["(" + c.Power + ") " + c.Type + ": " + c.Name + " - " + c.Subname for c in buttons], customButtons = ["Select BOTTOM","Leave Rest on BOTTOM","Reset"])
-            if num == -1:
-                loop = 'BOTTOM'         
-            elif num == -2:
-                while len(buttons) > 0:
-                    card = buttons.pop()
-                    bottomList.append(card)
-            elif num == -3:
-                topList = []
-                bottomList = []
-                buttons = []
-                for c in group.top(count):
-                    c.peek()
-                    buttons.append(c)
-            elif num > 0:
-                card = buttons.pop(num - 1)
-                topList.insert(0, card)
-        else:
-            num = askChoice(desc, ["(" + c.Power + ") " + c.Type + ": " + c.Name + " - " + c.Subname for c in buttons], customButtons = ["Select TOP","Leave Rest on TOP","Reset"])
-            if num == -1:
-                loop = 'TOP'
-            elif num == -2:
-                while len(buttons) > 0:
-                    card = buttons.pop()
-                    topList.insert(0, card)
-            elif num == -3:
-                topList = []
-                bottomList = []
-                buttons = []
-                for c in group.top(count):
-                    c.peek()
-                    buttons.append(c)
-            elif num > 0:
-                card = buttons.pop(num - 1)
-                bottomList.append(card)
-        if len(buttons) == 0: ##  End the loop
-            loop = None
-        if num == None:  ## closing the dialog window will cancel the ability, not moving any cards, but peek status will stay on.
-            return
-
-    topList.reverse()  ## Gotta flip topList so the moveTo's go in the right order
-    
-    originalOwner = group.controller
-    
-    update()
-    
-    group.controller = me
-
-    update()
-
-    for c in topList:
-        c.controller = me
-
-    update()
-
-    for c in topList:
-        c.moveTo(group,0)
-
-    update()
-        
-    for c in bottomList:
-        c.moveToBottom(group)
-        
-    update()
-        
-    for c in group:  ## This removes the peek status
-        c.isFaceUp = True
-        c.isFaceUp = False
-
-    update()
-
-    for c in topList:
-        c.controller = originalOwner
-    
-    update()
-    
-    group.controller = originalOwner
-
-    update()
-    
-    whisper("{}".format(group.controller))
-
-    notify("{} looked at {} cards and put {} on top and {} on bottom.".format(me, count, len(topList), len(bottomList)))
-
-def clearFaceoff(group, x = 0, y = 0):
-    mute()
-    global FaceoffPosition
-    global FaceoffOffset
-    
-    FaceoffPosition = 0
-    FaceoffOffset = 0
-    
-    FaceoffCards = (card for card in table if card.highlight == FaceoffColor1 or card.highlight == FaceoffColor2 or card.highlight == FaceoffColor3 or card.highlight == FaceoffColor4 or card.highlight == ChaosColor)
-    
-    count = 0
-    for card in FaceoffCards:
-        if card.owner == me:
-            card.moveToBottom(card.owner.Deck)
-            count += 1
-    
-    if count > 0:
-        notify("Faceoff Cards have been put on the bottom of {}'s deck.".format(me))
-
-def readyAll(group, x = 0, y = 0): 
-    mute()
-    doNotify = False
-    PlayerNo = me._id
-    
-    if getGlobalVariable("PermExhausted") != "Start": #Get a list of cards that is perm exhausted
-        permExhaustedList = eval(getGlobalVariable("PermExhausted"))
-    else:
-            permExhaustedList = []
-    
-    if (len(players) == 3 or len(players) == 4) and getGlobalVariable("VillainChallengeActive") == "False": #Setting orientation for multiplayer
-        if getGlobalVariable("Exhausted") == "Start": #If no cards exhausted, return esp at start of game
-            return
-        else:
-            exhaustedList = eval(getGlobalVariable("Exhausted"))
-        myCards = []
-            
-        for card in table:
-            if card.controller == me and card.owner == me:
-                if card.isFaceUp:
-                    currentCard = card._id #To compare with exhausted list
-                    for c in range(len(exhaustedList)): #Checks if card is in the Exhausted list, if so card is being readied
-                        permCard = False
-                        
-                        for c in range(len(permExhaustedList)): #Checks if card is in the PermExhausted list
-                            if permExhaustedList[c] == currentCard:
-                                permCard = True
-                    
-                        if exhaustedList[c] == currentCard and permCard == False:
-                            exhaustedList.remove(currentCard)
-                            card.orientation ^= Rot90
-                            card.highlight = None
-                            card.filter = None
-                            doNotify = True
-                            setGlobalVariable("Exhausted", str(exhaustedList))
-                            break
-    else:
-        if getGlobalVariable("VillainChallengeActive") == "True": #Remove card.owner as some VC cards owner are different from controller
-            myCards = (card for card in table
-                    if card.controller == me
-                    and card.orientation == Rot90)
-        else:
-            myCards = (card for card in table
-                        if card.controller == me
-                        and card.owner == me
-                        and card.orientation == Rot90)
+        myCards = (card for card in table
+                if card.owner == me)
 
         for card in myCards:
-            currentCard = card._id
-            permCard = False
-            
-            for c in range(len(permExhaustedList)): #Checks if card is in the PermExhausted list
-                if permExhaustedList[c] == currentCard:
-                    permCard = True
-                    
-            if card.isFaceUp and permCard == False:
-                card.orientation &= ~Rot90
-                card.highlight = None
-                card.filter = None
-                doNotify = True
+            if card.Type == 'Mane Character': 
+                card.moveTo(me.hand)
+            elif card.Type == 'Mane Character Boosted': 
+                card.moveTo(me.hand)
+            elif card.Type == 'Problem': 
+                card.moveTo(me.piles['Problem Deck'])
+            else: 
+                card.moveTo(me.Deck)
 
-    if doNotify:
-        notify("{} readies all their cards.".format(me))
+    #Starting Problem Selection
+    for c in me.piles['Problem Deck']:
+        c.peek() #Reveal the cards to python
 
-def peekAll(group, x = 0, y = 0):
-    faceDownCards = (card for card in table if card.controller == me and card.isFaceUp == False)
-    for c in faceDownCards:
-        c.peek()
+    rnd(1,2)  #allow the peeked card's properties to load
+    
+    StartProblems = (card for card in me.piles['Problem Deck'] if re.search(r'Starting Problem.', card.Keywords))
+                
+    buttons = []  #This list stores all the card objects for manipulations.
+    OldProblem = ""
+    for c in StartProblems:
+        if c.Name != OldProblem:
+            buttons.append(c)
+            OldProblem = c.Name
+    
+    desc = "Select a Starting Problem:"
+    num = askChoice(desc, [c.Name + ": (" + c.ProblemPlayerElement1Power + " " + c.ProblemPlayerElement1 + " / " + c.ProblemPlayerElement2Power + " " + c.ProblemPlayerElement2 + ")" for c in buttons], customButtons = ["Cancel Setup"])
+    if num > 0:
+        SelectedStart = buttons.pop(num - 1)       
+    else: 
+        return
 
-def nextPhase(group, x = 0, y = 0):
+    #Starting Problem Position
+    if (len(players) == 3 or len(players) == 4): #Starting Problem pos for multiplayer
+        if PlayerNo == 1:
+            SelectedStart.moveToTable(107,36)
+        elif PlayerNo == 2:
+            SelectedStart.moveToTable(-262,56)
+            SelectedStart.orientation ^= Rot90
+        elif PlayerNo == 3:
+            SelectedStart.moveToTable(-197,-127)
+            SelectedStart.orientation ^= Rot180
+        elif PlayerNo == 4:
+            SelectedStart.moveToTable(166,-167)
+            SelectedStart.orientation ^= Rot270
+    else:
+        #Starting Problem pos for 2 player games
+        if me.isInverted:
+            SelectedStart.moveToTable(-215,-57)
+        else:               
+            SelectedStart.moveToTable(130,-53)
+        
     update()
-    currentPhase = me.getGlobalVariable("Phase")
-
-    if currentPhase == "Start":
-        turnStart(group, x, y)
-    elif currentPhase == "Ready":
-        turnTroublemaker(group, x, y)
-    elif currentPhase == "Troublemaker":
-        turnMain(group, x, y)
-    elif currentPhase == "Main":
-        turnScore(group, x, y)
-    elif currentPhase == "Score":
-        if not confirm("End your turn?"): return
-        turnDone(group, x, y)
-    else:
-        return
-        return
-
-def turnStart(group, x = 0, y = 0):
-    mute()
-    maxPoints = 0
-    maxName = ""
-    addActions = 0
-    PlayerNo = me._id
-    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
-    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
-    
-    if getGlobalVariable("PlayerStartDone") == "Start": #If var running for the first time, create list
-        PlayerStartDone = []
-    else:
-        PlayerStartDone = eval(getGlobalVariable("PlayerStartDone"))
-    
-    if getGlobalVariable("PlayerDone") != "Start": #Check if any challenger is done with their turns
-        PlayerDone = eval(getGlobalVariable("PlayerDone"))
-        
-        for player in range(len(PlayerDone)): #If player is in the PlayerDone list, stop player from starting turn again
-            if PlayerDone[player] == PlayerNo:
-                whisper("Please wait for the other challenger(s) to finish their turn.")
-                return
-    
-    if me.getGlobalVariable("TurnStarted") == "True":
-        num = askChoice("It looks like you've already started your turn. If this is incorrect, you can Force Start your turn using the button below.", ["Force Start Turn","Cancel"])
-        if num != 1:
-            return
             
-    if turnNumber() == 0:
-        num = askChoice("Are you first player?", ["Yes","No"])
-        if num != 1:
-            return
-        if getGlobalVariable("VillainChallengeActive") == "True":
-            if PlayerNo != mainPlayerId and PlayerNo != villainPlayerId: #If you are the other challengers, set active for main player
-                if mainPlayerId == 1:
-                    players[1].setActive()
-                    rnd(1,2) # Just to delay the game but update() is enough
-                    update()
-                elif mainPlayerId == 2:
-                    if PlayerNo == 1:
-                        players[1].setActive()
-                        rnd(1,2)
-                        update()
-                    else:
-                        players[2].setActive()
-                        rnd(1,2)
-                        update()
+    for c in me.piles['Problem Deck']:  #This removes the peek status
+        c.isFaceUp = True
+        c.isFaceUp = False
+    
+    shuffle(me.piles['Problem Deck'])
+    
+    update()
+    
+    #Mane Position
+    for card in me.hand: 
+        if card.Type == 'Mane Character' or card.Type == 'Mane Character Boosted':
+            if (len(players) == 3 or len(players) == 4): #Mane pos for multiplayer
+                if PlayerNo == 1:
+                    card.moveToTable(-33,191)
+                elif PlayerNo == 2:
+                    card.moveToTable(-461,-53)
+                    card.orientation ^= Rot90
+                elif PlayerNo == 3:
+                    card.moveToTable(-33,-272)
+                    card.orientation ^= Rot180
+                elif PlayerNo == 4:
+                    card.moveToTable(374,-53)
+                    card.orientation ^= Rot270
+                ManeCheck = ManeCheck + 1
             else:
+                #Mane pos for 2 player games
                 if me.isInverted:
-                    setGlobalVariable("VillainTurn", "True")
-                me.setActive()
-                rnd(1,2)
-                update()
+                    card.moveToTable(-28,-220)
+                else:               
+                    card.moveToTable(-33,130)
+            
+            if card.Type == 'Mane Character Boosted':
+                card.alternate = ''
+            
+            ManeCheck = ManeCheck + 1
         else:
-            me.setActive()
-            rnd(1,2)
-            update()
-    
-    if getGlobalVariable("VillainChallengeActive") == "True":
-        #VillainTurn2 = getGlobalVariable("VillainTurn") #REMOVE
-        #notify("*Villian Turn: {}*".format(VillainTurn2)) #REMOVE
-        #isActive = me.isActive #REMOVE
-        #notify("*Is Player Active: {}*".format(isActive)) #REMOVE
-        #notify("*Turn Number: {}*".format(turnNumber())) #REMOVE
-        if me.isActive:
-            if me.isInverted:
-                #notify("*The villain, {} begins Turn {}*".format(me, turnNumber()))
-                setGlobalVariable("VillainTurn", "True")
-            else:
-                if getGlobalVariable("VillainTurn") == "True": #If it is villain turn and main is still active, stop main
-                    whisper("You can't start the turn when it isn't your turn.")
-                    return
-                else:
-                    notify("*Challenger {} starts his/her turn*".format(me))
-                    me.setGlobalVariable("TurnStarted", "True")
-        else:
-            if getGlobalVariable("VillainTurn") == "False" and PlayerNo != villainPlayerId:
-                notify("*Challenger {} starts his/her turn*".format(me))
-                me.setGlobalVariable("TurnStarted", "True")
-            elif getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId: #Somehow if inactive player set villain to active, it doesn't work
-                notify("*The villain, {} begins Turn {}*".format(me, turnNumber()))
-            else:
-                whisper("You can't start the turn when it isn't your turn.")
-                return
-    else:       
-        if me.isActive:
-            notify("*{} begins Turn {}*".format(me, turnNumber()))
-            me.setGlobalVariable("TurnStarted", "True")
-        else:
-            whisper("You can't start the turn when it isn't your turn.")
+            notify("{}: Invalid Setup! Must not have any other cards in hand but your Mane Character".format(me))
             return
-    
-    readyAll(group, x, y)
-            
-    for person in players:
-        if maxPoints < person.counters['Points'].value:
-            maxPoints = person.counters['Points'].value
-            maxName = person.name
-    
-    if getGlobalVariable("VillainChallengeActive") == "True":
-        if getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId:
-            if maxPoints < 2:
-                addActions = 4
-            elif maxPoints < 6:
-                addActions = 5
-            elif maxPoints < 11:
-                addActions = 6
-            else:
-                addActions = 7
-            
-            if maxPoints == 0:
-                notify("*Nobody has Points yet. Being the villain, {} adds {} Action Tokens.*".format(me,addActions))
-            else:   
-                notify("*{} has {} Points. Being the villain, {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
-        else:
-            if maxPoints < 2:
-                addActions = 2
-            elif maxPoints < 6:
-                addActions = 3
-            elif maxPoints < 11:
-                addActions = 4
-            else:
-                addActions = 5
-        
-            if maxPoints == 0:
-                notify("*Nobody has Points yet. Challenger {} adds {} Action Tokens.*".format(me,addActions))
-            else:   
-                notify("*{} has {} Points. Challenger {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
-    else:   
-        if maxPoints < 2:
-            addActions = 2
-        elif maxPoints < 6:
-            addActions = 3
-        elif maxPoints < 11:
-            addActions = 4
-        else:
-            addActions = 5
-        
-        if maxPoints == 0:
-            notify("*Nobody has Points yet. {} adds {} Action Tokens.*".format(me,addActions))
-        else:   
-            notify("*{} has {} Points. {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
-    
-    me.counters['Actions'].value = me.counters['Actions'].value + addActions
-    
-    #Meticulous triggers here, before draw step
-    meticulousCount = sum(1 for card in table if card.isFaceUp == True and card.controller == me and (re.search(r'Meticulous', card.Keywords) or re.search(r'Meticulous', card.Text)))
-    if meticulousCount > 0:
-        num = askChoice("You have {} Meticulous cards on the table. Use Meticulous?".format(meticulousCount), ["Yes","No"])
-        if num == 1:
-            meticulous(group, x, y)
-    
-    if len(PlayerStartDone) >= 3: #Checks if all 3 players are done with First turn before checking FirstTurn so it doesn't mess it up during the villain turn
-        setGlobalVariable("FirstTurn", "False")
-        
-    checkFirstTurn = getGlobalVariable("FirstTurn")
-    
-    if checkFirstTurn == "True":
-        if (len(players) == 3 or len(players) == 4) and getGlobalVariable("VillainChallengeActive") == "False":
-            draw(me.deck)
-            setGlobalVariable("FirstTurn", "False")
-        elif getGlobalVariable("VillainChallengeActive") == "True" and getGlobalVariable("VillainTurn") == "False":
-            notify("{} does not draw on the game's first turn.".format(me))
-            PlayerStartDone.append(PlayerNo)
-            setGlobalVariable("PlayerStartDone", str(PlayerStartDone))
-            update()
-        else:
-            notify("{} does not draw on the game's first turn.".format(me))
-            setGlobalVariable("FirstTurn", "False")
-    else:
-        draw(me.deck)
-    me.setGlobalVariable("Phase", "Ready")
-    
-        
-def turnTroublemaker(group, x = 0, y = 0):
-    mute()
-    PlayerNo = me._id
-    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
-    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
-    
-    if getGlobalVariable("VillainChallengeActive") == "True":
-        if me.isActive:
-            clearFaceoff(group, x, y)
-            if PlayerNo == villainPlayerId:
-                notify("*The villain, {} begins their Troublemaker Phase.*".format(me))
-            else:
-                notify("*Challenger {} begins their Troublemaker Phase.*".format(me))
-            
-            peekAll(group, x, y)        
-            rnd(1,2)
-            
-            troublemakerCount = sum(1 for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
-            if troublemakerCount > 0:
-                num = askChoice("You have facedown Troublemakers. Flip them up?", ["Yes","No"])
-                if num == 1:
-                    troublemakers = (card for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
-                    for c in troublemakers:
-                        c.isFaceUp = True           
-            me.setGlobalVariable("Phase", "Troublemaker")
-        else:
-            if getGlobalVariable("VillainTurn") == "False":
-                clearFaceoff(group, x, y)
-                notify("*Challenger {} begins their Troublemaker Phase.*".format(me))
-                peekAll(group, x, y)        
-                rnd(1,2)
-                
-                troublemakerCount = sum(1 for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
-                if troublemakerCount > 0:
-                    num = askChoice("You have facedown Troublemakers. Flip them up?", ["Yes","No"])
-                    if num == 1:
-                        troublemakers = (card for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
-                        for c in troublemakers:
-                            c.isFaceUp = True           
-                me.setGlobalVariable("Phase", "Troublemaker")
-            elif getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId: #Somehow if inactive player set villain to active, it doesn't work
-                clearFaceoff(group, x, y)
-                notify("*The villain, {} begins their Troublemaker Phase.*".format(me))
-                peekAll(group, x, y)        
-                rnd(1,2)
-                
-                troublemakerCount = sum(1 for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
-                if troublemakerCount > 0:
-                    num = askChoice("You have facedown Troublemakers. Flip them up?", ["Yes","No"])
-                    if num == 1:
-                        troublemakers = (card for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
-                        for c in troublemakers:
-                            c.isFaceUp = True           
-                me.setGlobalVariable("Phase", "Troublemaker")
-            else:
-                whisper("You can't set the phase when it isn't your turn.")
-    else:
-        if me.isActive:
-            clearFaceoff(group, x, y)
-            notify("*{} begins their Troublemaker Phase.*".format(me))
-            
-            peekAll(group, x, y)        
-            rnd(1,2)
-            
-            troublemakerCount = sum(1 for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
-            if troublemakerCount > 0:
-                num = askChoice("You have facedown Troublemakers. Flip them up?", ["Yes","No"])
-                if num == 1:
-                    troublemakers = (card for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
-                    for c in troublemakers:
-                        c.isFaceUp = True           
-            me.setGlobalVariable("Phase", "Troublemaker")
-                
-        else:
-            whisper("You can't set the phase when it isn't your turn.")
 
-def turnMain(group, x = 0, y = 0):
-    mute()
-    PlayerNo = me._id
-    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
-    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
-    
-    if getGlobalVariable("VillainChallengeActive") == "True":
-        if me.isActive:
-            clearFaceoff(group, x, y)
-            if PlayerNo == villainPlayerId:
-                notify("*The villain, {} begins their Main Phase.*".format(me))
-            else:
-                notify("*Challenger {} begins their Main Phase.*".format(me))
-            
-            #Check for Inspired
-            inspiredCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Inspired', card.Keywords) or re.search(r'Inspired', card.Text)))
-            if inspiredCount > 0:
-                num = askChoice("You have {} Inspired on the table. Use Inspired?".format(inspiredCount), ["Yes","No"])
-                if num == 1:
-                    inspired(group, x, y)
-            me.setGlobalVariable("Phase", "Main")
-        else:
-            if getGlobalVariable("VillainTurn") == "False":
-                clearFaceoff(group, x, y)
-                notify("*Challenger {} begins their Main Phase.*".format(me))
-                
-                #Check for Inspired
-                inspiredCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Inspired', card.Keywords) or re.search(r'Inspired', card.Text)))
-                if inspiredCount > 0:
-                    num = askChoice("You have {} Inspired on the table. Use Inspired?".format(inspiredCount), ["Yes","No"])
-                    if num == 1:
-                        inspired(group, x, y)
-                me.setGlobalVariable("Phase", "Main")
-            elif getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId: #Somehow if inactive player set villain to active, it doesn't work
-                clearFaceoff(group, x, y)
-                notify("*The villain, {} begins their Main Phase.*".format(me))
-                
-                #Check for Inspired
-                inspiredCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Inspired', card.Keywords) or re.search(r'Inspired', card.Text)))
-                if inspiredCount > 0:
-                    num = askChoice("You have {} Inspired on the table. Use Inspired?".format(inspiredCount), ["Yes","No"])
-                    if num == 1:
-                        inspired(group, x, y)
-                me.setGlobalVariable("Phase", "Main")
-            else:
-                whisper("You can't set the phase when it isn't your turn.")
-    else:
-        if me.isActive:
-            clearFaceoff(group, x, y)
-            #Check for Inspired
-            
-            notify("*{} begins their Main Phase.*".format(me))
-            
-            inspiredCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Inspired', card.Keywords) or re.search(r'Inspired', card.Text)))
-            if inspiredCount > 0:
-                num = askChoice("You have {} Inspired on the table. Use Inspired?".format(inspiredCount), ["Yes","No"])
-                if num == 1:
-                    inspired(group, x, y)
-            me.setGlobalVariable("Phase", "Main")
+    if ManeCheck != 1:
+        notify("{}: Invalid Setup! Must have exactly one copy of a Mane Character in your deck!".format(me))
+        return
 
-        else:
-            whisper("You can't set the phase when it isn't your turn.") 
+    shuffle(me.Deck)
+    
+    if len(me.Deck) == 0: return
+    if len(me.Deck) < 6:
+        drawAmount = len(group)
+    
+    for card in me.Deck.top(6):
+        card.moveTo(me.hand)
 
-def turnScore(group, x = 0, y = 0):
-    mute()
-    PlayerNo = me._id
-    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
-    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
-    
-    if getGlobalVariable("VillainChallengeActive") == "True":
-        if me.isActive:
-            clearFaceoff(group, x, y)
-            if PlayerNo == villainPlayerId:
-                notify("*The villain, {} begins their Score Phase.*".format(me))
-            else:
-                notify("*Challenger {} begins their Score Phase.*".format(me))
-            
-            me.setGlobalVariable("Phase", "Score")
-        else:
-            if getGlobalVariable("VillainTurn") == "False":
-                clearFaceoff(group, x, y)
-                notify("*Challenger {} begins their Score Phase.*".format(me))
-                
-                me.setGlobalVariable("Phase", "Score")
-            elif getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId: #Somehow if inactive player set villain to active, it doesn't work
-                clearFaceoff(group, x, y)
-                notify("*The villain, {} begins their Score Phase.*".format(me))
-                
-                me.setGlobalVariable("Phase", "Score")
-            else:
-                whisper("You can't set the phase when it isn't your turn.")
-    else:
-        if me.isActive: 
-            clearFaceoff(group, x, y)
-            notify("*{} begins their Score Phase.*".format(me))
-            me.setGlobalVariable("Phase", "Score")
-        else:
-            whisper("You can't set the phase when it isn't your turn.") 
+    me.counters['Points'].value = 0
+    me.counters['Actions'].value = 0
 
-def turnDone(group, x = 0, y = 0):
-    mute()
-    PlayerNo = me._id #Get current player ID
-    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
-    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
-    CountforHandLimitCards = None
-    handCount = 0
-    handLimit = 8
-    
-    #Check hand limit
-    choiceList = ['Ok', 'Let me just end my turn!']
-    
-    #Check for cards that increase hand limit
-    CountforHandLimitCards = sum(1 for card in table if card.controller == me and card.isFaceUp == True and card.model == "c476a8dc-7543-4c07-8273-37a216452c69")
-    if CountforHandLimitCards != None and CountforHandLimitCards != 0:
-        handLimit = 10
+    notify("{} draws their opening hand of {} cards.".format(me, 6))    
+    notify("{} has set up their side of the table.".format(me))
 
-    for card in me.hand:
-        handCount += 1
-    discardCount = handCount - handLimit
-    if handCount > handLimit:
-        choice = askChoice("You have more than {} cards in your hand. Please discard {} card(s) to continue!".format(handLimit, discardCount), choiceList)
-        if choice == 1:
-            return
-        
-    if getGlobalVariable("PlayerDone") == "Start": #If var running for the first time, create list
-        PlayerDone = []
-    else:
-        PlayerDone = eval(getGlobalVariable("PlayerDone"))
-        
-    #All possible scenario for each player to identify the villain player and main player
-    if PlayerNo == 1: 
-        if villainPlayerId == 2:
-            villainPlayerNo = 1
-            mainPlayerNo = 0
-        elif villainPlayerId == 3:
-            villainPlayerNo = 2
-            mainPlayerNo = 0
-        elif villainPlayerId == 4:
-            villainPlayerNo = 3
-            mainPlayerNo = 0
-        else:
-            villainPlayerNo = 0
-            mainPlayerNo = 1
-    elif PlayerNo == 2:
-        if villainPlayerId == 1:
-            villainPlayerNo = 1
-            mainPlayerNo = 0
-        elif villainPlayerId == 3:
-            villainPlayerNo = 2
-            mainPlayerNo = 1
-        elif villainPlayerId == 4:
-            villainPlayerNo = 3
-            mainPlayerNo = 1
-        else:
-            villainPlayerNo = 0
-            mainPlayerNo = 1
-    elif PlayerNo == 3:
-        if villainPlayerId == 1:
-            villainPlayerNo = 1
-            mainPlayerNo = 2
-        elif villainPlayerId == 2:
-            villainPlayerNo = 2
-            mainPlayerNo = 1
-        elif villainPlayerId == 4:
-            villainPlayerNo = 3
-            mainPlayerNo = 1
-        else:
-            villainPlayerNo = 0
-            mainPlayerNo = 1
-    elif PlayerNo == 4:
-        if villainPlayerId == 1:
-            villainPlayerNo = 1
-            mainPlayerNo = 2
-        elif villainPlayerId == 2:
-            villainPlayerNo = 2
-            mainPlayerNo = 1
-        elif villainPlayerId == 3:
-            villainPlayerNo = 3
-            mainPlayerNo = 1
-        else:
-            villainPlayerNo = 0
-            mainPlayerNo = 1
-    
-    if me.isActive:
-        me.setGlobalVariable("TurnStarted", "False")
-        update()
-        clearFaceoff(group, x, y)
-        playSound('endturn')
-        if len(players) == 1:
-            players[0].setActive()
-            notify("*{} is done. It is now {}'s turn.*".format(me, players[0]))
-            me.setGlobalVariable("Phase", "Start")
-        if len(players) == 2:
-            players[1].setActive()
-            notify("*{} is done. It is now {}'s turn.*".format(me, players[1]))
-            me.setGlobalVariable("Phase", "Start")
-        elif len(players) == 3 and getGlobalVariable("VillainChallengeActive") == "False":
-            if PlayerNo == 3: #If last player, go back to first player
-                players[1].setActive()
-                notify("*{} is done. It is now {}'s turn.*".format(me, players[1]))
-                me.setGlobalVariable("Phase", "Start")
-                return
-            players[PlayerNo].setActive()
-            notify("*{} is done. It is now {}'s turn.*".format(me, players[PlayerNo]))
-            me.setGlobalVariable("Phase", "Start")
-        elif len(players) == 4 and getGlobalVariable("VillainChallengeActive") == "False":
-            if PlayerNo == 4: #If last player, go back to first player
-                players[1].setActive()
-                notify("*{} is done. It is now {}'s turn.*".format(me, players[1]))
-                me.setGlobalVariable("Phase", "Start")
-                return
-            players[PlayerNo].setActive()
-            notify("*{} is done. It is now {}'s turn.*".format(me, players[PlayerNo]))
-            me.setGlobalVariable("Phase", "Start")
-        elif getGlobalVariable("VillainChallengeActive") == "True": #Ending turns for Villain Challenge
-            if me.isInverted:
-                players[mainPlayerNo].setActive()
-                notify("*The villain, {} is done. It is now the Challengers' turn.*".format(me))
-                setGlobalVariable("VillainTurn", "False")
-                me.setGlobalVariable("Phase", "Start")
-                trueTurnNumber = turnNumber() + 1
-                #notify("*The Challengers begins Turn {}*".format(trueTurnNumber))
-            else:
-                if len(PlayerDone) != 2: #Ensuring that active player being the last to end the turn
-                    whisper("Unfortunately, being the active player, you must wait for the other challengers to end their turn. Please end your turn again after your fellow challengers are done.")
-                    return
-                else:
-                    PlayerDone.append(PlayerNo)
-                    setGlobalVariable("PlayerDone", str(PlayerDone))
-                    update()
-                    notify("*Challenger {} is done.*".format(me))
-                    me.setGlobalVariable("Phase", "Start")
-                
-    else:
-        if getGlobalVariable("VillainChallengeActive") == "True":
-            if getGlobalVariable("VillainTurn") == "False" and PlayerNo != villainPlayerId: #For all non-active challengers
-                me.setGlobalVariable("TurnStarted", "False")
-                update()
-                clearFaceoff(group, x, y)
-                playSound('endturn')
-                PlayerDone.append(PlayerNo)
-                setGlobalVariable("PlayerDone", str(PlayerDone))
-                update()
-                notify("*Challenger {} is done.*".format(me))
-                me.setGlobalVariable("Phase", "Start")
-            else:
-                whisper("You can't pass the turn when it isn't your turn.")
-    
-    if getGlobalVariable("VillainChallengeActive") == "True": #Check if last challenger is done
-        if len(PlayerDone) == 3:
-            players[villainPlayerNo].setActive()
-            villainName = players[villainPlayerNo].name
-            notify("*The Challengers are done. It is now the villain, {}'s turn*".format(villainName))
-            setGlobalVariable("PlayerDone", "Start") #Resetting the list
-            setGlobalVariable("VillainTurn", "True")
+    me.setGlobalVariable("deckLoadedAndSet", "True")
 
-def holdOn(group, x = 0, y = 0):
-    mute()
-    notify("*{} has an reaction/question.*".format(me))
-    
+#Setup for VC
 def activateVC(group, x = 0, y = 0):
     mute()
     villainList = ["Nightmare Moon", "King Sombra", "Queen Chrysalis"]
     count = 0
     playerId = me._id
     villainPicked = False
+    #VCplayerID = eval(getGlobalVariable("VCplayerID"))
     
     if not confirm("Start Villian Challenge?\nNOTE: This action will reset the game!"): return
     resetGame()
@@ -935,14 +293,19 @@ def activateVC(group, x = 0, y = 0):
         whisper("There is not enough players to start Villian Challenge! Please ensure you have 4 players and try again.")
         return
     
-    while count <= 3: #count <=3
+    while count <= 3: #Find which player is the villain and look for any additional villains
         if players[count].isInverted == True:
             if villainPicked == True:
                 whisper("There are more than one player on the 'B' side of the table! Please quit the game and ensure that there is only one player on the 'B' side in the lobby.")
                 return
             else:
-                setGlobalVariable("villainPlayerId", players[count]._id)
-                villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
+                setGlobalVariable("villainPlayerId", players[count]._id) #Remove?
+                villainPlayerId = eval(getGlobalVariable("villainPlayerId")) #Remove?
+
+                # VCplayerID.insert(0, players[count]._id)
+                # villainPlayerId = VCplayerID[0]
+                # setGlobalVariable("VCplayerID", str(VCplayerID))
+
                 villainPlayerName = players[count].name
                 villainPicked = True
         count += 1
@@ -1008,10 +371,17 @@ def activateVC(group, x = 0, y = 0):
     
     if villainPlayerId == 1:#Picking which player to hold the elements, it is counted by playerID, should be player 1 else player 2 (Might not be needed)
         setGlobalVariable("mainPlayerId", "2")
+
+        #VCplayerID.insert(1, 2)
+        #setGlobalVariable("VCplayerID", str(VCplayerID))
     else:
         setGlobalVariable("mainPlayerId", "1")
+
+        #VCplayerID.insert(1, 1)
+        #setGlobalVariable("VCplayerID", str(VCplayerID))
     update()
     mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
+    #mainPlayerId = VCplayerID[1]
     ##END of Initialization
     
     notify("{} starts a Villain Challenge game.".format(me))
@@ -1021,7 +391,7 @@ def activateVC(group, x = 0, y = 0):
     villainChoice = askChoice("Pick a villain:", villainList)
     setGlobalVariable("villainChoice", villainChoice)
     
-    if getGlobalVariable("villainChoice") == "1":
+    if getGlobalVariable("villainChoice") == "1": #Nightmare Moon
         notify("Nightmare Moon is chosen to be the Villain.")
         
         table.create('21dcdb56-d043-4d08-8c9d-d7f999fc3ca5', 411, 12, quantity = 1, persist = True)
@@ -1120,7 +490,7 @@ def activateVC(group, x = 0, y = 0):
         villainManeCard.controller = players[villainPlayerNo]
         villainStartProbCard.controller = players[villainPlayerNo]
         
-    elif getGlobalVariable("villainChoice") == "2":
+    elif getGlobalVariable("villainChoice") == "2": #King Sombra
         notify("King Sombra is chosen to be the Villain.")
         
         table.create('d682a5c3-c072-4704-a060-fe7e11652a41', 411, 12, quantity = 1, persist = True)
@@ -1186,7 +556,7 @@ def activateVC(group, x = 0, y = 0):
         villainManeCard.controller = players[villainPlayerNo]
         villainCard.controller = players[villainPlayerNo]
         
-    elif getGlobalVariable("villainChoice") == "3":
+    elif getGlobalVariable("villainChoice") == "3": #Queen Chrysalis
         notify("Queen Chrysalis is chosen to be the Villain.")
         
         table.create('afb81798-ce55-4608-9f5b-cbeb20f52ab1', 411, 12, quantity = 2, persist = True)
@@ -1257,341 +627,657 @@ def activateVC(group, x = 0, y = 0):
         
     whisper("Please ignore the moving errors above if any. The cards are already in the correct position, just that it's too fast for the game to track.")
 
-# NOTE: Reserved for future use when the devs allow multiple boards on the table
-# def playmat(group, x = 0, y = 0):
-    # mute()
-    # #Just wanted to replace Default option with None so it will be more clear to the user. Note that the Default playmat is transparent
-    # playmatList = ['None']
-    # playmatList.extend(table.boards)
-    # playmatList.remove('Default')
-    # playmatList = [x for x in playmatList if not 'Inverted' in x] #Remove all elements with the word "Inverted"
-    # playmatChoice = askChoice("Pick a playmat: ", playmatList)
-    
-    # if playmatChoice == 1:
-        # table.board = 'Default'
-    # elif playmatChoice == 2:
-        # if me.isInverted:
-            # table.board = 'Playmat 1 Inverted'
-        # else:
-            # table.board = 'Playmat 1'
-    # elif playmatChoice == 3:
-        # if me.isInverted:
-            # table.board = 'Playmat 2 Inverted'
-        # else:
-            # table.board = 'Playmat 2'
-    # else:
-        # return
+#---------------------------------------------------------------------------
+# Game Phases
+#---------------------------------------------------------------------------
 
-def setup(group, x = 0, y = 0):
-    ManeCheck = 0
-    PlayerNo = me._id #Get current player ID
+#First Turn - Only runs on the first turn of the game to properly set the Phase System
+def firstTurn(group, x = 0, y = 0):
+    mute()
+    PlayerNo = me._id
+    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
     villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
-    
-    if not confirm("Setup your side of the table?"): return
-    
-    if getGlobalVariable("VillainChallengeActive") == "True": #Setup for Villain Challenge
-        mute()
-        for card in me.hand:
-            if card.Type != 'Mane Character' and card.Type != 'Mane Character Boosted': 
-                card.moveTo(me.Deck)
-        
-        for card in me.piles['Discard Pile']:
-            if card.Type == 'Mane Character': 
-                card.moveTo(me.hand)
-            elif card.Type == 'Mane Character Boosted': 
-                card.moveTo(me.hand)
-            else: 
-                card.moveTo(me.Deck)
-        
-        for card in me.piles['Problem Deck']:
-            if card.Type == 'Mane Character': 
-                card.moveTo(me.hand)
-            elif card.Type == 'Mane Character Boosted': 
-                card.moveTo(me.hand)
-            elif re.search(r'NM', card.Number) or re.search(r'KS', card.Number) or re.search(r'QC', card.Number):
-                pass
-            else:
-                card.moveTo(me.piles['Discard Pile'])
-                card.delete()
-        
-        for card in me.hand: 
-            if card.Type == 'Mane Character':
-                if me.isInverted:
-                    card.moveTo(me.piles['Discard Pile'])
-                    card.delete()
-                elif villainPlayerId == 1: 
-                    if PlayerNo == 2:               
-                        card.moveToTable(-33,177)
-                    elif PlayerNo == 3:
-                        card.moveToTable(-336,177)
-                    elif PlayerNo == 4:
-                        card.moveToTable(277,177)
-                elif villainPlayerId == 2: 
-                    if PlayerNo == 1:               
-                        card.moveToTable(-33,177)
-                    elif PlayerNo == 3:
-                        card.moveToTable(-336,177)
-                    elif PlayerNo == 4:
-                        card.moveToTable(277,177)
-                elif villainPlayerId == 3: 
-                    if PlayerNo == 1:               
-                        card.moveToTable(-33,177)
-                    elif PlayerNo == 2:
-                        card.moveToTable(-336,177)
-                    elif PlayerNo == 4:
-                        card.moveToTable(277,177)
-                elif villainPlayerId == 4: 
-                    if PlayerNo == 1:               
-                        card.moveToTable(-33,177)
-                    elif PlayerNo == 2:
-                        card.moveToTable(-336,177)
-                    elif PlayerNo == 3:
-                        card.moveToTable(277,177)
-                ManeCheck = ManeCheck + 1
-            elif card.Type == 'Mane Character Boosted':
-                if me.isInverted:
-                    card.moveTo(me.piles['Discard Pile'])
-                    card.delete()
-                elif villainPlayerId == 1: 
-                    if PlayerNo == 2:               
-                        card.moveToTable(-33,177)
-                    elif PlayerNo == 3:
-                        card.moveToTable(-336,177)
-                    elif PlayerNo == 4:
-                        card.moveToTable(277,177)
-                elif villainPlayerId == 2: 
-                    if PlayerNo == 1:               
-                        card.moveToTable(-33,177)
-                    elif PlayerNo == 3:
-                        card.moveToTable(-336,177)
-                    elif PlayerNo == 4:
-                        card.moveToTable(277,177)
-                elif villainPlayerId == 3: 
-                    if PlayerNo == 1:               
-                        card.moveToTable(-33,177)
-                    elif PlayerNo == 2:
-                        card.moveToTable(-336,177)
-                    elif PlayerNo == 4:
-                        card.moveToTable(277,177)
-                elif villainPlayerId == 4: 
-                    if PlayerNo == 1:               
-                        card.moveToTable(-33,177)
-                    elif PlayerNo == 2:
-                        card.moveToTable(-336,177)
-                    elif PlayerNo == 3:
-                        card.moveToTable(277,177)
-                card.alternate = ''
-                ManeCheck = ManeCheck + 1
-            else:
-                notify("{}: Invalid Setup! Must not have any other cards in hand but your Mane Character".format(me))
-                return
-        if getGlobalVariable("VillainChallengeActive") == "True":
-            if me.isInverted:
-                pass
-            elif ManeCheck != 1:
-                notify("{}: Invalid Setup! Must have exactly one copy of a Mane Character in your deck!".format(me))
-                return  
-        elif ManeCheck != 1:
-            notify("{}: Invalid Setup! Must have exactly one copy of a Mane Character in your deck!".format(me))
-            return
 
-        shuffle(me.Deck)
-        
-        if len(me.Deck) == 0: return
-        if len(me.Deck) < 6:
-            drawAmount = len(group)
-        
-        for card in me.Deck.top(6):
-            card.moveTo(me.hand)
-        notify("{} draws their opening hand of {} cards.".format(me, 6))    
-
-        notify("{} has set up their side of the table.".format(me))
-
-        setGlobalVariable("FirstTurn", "True")
-        me.setGlobalVariable("TurnStarted", "False")
-        me.setGlobalVariable("Phase", "Start")
-            
-        me.counters['Points'].value = 0
-        me.counters['Actions'].value = 0
+    num = askChoice("Are you first player?", ["Yes","No"])
+    if num != 1:
         return
-        ##END OF VILLAIN CHALLENGE SETUP
-    
-    for card in me.hand:
-        if card.Type == 'Problem': 
-            card.moveTo(me.piles['Problem Deck'])
-        elif card.Type != 'Mane Character' and card.Type != 'Mane Character Boosted': 
-            card.moveTo(me.Deck)
-    
-
-    for card in me.piles['Discard Pile']:
-        if card.Type == 'Mane Character': 
-            card.moveTo(me.hand)
-        elif card.Type == 'Mane Character Boosted': 
-            card.moveTo(me.hand)
-        elif card.Type == 'Problem': 
-            card.moveTo(me.piles['Problem Deck'])
-        else: 
-            card.moveTo(me.Deck)
-    
-    for card in me.piles['Banished Pile']: 
-        if card.Type == 'Mane Character': 
-            card.moveTo(me.hand)
-        elif card.Type == 'Mane Character Boosted': 
-            card.moveTo(me.hand)
-        elif card.Type == 'Problem': 
-            card.moveTo(me.piles['Problem Deck'])
-        else: 
-            card.moveTo(me.Deck)
-
-    myCards = (card for card in table
-            if card.owner == me)
-
-    for card in myCards:
-        if card.Type == 'Mane Character': 
-            card.moveTo(me.hand)
-        elif card.Type == 'Mane Character Boosted': 
-            card.moveTo(me.hand)
-        elif card.Type == 'Problem': 
-            card.moveTo(me.piles['Problem Deck'])
-        else: 
-            card.moveTo(me.Deck)
-
-    #
-    #Starting Problem Selection
-    #
-    
-    mute()
-    
-    for c in me.piles['Problem Deck']:
-        c.peek() ## Reveal the cards to python
-
-    rnd(1,2)  ## allow the peeked card's properties to load
-    
-    StartProblems = (card for card in me.piles['Problem Deck'] if re.search(r'Starting Problem.', card.Keywords))
-                
-    buttons = []  ## This list stores all the card objects for manipulations.
-    OldProblem = ""
-    for c in StartProblems:
-        if c.Name != OldProblem:
-            buttons.append(c)
-            OldProblem = c.Name
-    
-    desc = "Select a Starting Problem:"
-    num = askChoice(desc, [c.Name + ": (" + c.ProblemPlayerElement1Power + " " + c.ProblemPlayerElement1 + " / " + c.ProblemPlayerElement2Power + " " + c.ProblemPlayerElement2 + ")" for c in buttons], customButtons = ["Cancel Setup"])
-    if num > 0:
-        SelectedStart = buttons.pop(num - 1)       
-    else: 
-        return
-        
-    if (len(players) == 3 or len(players) == 4) and getGlobalVariable("VillainChallengeActive") == "False": #Starting Problem pos for multiplayer
-        if PlayerNo == 1:
-            SelectedStart.moveToTable(107,36)
-        elif PlayerNo == 2:
-            SelectedStart.moveToTable(-262,56)
-            SelectedStart.orientation ^= Rot90
-        elif PlayerNo == 3:
-            SelectedStart.moveToTable(-197,-127)
-            SelectedStart.orientation ^= Rot180
-        elif PlayerNo == 4:
-            SelectedStart.moveToTable(166,-167)
-            SelectedStart.orientation ^= Rot270
     else:
-        if me.isInverted:
-            SelectedStart.moveToTable(-215,-57)
-        else:               
-            SelectedStart.moveToTable(130,-53)
-        
-    update()
-            
-    for c in me.piles['Problem Deck']:  ## This removes the peek status
-        c.isFaceUp = True
-        c.isFaceUp = False
-    
-    shuffle(me.piles['Problem Deck'])
-    
-    update()
-    
-    for card in me.hand: 
-        if card.Type == 'Mane Character':
-            if (len(players) == 3 or len(players) == 4) and getGlobalVariable("VillainChallengeActive") == "False": #Mane pos for multiplayer
-                if PlayerNo == 1:
-                    card.moveToTable(-33,191)
-                    ManeCheck = ManeCheck + 1
-                elif PlayerNo == 2:
-                    card.moveToTable(-461,-53)
-                    card.orientation ^= Rot90
-                    ManeCheck = ManeCheck + 1
-                elif PlayerNo == 3:
-                    card.moveToTable(-33,-272)
-                    card.orientation ^= Rot180
-                    ManeCheck = ManeCheck + 1
-                elif PlayerNo == 4:
-                    card.moveToTable(374,-53)
-                    card.orientation ^= Rot270
-                    ManeCheck = ManeCheck + 1
+        #Set active for VC - Do you need others to setActive? Why not wait until Main/Villain player to reach here and set them as active?
+        if getGlobalVariable("VillainChallengeActive") == "True":
+            if getGlobalVariable("PlayerStartDone") == "Start": #If var running for the first time, create list
+                PlayerStartDone = []
+            else:
+                PlayerStartDone = eval(getGlobalVariable("PlayerStartDone"))
+
+            if PlayerNo != mainPlayerId and PlayerNo != villainPlayerId: #If you are the other challengers, set active for main player
+                if mainPlayerId == 1:
+                    players[1].setActive()
+                elif mainPlayerId == 2:
+                    if PlayerNo == 1:
+                        players[1].setActive()
+                    else:
+                        players[2].setActive()
             else:
                 if me.isInverted:
-                    card.moveToTable(-28,-220)
-                else:               
-                    card.moveToTable(-33,130)
-                ManeCheck = ManeCheck + 1
-        elif card.Type == 'Mane Character Boosted':
-            if me.isInverted:
-                card.moveToTable(-28,-220)
-            else:               
-                card.moveToTable(-33,130)
-            card.alternate = ''
-            ManeCheck = ManeCheck + 1
+                    setGlobalVariable("VillainTurn", "True")
+                me.setActive() #NOTE: Only active player can change phase, so challengers might not be able to do anything but to follow along
         else:
-            notify("{}: Invalid Setup! Must not have any other cards in hand but your Mane Character".format(me))
+            me.setActive() #Set active for non VC games
+
+        #Check if it is a 2 player game
+        if (len(players) == 2):
+            me.setGlobalVariable("noDrawFirstTurn", "True") #This person doesn't draw a card as it is the first turn of the game
+        elif getGlobalVariable("VillainChallengeActive") == "True" and getGlobalVariable("VillainTurn") == "False": #Challengers do not draw a card if they go first?? I'm not sure
+            me.setGlobalVariable("noDrawFirstTurn", "True")
+            PlayerStartDone.append(PlayerNo) #This part was at the end of the phase originally, check if this placement affects anything
+            setGlobalVariable("PlayerStartDone", str(PlayerStartDone))
+            update()
+        else:
+            me.setGlobalVariable("noDrawFirstTurn", "False") #Defining the Variable for any other game
+        setPhase(1) #Go to ready phase
+
+#Ready Phase
+def turnReady(group, x = 0, y = 0):
+    mute()
+    maxPoints = 0
+    maxName = ""
+    addActions = 0
+    PlayerNo = me._id
+    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
+    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
+    phaseStops = eval(getGlobalVariable("phaseStops"))
+
+    #Setup for tracking Challengers turn progress for VC 
+    if getGlobalVariable("VillainChallengeActive") == "True":
+        if getGlobalVariable("PlayerStartDone") == "Start": #If var running for the first time, create list
+            PlayerStartDone = []
+        else:
+            PlayerStartDone = eval(getGlobalVariable("PlayerStartDone"))
+        
+        if getGlobalVariable("PlayerDone") != "Start": #Check if any challenger is done with their turns
+            PlayerDone = eval(getGlobalVariable("PlayerDone"))
+            
+            for player in range(len(PlayerDone)): #If player is in the PlayerDone list, stop player from starting turn again
+                if PlayerDone[player] == PlayerNo:
+                    whisper("Please wait for the other challenger(s) to finish their turn.")
+                    return
+    else:
+        pass
+
+    #Check if player is active before continuing
+    if getGlobalVariable("VillainChallengeActive") == "True":
+        if me.isActive:
+            if me.isInverted:
+                setGlobalVariable("VillainTurn", "True")
+            else:
+                if getGlobalVariable("VillainTurn") == "True": #If it is villain turn and main is still active, stop main
+                    whisper("You can't start the turn when it isn't your turn.")
+                    return
+                else:
+                    notify("*Challenger {} starts his/her turn*".format(me)) #REMOVE? See how it works out
+        else:
+            if getGlobalVariable("VillainTurn") == "False" and PlayerNo != villainPlayerId:
+                notify("*Challenger {} starts his/her turn*".format(me))
+            elif getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId: #Somehow if inactive player set villain to active, it doesn't work
+                notify("*The villain, {} begins Turn {}*".format(me, turnNumber()))
+            else:
+                whisper("You can't start the turn when it isn't your turn.")
+                return
+    else:
+        #For non VC games
+        if me.isActive:
+            pass
+        else:
+            whisper("You can't start the turn when it isn't your turn.")
             return
 
-    if ManeCheck != 1:
-        notify("{}: Invalid Setup! Must have exactly one copy of a Mane Character in your deck!".format(me))
+    #Check if phaseLoop is True, if so, end the turn without doing anything. This acts as a buffer so the game doesn't jump into the next phase on pressing Tab
+    if getGlobalVariable("phaseLoop") == "True":
+        setGlobalVariable("phaseLoop", "False")
+        setPhase(2)
         return
 
-    shuffle(me.Deck)
-    
-    if len(me.Deck) == 0: return
-    if len(me.Deck) < 6:
-        drawAmount = len(group)
-    
-    for card in me.Deck.top(6):
-        card.moveTo(me.hand)
-    notify("{} draws their opening hand of {} cards.".format(me, 6))    
+    if "Del 1.1" not in phaseStops and "Del 1.2" not in phaseStops and "Stop" not in phaseStops:
+        #Meticulous triggers here? Idk if it is before or after Ready and gain AT
+        meticulousCount = sum(1 for card in table if card.isFaceUp == True and card.controller == me and (re.search(r'Meticulous', card.Keywords) or re.search(r'Meticulous', card.Text)))
+        if meticulousCount > 0:
+            num = askChoice("You have {} Meticulous cards on the table. Use Meticulous?".format(meticulousCount), ["Yes","No"])
+            if num == 1:
+                meticulous(group, x, y)
 
-    notify("{} has set up their side of the table.".format(me))
+        #Ready all cards
+        readyAll(group, x, y)
+        notify("{} readies all their cards.".format(me))
 
-    setGlobalVariable("FirstTurn", "True")
-    me.setGlobalVariable("TurnStarted", "False")
-    me.setGlobalVariable("Phase", "Start")
+        #Gain AT
+        for person in players:
+            if maxPoints < person.counters['Points'].value:
+                maxPoints = person.counters['Points'].value
+                maxName = person.name
+
+        if getGlobalVariable("VillainChallengeActive") == "True":
+            if getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId:
+                if maxPoints < 2:
+                    addActions = 4
+                elif maxPoints < 6:
+                    addActions = 5
+                elif maxPoints < 11:
+                    addActions = 6
+                else:
+                    addActions = 7
+                
+                if maxPoints == 0:
+                    notify("*Nobody has Points yet. Being the villain, {} adds {} Action Tokens.*".format(me,addActions))
+                else:   
+                    notify("*{} has {} Points. Being the villain, {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
+            else:
+                if maxPoints < 2:
+                    addActions = 2
+                elif maxPoints < 6:
+                    addActions = 3
+                elif maxPoints < 11:
+                    addActions = 4
+                else:
+                    addActions = 5
+            
+                if maxPoints == 0:
+                    notify("*Nobody has Points yet. Challenger {} adds {} Action Tokens.*".format(me,addActions))
+                else:   
+                    notify("*{} has {} Points. Challenger {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
+        else:
+            if maxPoints < 2:
+                addActions = 2
+            elif maxPoints < 6:
+                addActions = 3
+            elif maxPoints < 11:
+                addActions = 4
+            else:
+                addActions = 5
+            
+            if maxPoints == 0:
+                notify("*Nobody has Points yet. {} adds {} Action Tokens.*".format(me,addActions))
+            else:   
+                notify("*{} has {} Points. {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
         
-    me.counters['Points'].value = 0
-    me.counters['Actions'].value = 0
+        me.counters['Actions'].value = me.counters['Actions'].value + addActions
 
-def scoop(group, x = 0, y = 0):
+    #PPP Stop - Before drawing cards
+    if "1.1" not in phaseStops and "Del 1.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
+
+        #Draw cards
+        if me.getGlobalVariable("noDrawFirstTurn") == "True":
+            notify("{} does not draw on the game's first turn.".format(me))
+            me.setGlobalVariable("noDrawFirstTurn", "False")
+        else:
+            draw(me.deck)
+
+    elif "Del 1.2" in phaseStops: #If .2 has triggered, skip this portion
+        pass
+    else:
+        notify("*A player has set a pause before drawing card! Once done, {} please press Spacebar to continue*".format(me))
+        phaseStops.append("Stop")
+        setGlobalVariable("phaseStops", str(phaseStops))
+        return
+
+    #PPP Stop - Before phase ends
+    if "1.2" in phaseStops:
+        phaseStops.append("Stop")
+        notify("*A player has set a pause before ending this phase! Once done, {} please press Spacebar to continue*".format(me))
+        return
+    else:
+        #Remove Del if any but loop the phase again if it is Del .1
+        if "Del 1.1" in phaseStops:
+            phaseStops.remove("Del 1.1")
+            setGlobalVariable("phaseStops", str(phaseStops))
+            setGlobalVariable("phaseLoop", "True") #Without this, it will loop into phaseLoop again causing a double loop
+            return
+        if "Del 1.2" in phaseStops:
+            phaseStops.remove("Del 1.2")
+            setGlobalVariable("phaseStops", str(phaseStops))
+
+        setGlobalVariable("phaseLoop", "True")
+
+#Troublemaker Phase
+def turnTroublemaker(group, x = 0, y = 0):
     mute()
-    
-    if not confirm("Scoop your side of the table?"): return
-    
-    for c in me.hand: 
-        if not c.Type == "Mane Character":
-            c.moveTo(me.Deck)           
-    for c in me.piles['Discard Pile']: c.moveTo(me.Deck)
-    for c in me.piles['Banished Pile']: c.moveTo(me.Deck)
+    PlayerNo = me._id
+    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
+    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
+    phaseStops = eval(getGlobalVariable("phaseStops"))
 
-    myCards = (card for card in table
-            if card.owner == me)
+    #Check if player is active before continuing
+    if me.isActive:
+        if getGlobalVariable("VillainChallengeActive") == "True": #See if needed?
+            if PlayerNo == villainPlayerId:
+                notify("*The villain, {} begins their Troublemaker Phase.*".format(me))
+            else:
+                notify("*Challenger {} begins their Troublemaker Phase.*".format(me))
+        else:
+            pass
+    else:
+        #For the other challengers to get through the phase
+        if getGlobalVariable("VillainChallengeActive") == "True" and getGlobalVariable("VillainTurn") == "False": #See if needed?
+            notify("*Challenger {} begins their Troublemaker Phase.*".format(me))
+        elif getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId: #Somehow if inactive player set villain to active, it doesn't work
+            notify("*The villain, {} begins their Troublemaker Phase.*".format(me))
+        else:
+            whisper("You can't set the phase when it isn't your turn.")
+            return
 
-    for card in myCards:
-        if card.Type == "Mane Character": 
-            card.moveTo(me.hand)
-        elif card.Type == "Problem": 
-            card.moveTo(me.piles['Problem Deck'])
-        else: 
-            card.moveTo(me.Deck)
+    #Check if phaseLoop is True, if so, end the turn without doing anything. This acts as a buffer so the game doesn't jump into the next phase on pressing Tab
+    if getGlobalVariable("phaseLoop") == "True":
+        setGlobalVariable("phaseLoop", "False")
+        setPhase(3)
+        return
+
+    #PPP Stop - Before TM uncover
+    if "2.1" not in phaseStops and "Del 2.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
+
+        #Uncover Troublemakers
+        clearFaceoff(group, x, y)
+        peekAll(group, x, y)        
+        rnd(1,2)
+        
+        troublemakerCount = sum(1 for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
+        if troublemakerCount > 0:
+            num = askChoice("You have facedown Troublemakers. Flip them up?", ["Yes","No"])
+            if num == 1:
+                setGlobalVariable("phaseLoop", "True") #Only trigger a loop if there is facedown TM to flip up
+                troublemakers = (card for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
+                for c in troublemakers:
+                    c.isFaceUp = True
+    elif "Del 2.2" in phaseStops: #If .2 has triggered, skip this portion
+        pass
+    else:
+        notify("*A player has set a pause before uncovering Troublemaker(s)! Once done, {} please press Spacebar to continue*".format(me))
+        return
+
+    #PPP Stop - Before phase ends
+    if "2.2" in phaseStops:
+        setGlobalVariable("phaseLoop", "False") #Disable phaseLoop so that it cannot let the player bypass the stop
+        phaseStops.append("Stop")
+        notify("*A player has set a pause before ending this phase! Once done, {} please press Spacebar to continue*".format(me))
+        return
+    else:
+        #Remove Del if any but loop the phase again if it is Del .1
+        if "Del 2.1" in phaseStops:
+            phaseStops.remove("Del 2.1")
+            setGlobalVariable("phaseStops", str(phaseStops))
+            return
+        if "Del 2.2" in phaseStops:
+            phaseStops.remove("Del 2.2")
+            setGlobalVariable("phaseStops", str(phaseStops))
+        setPhase(3)
+
+#Main Phase
+def turnMain(group, x = 0, y = 0):
+    mute()
+    PlayerNo = me._id
+    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
+    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
+    phaseStops = eval(getGlobalVariable("phaseStops"))
+
+    #Check if player is active before continuing
+    if me.isActive:
+        if getGlobalVariable("VillainChallengeActive") == "True": #See if needed?
+            if PlayerNo == villainPlayerId:
+                notify("*The villain, {} begins their Main Phase.*".format(me))
+            else:
+                notify("*Challenger {} begins their Main Phase.*".format(me))
+        else:
+            pass
+    else:
+        #For the other challengers to get through the phase
+        if getGlobalVariable("VillainChallengeActive") == "True" and getGlobalVariable("VillainTurn") == "False": #See if needed?
+            notify("*Challenger {} begins their Main Phase.*".format(me))
+        elif getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId: #Somehow if inactive player set villain to active, it doesn't work
+            notify("*The villain, {} begins their Main Phase.*".format(me))
+        else:
+            whisper("You can't set the phase when it isn't your turn.")
+            return
+
+    #Check if phaseLoop is True, if so, end the turn without doing anything. This acts as a buffer so the game doesn't jump into the next phase on pressing Tab
+    if getGlobalVariable("phaseLoop") == "True":
+        setGlobalVariable("phaseLoop", "False")
+        setPhase(4)
+        return
+
+    #PPP Stop - Before any main phase action
+    if "3.1" not in phaseStops and "Del 3.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
+
+        #Inspired triggers here?
+        inspiredCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Inspired', card.Keywords) or re.search(r'Inspired', card.Text)))
+        if inspiredCount > 0:
+            num = askChoice("You have {} Inspired on the table. Use Inspired?".format(inspiredCount), ["Yes","No"])
+            if num == 1:
+                setGlobalVariable("phaseLoop", "True") #Only trigger a loop if inspired is used
+                inspired(group, x, y)
+    elif "Del 3.2" in phaseStops: #If .2 has triggered, skip this portion
+        pass
+    else:
+        phaseStops.append("Stop")
+        notify("*A player has set a pause before any Main Phase action! Once done, {} please press Spacebar to continue*".format(me))
+        return
+
+    #PPP Stop - Before phase ends
+    if "3.2" in phaseStops:
+        setGlobalVariable("phaseLoop", "False") #Disable phaseLoop so that it cannot let the player bypass the stop
+        phaseStops.append("Stop")
+        notify("*A player has set a pause before ending this phase! Once done, {} please press Spacebar to continue*".format(me))
+        return
+    else:
+        #Remove Del if any but loop the phase again if it is Del .1
+        if "Del 3.1" in phaseStops:
+            phaseStops.remove("Del 3.1")
+            setGlobalVariable("phaseStops", str(phaseStops))
+            return
+        if "Del 3.2" in phaseStops:
+            phaseStops.remove("Del 3.2")
+            setGlobalVariable("phaseStops", str(phaseStops))
+        setPhase(4)
+
+#Score Phase
+def turnScore(group, x = 0, y = 0):
+    mute()
+    PlayerNo = me._id
+    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
+    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
+    phaseStops = eval(getGlobalVariable("phaseStops"))
+
+    #Check if player is active before continuing
+    if me.isActive:
+        if getGlobalVariable("VillainChallengeActive") == "True": #See if needed?
+            if PlayerNo == villainPlayerId:
+                notify("*The villain, {} begins their Score Phase.*".format(me))
+            else:
+                notify("*Challenger {} begins their Score Phase.*".format(me))
+        else:
+            pass
+    else:
+        #For the other challengers to get through the phase
+        if getGlobalVariable("VillainChallengeActive") == "True" and getGlobalVariable("VillainTurn") == "False": #See if needed?
+            notify("*Challenger {} begins their Score Phase.*".format(me))
+        elif getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId: #Somehow if inactive player set villain to active, it doesn't work
+            notify("*The villain, {} begins their Score Phase.*".format(me))
+        else:
+            whisper("You can't set the phase when it isn't your turn.")
+            return
+
+    #PPP Stop - Before confronting problems
+    if "4.1" in phaseStops:
+        notify("*A player has set a pause before confronting problems! Once done, {} please press Spacebar to continue*".format(me))
+        return
+
+    #Check if confronting Problem A
+    #PPP
+    #Check if confronting Problem B
+    #PPP
+    #Problem Faceoff
+    #PPP
+    #Replace Solved Problems
+
+    #PPP Stop - Before phase ends
+    if "4.2" in phaseStops:
+        notify("*A player has set a pause before ending this phase! Once done, {} please press Spacebar to continue*".format(me))
+        return
+    else:
+        if "Del 4.1" in phaseStops:
+            phaseStops.remove("Del 4.1")
+            setGlobalVariable("phaseStops", str(phaseStops))
+            return
+        if "Del 4.2" in phaseStops:
+            phaseStops.remove("Del 4.2")
+            setGlobalVariable("phaseStops", str(phaseStops))
+
+        setPhase(5)
+
+#End Phase
+def turnEnd(group, x = 0, y = 0):
+    mute()
+    PlayerNo = me._id #Get current player ID
+    mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
+    villainPlayerId = eval(getGlobalVariable("villainPlayerId"))
+    phaseStops = eval(getGlobalVariable("phaseStops"))
+    CountforHandLimitCards = None
+    handCount = 0
+    handLimit = 8
+
+    #PPP Stop - Before phase starts
+    if "5.1" in phaseStops:
+        notify("*A player has set a pause before starting this phase! Once done, {} please press Spacebar to continue*".format(me))
+        return
+    else:
+        #Remove Del if any but loop the phase again if it is Del .1
+        if "Del 5.1" in phaseStops:
+            phaseStops.remove("Del 5.1")
+            setGlobalVariable("phaseStops", str(phaseStops))
+
+        if not confirm("End your turn?"): return
+
+    #Discard cards down to Max Hand Size
+    choiceList = ['Ok', 'Let me just end my turn!'] #Check hand limit
     
-    notify("{} scoops their side of the table.".format(me))
+    #Check for cards that increase hand limit
+    CountforHandLimitCards = sum(1 for card in table if card.controller == me and card.isFaceUp == True and card.model == "c476a8dc-7543-4c07-8273-37a216452c69")
+    if CountforHandLimitCards != None and CountforHandLimitCards != 0:
+        handLimit = 10
+
+    for card in me.hand:
+        handCount += 1
+    discardCount = handCount - handLimit
+    if handCount > handLimit:
+        choice = askChoice("You have more than {} cards in your hand. Please discard {} card(s) to continue!".format(handLimit, discardCount), choiceList)
+        if choice == 1:
+            return
+
+    #Retire down to Home Limit
+    #End of Turn effects end
+
+    if getGlobalVariable("PlayerDone") == "Start": #If var running for the first time, create list
+        PlayerDone = []
+    else:
+        PlayerDone = eval(getGlobalVariable("PlayerDone"))
+
+    #All possible scenario for each player to identify the villain player and main player
+    if getGlobalVariable("VillainChallengeActive") == "True":
+        PlayerDone = eval(getGlobalVariable("PlayerDone"))
+        if PlayerNo == 1: 
+            if villainPlayerId == 2:
+                villainPlayerNo = 1
+                mainPlayerNo = 0
+            elif villainPlayerId == 3:
+                villainPlayerNo = 2
+                mainPlayerNo = 0
+            elif villainPlayerId == 4:
+                villainPlayerNo = 3
+                mainPlayerNo = 0
+            else:
+                villainPlayerNo = 0
+                mainPlayerNo = 1
+        elif PlayerNo == 2:
+            if villainPlayerId == 1:
+                villainPlayerNo = 1
+                mainPlayerNo = 0
+            elif villainPlayerId == 3:
+                villainPlayerNo = 2
+                mainPlayerNo = 1
+            elif villainPlayerId == 4:
+                villainPlayerNo = 3
+                mainPlayerNo = 1
+            else:
+                villainPlayerNo = 0
+                mainPlayerNo = 1
+        elif PlayerNo == 3:
+            if villainPlayerId == 1:
+                villainPlayerNo = 1
+                mainPlayerNo = 2
+            elif villainPlayerId == 2:
+                villainPlayerNo = 2
+                mainPlayerNo = 1
+            elif villainPlayerId == 4:
+                villainPlayerNo = 3
+                mainPlayerNo = 1
+            else:
+                villainPlayerNo = 0
+                mainPlayerNo = 1
+        elif PlayerNo == 4:
+            if villainPlayerId == 1:
+                villainPlayerNo = 1
+                mainPlayerNo = 2
+            elif villainPlayerId == 2:
+                villainPlayerNo = 2
+                mainPlayerNo = 1
+            elif villainPlayerId == 3:
+                villainPlayerNo = 3
+                mainPlayerNo = 1
+            else:
+                villainPlayerNo = 0
+                mainPlayerNo = 1
+
+    if me.isActive:
+        clearFaceoff(group, x, y)
+        playSound('endturn')
+
+        if len(players) == 1:
+            players[0].setActive()
+            notify("*{} is done. It is now {}'s turn.*".format(me, players[0]))
+        elif len(players) == 2:
+            players[1].setActive()
+            notify("*{} is done. It is now {}'s turn.*".format(me, players[1]))
+        elif len(players) == 3 and getGlobalVariable("VillainChallengeActive") == "False":
+            if PlayerNo == 3: #If last player, go back to first player
+                players[1].setActive()
+                notify("*{} is done. It is now {}'s turn.*".format(me, players[1]))
+                return
+            players[PlayerNo].setActive()
+            notify("*{} is done. It is now {}'s turn.*".format(me, players[PlayerNo]))
+        elif len(players) == 4 and getGlobalVariable("VillainChallengeActive") == "False":
+            if PlayerNo == 4: #If last player, go back to first player
+                players[1].setActive()
+                notify("*{} is done. It is now {}'s turn.*".format(me, players[1]))
+                return
+            players[PlayerNo].setActive()
+            notify("*{} is done. It is now {}'s turn.*".format(me, players[PlayerNo]))
+        elif getGlobalVariable("VillainChallengeActive") == "True": #Ending turns for Villain Challenge
+            if me.isInverted:
+                players[mainPlayerNo].setActive()
+                notify("*The villain, {} is done. It is now the Challengers' turn.*".format(me))
+                setGlobalVariable("VillainTurn", "False")
+            else:
+                if len(PlayerDone) != 2: #Ensuring that active player being the last to end the turn
+                    whisper("Unfortunately, being the active player, you must wait for the other challengers to end their turn. Please end your turn again after your fellow challengers are done.")
+                    return
+                else:
+                    PlayerDone.append(PlayerNo)
+                    setGlobalVariable("PlayerDone", str(PlayerDone))
+                    update()
+                    notify("*Challenger {} is done.*".format(me))
+        setGlobalVariable("phaseStop", "True")
+        setPhase(1) #Reset the phase for the new active player
+    else:
+        if getGlobalVariable("VillainChallengeActive") == "True":
+            if getGlobalVariable("VillainTurn") == "False" and PlayerNo != villainPlayerId: #For all non-active challengers
+                clearFaceoff(group, x, y)
+                playSound('endturn')
+                PlayerDone.append(PlayerNo)
+                setGlobalVariable("PlayerDone", str(PlayerDone))
+                update()
+                notify("*Challenger {} is done.*".format(me))
+            else:
+                whisper("You can't pass the turn when it isn't your turn.") #For all non active players not in VC 
+
+    if getGlobalVariable("VillainChallengeActive") == "True": #Check if last challenger is done
+        if len(PlayerDone) == 3:
+            players[villainPlayerNo].setActive()
+            setGlobalVariable("phaseStop", "True")
+            setPhase(1) #Reset the phase for the new active player
+            villainName = players[villainPlayerNo].name
+            notify("*The Challengers are done. It is now the villain, {}'s turn*".format(villainName))
+            setGlobalVariable("PlayerDone", "Start") #Resetting the list
+            setGlobalVariable("VillainTurn", "True")
+
+#Phase passer
+def nextPhase(group, x = 0, y = 0):
+    update()
+    currentPhaseName, currentPhaseID = currentPhase()
+
+    if currentPhaseID == 0:
+        if me.getGlobalVariable("deckLoadedAndSet") == "True": #Checks if player has loaded a deck and set it up
+            if turnNumber() == 0:
+                firstTurn(group, x, y)
+        else:
+            whisper("*Please load a deck and press F12 to setup your table to continue*")
+
+    if currentPhaseID == 1:
+        turnReady(group, x, y)
+    elif currentPhaseID == 2:
+        turnTroublemaker(group, x, y)
+    elif currentPhaseID == 3:
+        turnMain(group, x, y)
+    elif currentPhaseID == 4:
+        turnScore(group, x, y)
+    elif currentPhaseID == 5:
+        turnEnd(group, x, y)
+    else:
+        return
+
+#Phase Stop Remover
+def removeStop(group, x = 0, y = 0):
+    mute()
+    currentPhaseName, currentPhaseID = currentPhase()
+    phaseStops = eval(getGlobalVariable("phaseStops"))
+
+    if me.isActive: #Checks if the player removing the stop is the active turn player
+        if "{}.1".format(currentPhaseID) in phaseStops: #Check if there is a .1 stop in current phase
+            phaseStops.remove("{}.1".format(currentPhaseID))
+            phaseStops.append("Del {}.1".format(currentPhaseID))
+            phaseStops[:] = (value for value in phaseStops if value != "Stop")
+            notify("*The game is now unpaused! Press Tab to continue with the phase*")
+        elif "{}.2".format(currentPhaseID) in phaseStops: #Check if there is a .2 stop in current phase
+            phaseStops.remove("{}.2".format(currentPhaseID))
+            phaseStops.append("Del {}.2".format(currentPhaseID))
+            phaseStops[:] = (value for value in phaseStops if value != "Stop")
+            notify("*The game is now unpaused! Press Tab when you are ready to go to the next phase*")
+
+        setGlobalVariable("phaseStops", str(phaseStops))
+        setStop(currentPhaseID, False)
+    else:
+        whisper("Only the active turn player can unpause the game!")
+
+    ##Guide for this stop system
+    #Each phase has 2 stops defined as .1 or .2
+    #The phase number will define the number in front of the "."  Eg. Phase 1 is 1.1 and 1.2 respectively
+    #The "Del" suffix will been given to the stop once a player removes a stop
+    #This is to let the program know that the stop is done and the player is triggering the same phase again
+    #So the program will not run any actions it has done before  Eg. In TM phase, 2.2 is done, "Del 2.2" will tell uncover TM not to trigger again
+    #For "Del *.1", it is to tell the program not to end the phase if player is triggering the same phase again after removing stop
+    #This allows actions that have not triggered to be completed without the program jumping into the next phase immediately
+    #For "Stop", it is only used in Ready Phase as to prevent actions before the first stop from triggering if a stop is active in the phase
+
+#---------------------------------------------------------------------------
+# Table Actions
+#---------------------------------------------------------------------------
+def flipCoin(group, x = 0, y = 0):
+    mute()
+    n = rnd(1, 2)
+    if n == 1:
+        notify("{} flips heads.".format(me))
+    else:
+        notify("{} flips tails.".format(me))
+        
+def sixSided(group, x = 0, y = 0):
+    mute()
+    n = rnd(1,6)
+    notify("{} rolls a {} on a 6-sided die.".format(me, n))
+
+def xSided(group, x = 0, y = 0):
+    mute()
+    x = askInteger("Roll a die with how many sides?", 20)
+    if x < 1:
+        return
+    
+    n = rnd(1,x)
+    notify("{} rolls a {} on a {}-sided die.".format(me, n, x))
 
 def gainPoint(group, x = 0, y = 0):
     me.counters['Points'].value = me.counters['Points'].value + 1
@@ -1607,8 +1293,92 @@ def spendAction(group, x = 0, y = 0):
     
 def increaseAction(group, x = 0, y = 0):
     me.counters['Actions'].value = me.counters['Actions'].value + 1
+
+def peekAll(group, x = 0, y = 0):
+    faceDownCards = (card for card in table if card.controller == me and card.isFaceUp == False)
+    for c in faceDownCards:
+        c.peek()
+
+def clearFaceoff(group, x = 0, y = 0):
+    mute()
+    global FaceoffPosition
+    global FaceoffOffset
     
-## addToken function (EDIT BY: GAMEMASTERLUNA)
+    FaceoffPosition = 0
+    FaceoffOffset = 0
+    
+    FaceoffCards = (card for card in table if card.highlight == FaceoffColor1 or card.highlight == FaceoffColor2 or card.highlight == FaceoffColor3 or card.highlight == FaceoffColor4 or card.highlight == ChaosColor)
+    
+    count = 0
+    for card in FaceoffCards:
+        if card.owner == me:
+            card.moveToBottom(card.owner.Deck)
+            count += 1
+    
+    if count > 0:
+        notify("Faceoff Cards have been put on the bottom of {}'s deck.".format(me))
+
+def readyAll(group, x = 0, y = 0): 
+    mute()
+    PlayerNo = me._id
+    
+    if getGlobalVariable("PermExhausted") != "Start": #Get a list of cards that is perm exhausted
+        permExhaustedList = eval(getGlobalVariable("PermExhausted"))
+    else:
+            permExhaustedList = []
+    
+    if (len(players) == 3 or len(players) == 4) and getGlobalVariable("VillainChallengeActive") == "False": #Setting orientation for multiplayer
+        if getGlobalVariable("Exhausted") == "Start": #If no cards exhausted, return esp at start of game
+            return
+        else:
+            exhaustedList = eval(getGlobalVariable("Exhausted"))
+        myCards = []
+            
+        for card in table:
+            if card.controller == me and card.owner == me:
+                if card.isFaceUp:
+                    currentCard = card._id #To compare with exhausted list
+                    for c in range(len(exhaustedList)): #Checks if card is in the Exhausted list, if so card is being readied
+                        permCard = False
+                        
+                        for c in range(len(permExhaustedList)): #Checks if card is in the PermExhausted list
+                            if permExhaustedList[c] == currentCard:
+                                permCard = True
+                    
+                        if exhaustedList[c] == currentCard and permCard == False:
+                            exhaustedList.remove(currentCard)
+                            card.orientation ^= Rot90
+                            card.highlight = None
+                            card.filter = None
+                            notify("{} readies all their cards.".format(me))
+                            setGlobalVariable("Exhausted", str(exhaustedList))
+                            break
+    else:
+        if getGlobalVariable("VillainChallengeActive") == "True": #Remove card.owner as some VC cards owner are different from controller
+            myCards = (card for card in table
+                    if card.controller == me
+                    and card.orientation == Rot90)
+        else:
+            myCards = (card for card in table
+                        if card.controller == me
+                        and card.owner == me
+                        and card.orientation == Rot90)
+
+        for card in myCards:
+            currentCard = card._id
+            permCard = False
+            
+            for c in range(len(permExhaustedList)): #Checks if card is in the PermExhausted list
+                if permExhaustedList[c] == currentCard:
+                    permCard = True
+                    
+            if card.isFaceUp and permCard == False:
+                card.orientation &= ~Rot90
+                card.highlight = None
+                card.filter = None
+                notify("{} readies all their cards.".format(me))
+
+#Token System
 def addToken(group, x = 0, y = 0):
     mute()
     
@@ -1693,11 +1463,59 @@ def addToken(group, x = 0, y = 0):
             return
     else:
         return
-## (EDIT BY: GAMEMASTERLUNA)
-        
+
+def scoop(group, x = 0, y = 0):
+    mute()
+    
+    if not confirm("Scoop your side of the table?"): return
+    
+    for c in me.hand: 
+        if not c.Type == "Mane Character":
+            c.moveTo(me.Deck)           
+    for c in me.piles['Discard Pile']: c.moveTo(me.Deck)
+    for c in me.piles['Banished Pile']: c.moveTo(me.Deck)
+
+    myCards = (card for card in table
+            if card.owner == me)
+
+    for card in myCards:
+        if card.Type == "Mane Character": 
+            card.moveTo(me.hand)
+        elif card.Type == "Problem": 
+            card.moveTo(me.piles['Problem Deck'])
+        else: 
+            card.moveTo(me.Deck)
+    
+    notify("{} scoops their side of the table.".format(me))
+
+# NOTE: Reserved for future use when the devs allow multiple boards on the table
+# def playmat(group, x = 0, y = 0):
+    # mute()
+    # #Just wanted to replace Default option with None so it will be more clear to the user. Note that the Default playmat is transparent
+    # playmatList = ['None']
+    # playmatList.extend(table.boards)
+    # playmatList.remove('Default')
+    # playmatList = [x for x in playmatList if not 'Inverted' in x] #Remove all elements with the word "Inverted"
+    # playmatChoice = askChoice("Pick a playmat: ", playmatList)
+    
+    # if playmatChoice == 1:
+        # table.board = 'Default'
+    # elif playmatChoice == 2:
+        # if me.isInverted:
+            # table.board = 'Playmat 1 Inverted'
+        # else:
+            # table.board = 'Playmat 1'
+    # elif playmatChoice == 3:
+        # if me.isInverted:
+            # table.board = 'Playmat 2 Inverted'
+        # else:
+            # table.board = 'Playmat 2'
+    # else:
+        # return
+
 #---------------------------------------------------------------------------
-# Table card actions
-#---------------------------------------------------------------------------        
+# Card actions
+#---------------------------------------------------------------------------
 def exhaust(card, x = 0, y = 0):
     mute()
     PlayerNo = me._id
@@ -1705,7 +1523,7 @@ def exhaust(card, x = 0, y = 0):
     if card.Type == "Problem":
         if getGlobalVariable("VillainChallengeActive") == "True" and getGlobalVariable("villainChoice") == "2":
             buttonList = ['Won', 'Lost', 'Cancel']
-            choice = askChoice("Did you won or lost the Problem Faceoff at your Problem?", buttonList)
+            choice = askChoice("Did you win or lose the Problem Faceoff at your Problem?", buttonList)
             if choice != 3:
                 setGlobalVariable("KSChoice", choice)
                 replaceProblem(card, x, y)
@@ -1897,7 +1715,7 @@ def subAction(card, x = 0, y = 0):
     notify("{} subtracts an Action Marker from {}.".format(me, card))
     card.markers[Action] -= 1
 
-## Colours function (EDIT BY: GAMEMASTERLUNA)
+#Color Marker System
 def addBlue(card, x = 0, y = 0):
     mute()
     if card.markers[Loyalty] < 1:
@@ -1955,10 +1773,8 @@ def removeColour(card, x = 0, y = 0):
     card.markers[Generosity] = 0
     card.markers[Kindness] = 0
     notify("{} removes all colour(s) from {}.".format(me, card))
-    
-## (EDIT BY: GAMEMASTERLUNA)
 
-## Card Rotation function
+#Card Rotation for Multiplayer
 def rotUp(card, x = 0, y = 0):
     mute()
     card.orientation = Rot0
@@ -1983,10 +1799,9 @@ def rotLeft(card, x = 0, y = 0):
     update()
     whisper("{} was rotated left.".format(card))
 
-#------------------------------------------------------------------------------
+#---------------------------------------------------------------------------
 # Hand Actions
-#------------------------------------------------------------------------------
-
+#---------------------------------------------------------------------------
 def randomDiscard(group):
     mute()
     card = group.random()
@@ -2037,10 +1852,9 @@ def toggleAutoAT(group): #Just a on/off for the Auto AT feature
         me.setGlobalVariable("toggleAutoAT", True)
         whisper("Auto AT and Color Req Check is now turned on.")
 
-#------------------------------------------------------------------------------
+#---------------------------------------------------------------------------
 # Pile Actions
-#------------------------------------------------------------------------------
-
+#---------------------------------------------------------------------------
 def shuffle(group):
     group.shuffle()
 
@@ -2058,7 +1872,7 @@ def draw(group):
     else:
         group[0].moveTo(me.hand)
         notify("{} draws a card.".format(me))
-    
+
 def payDraw(group):
     mute()
     if len(group) == 0: return
@@ -2068,14 +1882,6 @@ def payDraw(group):
     group[0].moveTo(me.hand)
     spendAction(group, 0, 0)
     notify("{} pays 1 to draw a card. {} tokens left.".format(me, me.counters['Actions'].value))
-
-def drawRandom(group):
-    mute()
-    
-    card = group.random()
-    if card == None: return
-    card.moveTo(me.hand)
-    notify("{} randomly draws a Problem card.".format(me))
 
 def drawMany(group):
     drawAmount = None
@@ -2091,7 +1897,7 @@ def drawMany(group):
     for card in group.top(drawAmount):
         card.moveTo(me.hand)
     notify("{} draws {} cards.".format(me, drawAmount))
- 
+
 def discardManyFromTop(group):
     count = 0
     discAmount = None
@@ -2107,7 +1913,7 @@ def discardManyFromTop(group):
         count += 1
         if len(group) == 0: break
     notify("{} discards {} cards from the top of their Deck.".format(me, count))
-    
+
 def reshuffle(group):
     count = None
     
@@ -2120,7 +1926,8 @@ def reshuffle(group):
         card.moveTo(myDeck)
     myDeck.shuffle()
     notify("{} shuffles their {} back into their deck.".format(me, group.name))
-    
+
+#For discard pile, to move a random card from pile back to hand
 def moveOneRandom(group):
     mute()
     if len(group) == 0: return
@@ -2129,8 +1936,8 @@ def moveOneRandom(group):
     card = group.random()
     if card == None: return
     card.moveTo(me.hand)
-    notify("{} randomly moves {} from their {} to their hand.".format(me, card.name, group.name))   
-    
+    notify("{} randomly moves {} from their {} to their hand.".format(me, card.name, group.name))
+
 def faceoffFlipTable(group, x = 0, y = 0):
     faceoffFlip(me.Deck)
 
@@ -2327,117 +2134,202 @@ def faceoffFlip(group):
     
     notify("{} flips {} for the faceoff with printed power {}.".format(me, card, card.Power))
 
-#------------------------------------------------------------------------------
-# Special Card Actions
-#------------------------------------------------------------------------------
-def specialActions(card, group, x = 0, y = 0):
-    notify("flips {} for the faceoff with printed power {}.".format(card, card.Power))
-    # if card.model = "2c59edbe-990f-09a8-a872-2689448e3585":
-        # notify("{} uses Inspired to look at the top {} cards of {}'s deck.".format(me, count, players[1]))
+#---------------------------------------------------------------------------
+# Special Mechanics
+#---------------------------------------------------------------------------
+def inspired(targetgroup, x = 0, y = 0, count = None):
+    mute()
     
-        # topCards = group.top(count)
+    PlayerNo = me._id
+    
+    if len(players) == 1:
+        notify("There must be more than 1 player to use Inspired.")
+        return
+    elif len(players) == 3 and getGlobalVariable("VillainChallengeActive") == "False":
+        if PlayerNo == 3: #If last player, go back to first player
+            group = players[1].Deck
+        else:
+            group = players[PlayerNo].Deck
+    elif len(players) == 4 and getGlobalVariable("VillainChallengeActive") == "False":
+        if PlayerNo == 4: #If last player, go back to first player
+            group = players[1].Deck
+        else:
+            group = players[PlayerNo].Deck
+    else:
+        group = players[1].Deck
+    
+    inspiredCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Inspired', card.Keywords) or re.search(r'Inspired', card.Text)))
+    
+    if count == None:
+        count = askInteger("Look at how many cards?", inspiredCount)
+    if count == None or count == 0:
+        return
+    
+    notify("{} uses Inspired to look at the top {} cards of {}'s deck.".format(me, count, players[1]))
+    
+    topCards = group.top(count)
+    
+    buttons = []  ## This list stores all the card objects for manipulations.
+    for c in topCards:
+        c.peek()  ## Reveal the cards to python
+        buttons.append(c)
+    
+    topList = []  ## This will store the cards selected for the top of the pile
+    bottomList = []  ## For cards going to the bottom of the pile
+    rnd(1,2)  ## allow the peeked card's properties to load
+    loop = 'BOTTOM'  ## Start with choosing cards to put on bottom
+    
+    while loop != None:
+        desc = "Select a card to place on {}:\n\n{}\n///////DECK///////\n{}".format(
+        loop,
+        '\n'.join([c.Name for c in topList]),
+        '\n'.join([c.Name for c in bottomList]))
+        if loop == 'TOP':
+            num = askChoice(desc, ["(" + c.Power + ") " + c.Type + ": " + c.Name + " - " + c.Subname for c in buttons], customButtons = ["Select BOTTOM","Leave Rest on BOTTOM","Reset"])
+            if num == -1:
+                loop = 'BOTTOM'         
+            elif num == -2:
+                while len(buttons) > 0:
+                    card = buttons.pop()
+                    bottomList.append(card)
+            elif num == -3:
+                topList = []
+                bottomList = []
+                buttons = []
+                for c in group.top(count):
+                    c.peek()
+                    buttons.append(c)
+            elif num > 0:
+                card = buttons.pop(num - 1)
+                topList.insert(0, card)
+        else:
+            num = askChoice(desc, ["(" + c.Power + ") " + c.Type + ": " + c.Name + " - " + c.Subname for c in buttons], customButtons = ["Select TOP","Leave Rest on TOP","Reset"])
+            if num == -1:
+                loop = 'TOP'
+            elif num == -2:
+                while len(buttons) > 0:
+                    card = buttons.pop()
+                    topList.insert(0, card)
+            elif num == -3:
+                topList = []
+                bottomList = []
+                buttons = []
+                for c in group.top(count):
+                    c.peek()
+                    buttons.append(c)
+            elif num > 0:
+                card = buttons.pop(num - 1)
+                bottomList.append(card)
+        if len(buttons) == 0: ##  End the loop
+            loop = None
+        if num == None:  ## closing the dialog window will cancel the ability, not moving any cards, but peek status will stay on.
+            return
+
+    topList.reverse()  ## Gotta flip topList so the moveTo's go in the right order
+    
+    originalOwner = group.controller
+    
+    update()
+    
+    group.controller = me
+
+    update()
+    time.sleep(.5)
+
+    for c in topList:
+        c.controller = me
+
+    update()
+    time.sleep(.2)
+
+    for c in topList:
+        c.moveTo(group,0)
+
+    update()
         
-        # buttons = []  ## This list stores all the card objects for manipulations.
-        # for c in topCards:
-            # c.peek()  ## Reveal the cards to python
-            # buttons.append(c)
+    for c in bottomList:
+        c.moveToBottom(group)
         
-        # topList = []  ## This will store the cards selected for the top of the pile
-        # bottomList = []  ## For cards going to the bottom of the pile
-        # rnd(1,2)  ## allow the peeked card's properties to load
-        # loop = 'BOTTOM'  ## Start with choosing cards to put on bottom
+    update()
         
-        # while loop != None:
-            # desc = "Select a card to place on {}:\n\n{}\n///////DECK///////\n{}".format(
-            # loop,
-            # '\n'.join([c.Name for c in topList]),
-            # '\n'.join([c.Name for c in bottomList]))
-            # if loop == 'TOP':
-                # num = askChoice(desc, ["(" + c.Power + ") " + c.Type + ": " + c.Name + " - " + c.Subname for c in buttons], customButtons = ["Select BOTTOM","Leave Rest on BOTTOM","Reset"])
-                # if num == -1:
-                    # loop = 'BOTTOM'         
-                # elif num == -2:
-                    # while len(buttons) > 0:
-                        # card = buttons.pop()
-                        # bottomList.append(card)
-                # elif num == -3:
-                    # topList = []
-                    # bottomList = []
-                    # buttons = []
-                    # for c in group.top(count):
-                        # c.peek()
-                        # buttons.append(c)
-                # elif num > 0:
-                    # card = buttons.pop(num - 1)
-                    # topList.insert(0, card)
-            # else:
-                # num = askChoice(desc, ["(" + c.Power + ") " + c.Type + ": " + c.Name + " - " + c.Subname for c in buttons], customButtons = ["Select TOP","Leave Rest on TOP","Reset"])
-                # if num == -1:
-                    # loop = 'TOP'
-                # elif num == -2:
-                    # while len(buttons) > 0:
-                        # card = buttons.pop()
-                        # topList.insert(0, card)
-                # elif num == -3:
-                    # topList = []
-                    # bottomList = []
-                    # buttons = []
-                    # for c in group.top(count):
-                        # c.peek()
-                        # buttons.append(c)
-                # elif num > 0:
-                    # card = buttons.pop(num - 1)
-                    # bottomList.append(card)
-            # if len(buttons) == 0: ##  End the loop
-                # loop = None
-            # if num == None:  ## closing the dialog window will cancel the ability, not moving any cards, but peek status will stay on.
-                # return
+    for c in group:  ## This removes the peek status
+        c.isFaceUp = True
+        c.isFaceUp = False
 
-        # topList.reverse()  ## Gotta flip topList so the moveTo's go in the right order
-        
-        # originalOwner = group.controller
-        
-        # update()
-        
-        # group.controller = me
+    time.sleep(.2)
 
-        # update()
-        # time.sleep(.5)
+    for c in topList:
+        c.controller = originalOwner
+    
+    update()
+    time.sleep(.5)
+    
+    group.controller = originalOwner
 
-        # for c in topList:
-            # c.controller = me
+    update()
+    
+    whisper("{}".format(group.controller))
 
-        # update()
-        # time.sleep(.2)
+    notify("{} looked at {} cards and put {} on top and {} on bottom.".format(me, count, len(topList), len(bottomList)))
+    
+def meticulous(targetgroup, x = 0, y = 0, count = None):
+    #Maybe ask the person how many meticulous in total he/she have then loop that many times until he/she cancels the meticulous
+    mute()
+    
+    PlayerNo = me._id
+    deck = me.Deck
+    deckCount = 0
+    totalCount = 0
+    
+    #Count how many met cards are on the table
+    meticulousCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Meticulous', card.Keywords) or re.search(r'Meticulous', card.Text)))
+    
+    #Return if 0 or none, but it will use the amt of Met cards as a gauge of how many Met the player have. Player can change this as some cards have more than 1 Met
+    if meticulousCount != None and meticulousCount != 0:
+        count = askInteger("How many meticulous do you have?", meticulousCount)
+        totalCount = count #To keep track of what is the total Met entered
+    else:
+        whisper("No Meticulous cards detected on table!")
+        return
 
-        # for c in topList:
-            # c.moveTo(group,0)
+    #Get the total number of cards in player deck
+    for card in deck:
+        deckCount += 1
 
-        # update()
-            
-        # for c in bottomList:
-            # c.moveToBottom(group)
-            
-        # update()
-            
-        # for c in group:  ## This removes the peek status
-            # c.isFaceUp = True
-            # c.isFaceUp = False
+    #If players closes the dialog box or selects 0 or anything below 0
+    if count == None or count <= 0 or count > deckCount:
+        if count > deckCount:
+            whisper("Nice try, you think you could Meticulous more cards than your deck contains eh?!")
+        return
+    
+    notify("{} have {} Meticulous to look at the top card of {}'s deck.".format(me, count, me))
 
-        # time.sleep(.2)
+    #Loop though all the meticulous
+    while not count <= 0:
+        topCard = deck.top()
 
-        # for c in topList:
-            # c.controller = originalOwner
-        
-        # update()
-        # time.sleep(.5)
-        
-        # group.controller = originalOwner
+        desc = "{}/{} Meticulous left!\n\nDo you want to place the card on the TOP or BOTTOM of the deck?\n\n({}) {}: {} - {}".format(count, totalCount, topCard.Power, topCard.Type, topCard.Name, topCard.Subname)
+        choiceNum = askChoice(desc, ["TOP", "BOTTOM"])
 
-        # update()
-        
-        # whisper("{}".format(group.controller))
+        #If player picks top, end Met
+        if choiceNum == 1:
+            if confirm("Are you sure you want to leave this card on the top of your deck?"):
+                notify("{} leaves the card at the top, ending Meticulous.".format(me))
+                return
+            else:
+                count += 1 #Loop 1 additional time for player to make the choice again
+        #If player picks bottom, move the card to the bottom
+        elif choiceNum == 2:
+            topCard.moveToBottom(deck)
+            notify("{} moves the card to the bottom, {}/{} Meticulous left.".format(me, count-1, totalCount))
+        #If player closes the dialog box
+        else:
+            if confirm("Are you sure you want to quit and leave this card on the top of your deck?"):
+                notify("{} leaves the card at the top, ending Meticulous.".format(me))
+                return
+            else:
+                count += 1 #Loop 1 additional time for player to make the choice again
 
-        # notify("{} looked at {} cards and put {} on top and {} on bottom.".format(me, count, len(topList), len(bottomList)))
-    # else:
-        # return
+        count -= 1 #Reduce the amt of Met left
+
+    notify("{} has no Meticulous left, ending Meticulous.".format(me))

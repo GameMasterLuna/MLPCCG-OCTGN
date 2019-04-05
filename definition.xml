@@ -4,7 +4,7 @@
 	id="65656467-b709-43b2-a5c6-80c2f216adf9" 
 	octgnVersion="3.3.106.0" 
 	scriptVersion ="3.1.0.2"
-	version="2.3.0.02"
+	version="2.3.0.101"
 	markersize="16"
 	tags="My Little Pony MLP CCG" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -21,11 +21,11 @@
 	</scripts>
 	
    	<events>
-	       <event name="OnTableLoaded" action="chkTwoSided" />
-           <event name="OnDeckLoaded" action="loadPlayerGlobalVars" />
+           <event name="OnGameStarted" action="loadPlayerGlobalVars" />
 		   <event name="OnCardsMoved" action="chkMultiplayer" />
 		   <event name="OnCardsMoved" action="autoAT" />
            <event name="OnCardsMoved" action="autoRotateDilemma" />
+           <event name="OverridePhaseClicked" action="triggerPhaseStop" /> <!-- Checks if player clicks the phase icon -->
    	</events>
 	
 	<sounds>
@@ -37,27 +37,39 @@
 
 	<proxygen definitionsrc="proxy/proxydef.xml">
 	</proxygen>
+    
+    <phases>
+        <phase name="Ready Phase" icon="icons/ready.jpg" />
+        <phase name="Troublemaker Phase" icon="icons/troublemaker.jpg" />
+        <phase name="Main Phase" icon="icons/main.jpg" />
+        <phase name="Score Phase" icon="icons/score.jpg" />
+        <phase name="End Phase" icon="icons/end.jpg" />
+    </phases> 
 	
 	<documents>
 	</documents>
 	
 	<globalvariables>
-		<globalvariable name="FirstTurn" value="True" />
-		<globalvariable name="TurnStarted" value="False" />
-		<globalvariable name="Phase" value="Start" />
-		<globalvariable name="Exhausted" value="Start" />
-		<globalvariable name="PermExhausted" value="Start" />
-		<globalvariable name="VillainChallengeActive" value="False" />
-		<globalvariable name="mainPlayerId" value="0" />
-		<globalvariable name="villainPlayerId" value="0" />
-		<!-- <globalvariable name="Challenger1No" value="0" /> -->
-		<!-- <globalvariable name="Challenger2No" value="0" /> -->
-		<globalvariable name="villainChoice" value="0" />
-		<globalvariable name="KSChoice" value="0" />
-		<globalvariable name="PlayerDone" value="Start" />
-		<globalvariable name="PlayerStartDone" value="Start" />
-		<globalvariable name="VillainTurn" value="False" />
-		<globalvariable name="toggleAutoAT" value="True" />
+        <!-- Old phase globalvariable -->
+        <!--<globalvariable name="FirstTurn" value="True" />-->
+        <!--<globalvariable name="TurnStarted" value="False" />-->
+        <!--<globalvariable name="Phase" value="Start" /> -->
+        <globalvariable name="deckLoadedAndSet" value="False" /> <!-- check if deck is loaded and set -->
+        <globalvariable name="noDrawFirstTurn" value="False" /> <!-- define if player draws on first turn -->
+        <globalvariable name="phaseLoop" value="False" /> <!-- for phases to loop again -->
+        <globalvariable name="phaseStops" value="[]" /> <!-- Store all stops as a list -->
+        <globalvariable name="Exhausted" value="Start" />
+        <globalvariable name="PermExhausted" value="Start" />
+        <globalvariable name="VillainChallengeActive" value="False" />
+        <globalvariable name="mainPlayerId" value="0" />
+        <globalvariable name="villainPlayerId" value="0" />
+        <!--<globalvariable name="VCplayerID" value="[]" /> Future plan to store all VC player ID as a list instead -->
+        <globalvariable name="villainChoice" value="0" />
+        <globalvariable name="KSChoice" value="0" />
+        <globalvariable name="PlayerDone" value="Start" />
+        <globalvariable name="PlayerStartDone" value="Start" />
+        <globalvariable name="VillainTurn" value="False" />
+        <globalvariable name="toggleAutoAT" value="True" />
 	</globalvariables>
     
     <!-- <gameboards src="boards/noPlaymat.png" x="-300" y="0" width="900" height="250">
@@ -102,23 +114,25 @@
 		
 		<groupactions menu="Setup / Phases">
 			<groupaction menu="Game Setup" shortcut="F12" execute="setup" />
-			<groupaction menu="Jump to Start Turn" shortcut="F1" execute="turnStart" />
+			<groupaction menu="Jump to Ready Phase" shortcut="F1" execute="turnReady" />
 			<groupaction menu="Jump to Troublemaker Phase" shortcut="F2" execute="turnTroublemaker" />
 			<groupaction menu="Jump to Main Phase" shortcut="F3" execute="turnMain" />
 			<groupaction menu="Jump to Score Phase" shortcut="F4" execute="turnScore" />
-			<groupaction menu="End Turn" shortcut="F5" execute="turnDone" />
+			<groupaction menu="Jump to End Phase" shortcut="F5" execute="turnEnd" />
 		</groupactions>
 		
 		<groupaction menu="Next Phase" shortcut="tab" execute="nextPhase" />
 		<groupaction menu="Declare Response" shortcut="F6" execute="holdOn" />
+        <groupaction menu="Remove Phase Pause" shortcut="SPACE" execute="removeStop" />
 
 		<groupactions menu="Special Abilities">
 			<groupaction menu="Inspired" shortcut="ALT+I" execute="inspired" />
+            <groupaction menu="Meticulous" shortcut="ALT+M" execute="meticulous" />
 		</groupactions>
 		
 		<groupactions menu="Faceoff Actions">
 			<groupaction menu="Faceoff Flip" shortcut="CTRL+F" execute="faceoffFlipTable" />
-			<groupaction menu="Clear Faceoff Cards" shortcut="ALT+C" execute="clearFaceoff" />	
+			<groupaction menu="Clear Faceoff Cards" shortcut="ALT+C" execute="clearFaceoff" />
 		</groupactions>
 
 		<groupactions menu="Card actions">
@@ -157,7 +171,7 @@
 			<cardaction menu="Sub Marker" shortcut="CTRL+SHIFT+1" execute="subAction" />
 		</cardactions>
 		
-		<!-- Card Colour Selection (EDIT BY: GAMEMASTERLUNA) -->
+		<!-- Card Colour Selection -->
 		<cardactions menu="Colours">
 			<cardaction menu="Add Loyalty" shortcut="CTRL+ALT+B" execute="addBlue" />
 			<cardaction menu="Add Honesty" shortcut="CTRL+ALT+O" execute="addOrange" />
@@ -174,7 +188,6 @@
 			<cardaction menu="Rotate Card Down" shortcut="DOWN" execute="rotDown" />
 			<cardaction menu="Rotate Card Left" shortcut="LEFT" execute="rotLeft" />
 		</cardactions>
-		<!-- (EDIT BY: GAMEMASTERLUNA) -->
 	</table>
 	
     <!-- width="63" height="88" for hand and group by default but OCTGN is complaining about it for now -->
