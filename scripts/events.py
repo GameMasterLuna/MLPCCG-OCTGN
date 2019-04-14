@@ -50,6 +50,7 @@ def autoAT(args):
         #whisper("Card Pos: {}".format(card.position))
         
         type = card.properties["Type"]
+        cardNo = card.properties["Number"] #Only to find cards with special conditions Eg. The Fire of Friendship
         cardCost = card.properties["Cost"]
         cardReqPower = card.properties["PlayRequiredPower"]
         cardReqElement = card.properties["PlayRequiredElement"]
@@ -93,89 +94,104 @@ def autoAT(args):
             
                 if cardReqElement != '':
                     #Capturing all face up friend cards on table for comparison
-                    allCards = (card for card in table if card.isFaceUp == True and (card.properties["Type"] == 'Friend' or card.properties["Type"] == 'Mane Character' or card.properties["Type"] == 'Mane Character Boosted'))
+                    allCards = (card for card in table if card.isFaceUp == True and (card.properties["Type"] == 'Friend' or card.properties["Type"] == 'Mane Character' or card.properties["Type"] == 'Mane Character Boosted' or card.properties["Number"] == 'FF115'))
                     for cards in allCards:
                         elementPower =  int(cards.properties["Power"]) + cards.markers[Action]
                         
-                        #Capture all colours for single, multicolored or tri-colored friend cards and add their powers
-                        if cards.properties["Element"] != 'Multicolor':
-                            if cards.properties["Element"] == 'Loyalty' or cards.markers[LoyaltyCounter] > 0:
-                                Loyalty += elementPower
-                            if cards.properties["Element"] == 'Kindness' or cards.markers[KindnessCounter] > 0:
-                                Kindness += elementPower
-                            if cards.properties["Element"] == 'Honesty' or cards.markers[HonestyCounter] > 0:
-                                Honesty += elementPower
-                            if cards.properties["Element"] == 'Laughter' or cards.markers[LaughterCounter] > 0:
-                                Laughter += elementPower
-                            if cards.properties["Element"] == 'Magic' or cards.markers[MagicCounter] > 0:
-                                Magic += elementPower
-                            if cards.properties["Element"] == 'Generosity' or cards.markers[GenerosityCounter] > 0:
-                                Generosity += elementPower
-                        elif cards.properties["TriElement"] == '':
-                            if cards.properties["MultiPrimaryElement"] == 'Loyalty' or cards.markers[LoyaltyCounter] > 0:
-                                Loyalty += elementPower
-                            if cards.properties["MultiPrimaryElement"] == 'Kindness' or cards.markers[KindnessCounter] > 0:
-                                Kindness += elementPower
-                            if cards.properties["MultiPrimaryElement"] == 'Honesty' or cards.markers[HonestyCounter] > 0:
-                                Honesty += elementPower
-                            if cards.properties["MultiPrimaryElement"] == 'Laughter' or cards.markers[LaughterCounter] > 0:
-                                Laughter += elementPower
-                            if cards.properties["MultiPrimaryElement"] == 'Magic' or cards.markers[MagicCounter] > 0:
-                                Magic += elementPower
-                            if cards.properties["MultiPrimaryElement"] == 'Generosity' or cards.markers[GenerosityCounter] > 0:
-                                Generosity += elementPower
-                            
-                            if cards.properties["MultiSecondaryElement"] == 'Loyalty':
-                                Loyalty += elementPower
-                            if cards.properties["MultiSecondaryElement"] == 'Kindness':
-                                Kindness += elementPower
-                            if cards.properties["MultiSecondaryElement"] == 'Honesty':
-                                Honesty += elementPower
-                            if cards.properties["MultiSecondaryElement"] == 'Laughter':
-                                Laughter += elementPower
-                            if cards.properties["MultiSecondaryElement"] == 'Magic':
-                                Magic += elementPower
-                            if cards.properties["MultiSecondaryElement"] == 'Generosity':
-                                Generosity += elementPower
+                        #For Cards with special conditions
+                        if cards.properties["Number"] == 'FF115':
+                            if cards.markers[LoyaltyCounter] > 0:
+                                Loyalty += 2
+                            if cards.markers[KindnessCounter] > 0:
+                                Kindness += 2
+                            if cards.markers[HonestyCounter] > 0:
+                                Honesty += 2
+                            if cards.markers[LaughterCounter] > 0:
+                                Laughter += 2
+                            if cards.markers[MagicCounter] > 0:
+                                Magic += 2
+                            if cards.markers[GenerosityCounter] > 0:
+                                Generosity += 2
                         else:
-                            if cards.properties["TriPrimaryElement"] == 'Loyalty' or cards.markers[LoyaltyCounter] > 0:
-                                Loyalty += elementPower
-                            if cards.properties["TriPrimaryElement"] == 'Kindness' or cards.markers[KindnessCounter] > 0:
-                                Kindness += elementPower
-                            if cards.properties["TriPrimaryElement"] == 'Honesty' or cards.markers[HonestyCounter] > 0:
-                                Honesty += elementPower
-                            if cards.properties["TriPrimaryElement"] == 'Laughter' or cards.markers[LaughterCounter] > 0:
-                                Laughter += elementPower
-                            if cards.properties["TriPrimaryElement"] == 'Magic' or cards.markers[MagicCounter] > 0:
-                                Magic += elementPower
-                            if cards.properties["TriPrimaryElement"] == 'Generosity' or cards.markers[GenerosityCounter] > 0:
-                                Generosity += elementPower
-                            
-                            if cards.properties["TriSecondaryElement"] == 'Loyalty':
-                                Loyalty += elementPower
-                            if cards.properties["TriSecondaryElement"] == 'Kindness':
-                                Kindness += elementPower
-                            if cards.properties["TriSecondaryElement"] == 'Honesty':
-                                Honesty += elementPower
-                            if cards.properties["TriSecondaryElement"] == 'Laughter':
-                                Laughter += elementPower
-                            if cards.properties["TriSecondaryElement"] == 'Magic':
-                                Magic += elementPower
-                            if cards.properties["TriSecondaryElement"] == 'Generosity':
-                                Generosity += elementPower
+                            #Capture all colours for single, multicolored or tri-colored friend cards and add their powers
+                            if cards.properties["Element"] != 'Multicolor':
+                                if cards.properties["Element"] == 'Loyalty' or cards.markers[LoyaltyCounter] > 0:
+                                    Loyalty += elementPower
+                                if cards.properties["Element"] == 'Kindness' or cards.markers[KindnessCounter] > 0:
+                                    Kindness += elementPower
+                                if cards.properties["Element"] == 'Honesty' or cards.markers[HonestyCounter] > 0:
+                                    Honesty += elementPower
+                                if cards.properties["Element"] == 'Laughter' or cards.markers[LaughterCounter] > 0:
+                                    Laughter += elementPower
+                                if cards.properties["Element"] == 'Magic' or cards.markers[MagicCounter] > 0:
+                                    Magic += elementPower
+                                if cards.properties["Element"] == 'Generosity' or cards.markers[GenerosityCounter] > 0:
+                                    Generosity += elementPower
+                            elif cards.properties["TriElement"] == '':
+                                if cards.properties["MultiPrimaryElement"] == 'Loyalty' or cards.markers[LoyaltyCounter] > 0:
+                                    Loyalty += elementPower
+                                if cards.properties["MultiPrimaryElement"] == 'Kindness' or cards.markers[KindnessCounter] > 0:
+                                    Kindness += elementPower
+                                if cards.properties["MultiPrimaryElement"] == 'Honesty' or cards.markers[HonestyCounter] > 0:
+                                    Honesty += elementPower
+                                if cards.properties["MultiPrimaryElement"] == 'Laughter' or cards.markers[LaughterCounter] > 0:
+                                    Laughter += elementPower
+                                if cards.properties["MultiPrimaryElement"] == 'Magic' or cards.markers[MagicCounter] > 0:
+                                    Magic += elementPower
+                                if cards.properties["MultiPrimaryElement"] == 'Generosity' or cards.markers[GenerosityCounter] > 0:
+                                    Generosity += elementPower
                                 
-                            if cards.properties["TriElement"] == 'Loyalty':
-                                Loyalty += elementPower
-                            if cards.properties["TriElement"] == 'Kindness':
-                                Kindness += elementPower
-                            if cards.properties["TriElement"] == 'Honesty':
-                                Honesty += elementPower
-                            if cards.properties["TriElement"] == 'Laughter':
-                                Laughter += elementPower
-                            if cards.properties["TriElement"] == 'Magic':
-                                Magic += elementPower
-                            if cards.properties["TriElement"] == 'Generosity':
-                                Generosity += elementPower
+                                if cards.properties["MultiSecondaryElement"] == 'Loyalty':
+                                    Loyalty += elementPower
+                                if cards.properties["MultiSecondaryElement"] == 'Kindness':
+                                    Kindness += elementPower
+                                if cards.properties["MultiSecondaryElement"] == 'Honesty':
+                                    Honesty += elementPower
+                                if cards.properties["MultiSecondaryElement"] == 'Laughter':
+                                    Laughter += elementPower
+                                if cards.properties["MultiSecondaryElement"] == 'Magic':
+                                    Magic += elementPower
+                                if cards.properties["MultiSecondaryElement"] == 'Generosity':
+                                    Generosity += elementPower
+                            else:
+                                if cards.properties["TriPrimaryElement"] == 'Loyalty' or cards.markers[LoyaltyCounter] > 0:
+                                    Loyalty += elementPower
+                                if cards.properties["TriPrimaryElement"] == 'Kindness' or cards.markers[KindnessCounter] > 0:
+                                    Kindness += elementPower
+                                if cards.properties["TriPrimaryElement"] == 'Honesty' or cards.markers[HonestyCounter] > 0:
+                                    Honesty += elementPower
+                                if cards.properties["TriPrimaryElement"] == 'Laughter' or cards.markers[LaughterCounter] > 0:
+                                    Laughter += elementPower
+                                if cards.properties["TriPrimaryElement"] == 'Magic' or cards.markers[MagicCounter] > 0:
+                                    Magic += elementPower
+                                if cards.properties["TriPrimaryElement"] == 'Generosity' or cards.markers[GenerosityCounter] > 0:
+                                    Generosity += elementPower
+                                
+                                if cards.properties["TriSecondaryElement"] == 'Loyalty':
+                                    Loyalty += elementPower
+                                if cards.properties["TriSecondaryElement"] == 'Kindness':
+                                    Kindness += elementPower
+                                if cards.properties["TriSecondaryElement"] == 'Honesty':
+                                    Honesty += elementPower
+                                if cards.properties["TriSecondaryElement"] == 'Laughter':
+                                    Laughter += elementPower
+                                if cards.properties["TriSecondaryElement"] == 'Magic':
+                                    Magic += elementPower
+                                if cards.properties["TriSecondaryElement"] == 'Generosity':
+                                    Generosity += elementPower
+                                    
+                                if cards.properties["TriElement"] == 'Loyalty':
+                                    Loyalty += elementPower
+                                if cards.properties["TriElement"] == 'Kindness':
+                                    Kindness += elementPower
+                                if cards.properties["TriElement"] == 'Honesty':
+                                    Honesty += elementPower
+                                if cards.properties["TriElement"] == 'Laughter':
+                                    Laughter += elementPower
+                                if cards.properties["TriElement"] == 'Magic':
+                                    Magic += elementPower
+                                if cards.properties["TriElement"] == 'Generosity':
+                                    Generosity += elementPower
                                 
                     #Comparing card to see if it meet color req
                     intCardReqPower = int(card.properties["PlayRequiredPower"])
@@ -260,7 +276,8 @@ def autoAT(args):
                             if Generosity < intCardReqPower:
                                 triColorReqFailed = True
                     
-                    #notify("Honesty: {}, Loyalty: {}, Generosity: {}, Magic: {}".format(Honesty, Loyalty, Generosity, Magic))
+                    #For debugging color req
+                    #notify("Honesty: {}, Loyalty: {}, Generosity: {}, Magic: {}, Laughter: {}, Kindness: {}".format(Honesty, Loyalty, Generosity, Magic, Laughter, Kindness))
                     #notify("PriReqFailed: {}, SecReqFailed: {} triColorReqFailed: {}".format(priColorReqFailed, secColorReqFailed, triColorReqFailed))
                     if priColorReqFailed == True or secColorReqFailed == True or triColorReqFailed == True:
                         mute()
