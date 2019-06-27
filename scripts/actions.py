@@ -2302,7 +2302,7 @@ def meticulous(targetgroup, x = 0, y = 0, count = None):
             whisper("Nice try, you think you could Meticulous more cards than your deck contains eh?!")
         return
     
-    notify("{} have {} Meticulous to look at the top card of {}'s deck.".format(me, count, me))
+    notify("{} uses {} Meticulous to look at the top card of {}'s deck.".format(me, count, me))
 
     #Loop though all the meticulous
     while not count <= 0:
