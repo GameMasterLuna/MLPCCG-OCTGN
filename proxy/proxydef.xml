@@ -1642,7 +1642,7 @@
 		
 		<!-- Adding Bonus for dilemma cards (EDIT BY: GAMEMASTERLUNA) -->
 		<link block="dilemmaBonus">
-			<property name="ProblemBonus" />
+			<property name="Bonus" />
 		</link>
 		<!-- (EDIT BY: GAMEMASTERLUNA) -->
 	</textblocks>
@@ -2539,7 +2539,7 @@
 		</link>
 		
 		<link block="troublemakerBonus">
-			<property name="ProblemBonus" />
+			<property name="Bonus" />
 		</link>
 	</textblocks>
 </template>
@@ -2745,7 +2745,7 @@
 		
 		<textblocks>
 			<link block="problemBonus">
-				<property name="ProblemBonus" />
+				<property name="Bonus" />
 			</link> 
 			
 			<conditional>

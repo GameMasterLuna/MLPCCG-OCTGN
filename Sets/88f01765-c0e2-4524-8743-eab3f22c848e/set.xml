@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<set name="Tokens" id="88f01765-c0e2-4524-8743-eab3f22c848e" gameId="65656467-b709-43b2-a5c6-80c2f216adf9" gameVersion="2.2.7.0" version="1.0" hidden="true">
+ <packaging>
+  <pack name="All Manes and Starting Problems" id="92bc108e-0b3c-4aee-a02a-c35dae8dced2">
+   <!-- Manes, Premiere -->
+   <include id="5ff3e6bf-84fb-4387-8931-cfd18710c93c" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="fbfe63a5-71e4-4b16-b735-9cfca17f8b45" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="7a6d06b9-e09e-4c73-930b-0b62a36b4588" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="e0ded2bf-41fe-4a02-bf7a-f269c5895840" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="10e394e3-6437-49bb-b836-ab20f49c92b7" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="935e02bc-b14d-4a49-ae4d-375f567fb3ac" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <!-- Manes, Canterlot Nights -->
+   <include id="ad7f8550-7a8c-414e-b96c-6c99c8f925e5" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="dd658570-40f1-46ca-b612-c6de9a49b5ff" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="2b501334-bb56-43c3-a409-bf7d4cca31a6" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="38684cc8-425e-4143-9341-eb7f7b69fb54" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="b8e20a51-a782-44f9-b07e-45b41e4d3d8c" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="b10cd7cf-a119-4a16-87a5-2413c2ed892b" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="0b1b1526-907b-4aaa-9cd9-2da1adaa3b09" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="af3437a7-12f8-4608-a75e-881ae0de8c8f" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="2c19775b-672c-4fd8-9f2f-8f7da5b996f0" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="b3004b95-f605-4614-8147-ad9869b0314c" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="fb3664df-82f9-42b7-91f4-5f4dc000bd34" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="43dcb1bd-fa9f-4696-9523-331f9fdde4bd" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <!-- Manes, Crystal Games -->
+   <include id="04c03ed8-8e56-4fc1-bf3d-6795c48665bd" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="d16b1a8b-558e-41ec-81b2-a87e17b5f525" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="ee9218c3-acbb-44de-b184-6772d0024dff" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="30a2fabe-9009-4aa4-ab2e-54950f5100ab" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="e93db302-6c6b-4269-b39b-1ac55d134f94" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="360e7139-9247-4c57-a65f-6a2e3561c2fb" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <!-- Manes, Absolute Discord -->
+   <include id="c0ca7275-b83b-8839-c0e0-94597d309747" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="98277ecb-6851-69ec-d03a-d74e5361f552" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="cdbda8d5-23d2-a049-2dae-5ab1ec4fdc35" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="b29a985d-aed4-b1b3-1a38-3493ef192643" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="f9d60108-68d9-9875-44c5-c397776afb7e" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="459ddc49-581b-1b64-eea3-66315069beb6" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="ba11944d-c1c2-0815-69a9-c65c2dab1420" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <!-- Manes, Equestrian Odysseys -->
+   <include id="d04dd97f-3ae3-d664-c611-0c0f3f051f14" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="98d511a6-7ba6-a455-e5bd-fc74ca1c6fa2" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="8c5b127f-77d2-3100-f955-1be2309d8122" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="9430a1d9-50d2-2a65-f70b-05a1d8394de2" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="dff1e7d3-910d-8556-aabb-8cde40381f00" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="2d56877c-3258-035a-1d57-e889b56cf172" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="86ff9b0d-89dc-75e0-ccec-f29d38648457" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="950621d8-4640-1219-9364-d7dbe459404b" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="788c9ec4-58ce-03cd-3340-0f79f8713631" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="4c7be283-6ac2-22f8-18cf-de98eb9855be" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <!-- Manes, High Magic -->
+   <include id="aad14163-2608-dc48-cd0e-844908d62937" set="08a02de6-cb1a-4a2c-8076-4827a6c63a7d" />
+   <include id="2ce1000b-f5d5-a6cd-f9f3-70b470715981" set="08a02de6-cb1a-4a2c-8076-4827a6c63a7d" />
+   <include id="ae1e0351-8070-2ff9-6f10-2820df5ed983" set="08a02de6-cb1a-4a2c-8076-4827a6c63a7d" />
+   <!-- Manes, Marks in Time -->
+   <include id="556bdd9c-776c-4a9a-b9ef-1d333287427b" set="09a5072a-6214-49d3-9817-313e69b61302" />
+   <include id="31ccc801-7d07-4bc9-ac47-59540051cdc7" set="09a5072a-6214-49d3-9817-313e69b61302" />
+   <include id="8bc4a85f-9892-42c4-9000-d7e9dcc71618" set="09a5072a-6214-49d3-9817-313e69b61302" />
+   <include id="a7581898-9c5a-4ef2-8a0d-4824dd5452c0" set="09a5072a-6214-49d3-9817-313e69b61302" />
+   <!-- Manes, Defenders of Equestria -->
+   <include id="700ec054-f7a8-c3e0-3d4f-d9c01c2facd9" set="10a6b93b-26ba-4b28-830b-10a2e43cdd49" />
+   <include id="af03d228-5486-0bc4-72a9-45bfdc88c29f" set="10a6b93b-26ba-4b28-830b-10a2e43cdd49" />
+   <include id="07b137c6-d832-bd34-e0fa-bc6bad4a010a" set="10a6b93b-26ba-4b28-830b-10a2e43cdd49" />
+   <include id="70b1d9fe-4384-a90c-5dce-235e52f6b2ca" set="10a6b93b-26ba-4b28-830b-10a2e43cdd49" />
+   <include id="37b82661-c70d-9637-6759-4eb27c13fa00" set="10a6b93b-26ba-4b28-830b-10a2e43cdd49" />
+   <include id="814a8cc0-958a-0d55-7880-4673c05694f5" set="10a6b93b-26ba-4b28-830b-10a2e43cdd49" />
+   <include id="92266261-9623-3e27-8a16-ec77d1cb772f" set="10a6b93b-26ba-4b28-830b-10a2e43cdd49" />
+   <!-- Manes, Seaquestria & Beyond -->
+   <include id="a0345e26-4947-cea4-6ed8-9dd7c81760a8" set="11a048f2-68bf-4fe9-a437-0ee71c3bcfcd" />
+   <include id="bf5bd3f6-02ed-8efa-85c8-bbf6f5ecade2" set="11a048f2-68bf-4fe9-a437-0ee71c3bcfcd" />
+   <include id="638bde11-e409-d267-2a7c-cd4c6999b8d2" set="11a048f2-68bf-4fe9-a437-0ee71c3bcfcd" />
+   <include id="30d2a97f-6cad-a72e-b1b2-0214fad4233d" set="11a048f2-68bf-4fe9-a437-0ee71c3bcfcd" />
+   <include id="9db97473-062d-68d6-0a2c-2562c2b32920" set="11a048f2-68bf-4fe9-a437-0ee71c3bcfcd" />
+   <include id="6e468f9e-cfc5-7575-c689-4e7223d4cab2" set="11a048f2-68bf-4fe9-a437-0ee71c3bcfcd" />
+   <!-- Manes, Friends Forever -->
+   <include id="7e2c4f44-ec4f-6c33-bd50-ded96fd561b4" set="12a9d6fe-0732-4013-b443-34faed34ddee" />
+   <include id="06596518-5ffb-d859-a802-ef7eca5f53e4" set="12a9d6fe-0732-4013-b443-34faed34ddee" />
+   <include id="7f043f3f-4b00-93f2-2be8-16f5ed8edaee" set="12a9d6fe-0732-4013-b443-34faed34ddee" />
+   <include id="dd9791fe-d751-d224-0e62-76ee48cc1a6c" set="12a9d6fe-0732-4013-b443-34faed34ddee" />
+   <!-- Manes, Leaders and Legends -->
+   <include id="ca1afa21-0050-20da-3cee-fe9cfa1a12ee" set="14a77374-7879-4270-83a8-8e574e3b812f" />
+   <include id="fb1c337d-a166-afbd-80e9-9cef24d9848b" set="14a77374-7879-4270-83a8-8e574e3b812f" />
+   <include id="f9be3b20-8f7a-77d2-2d79-665b00c37b10" set="14a77374-7879-4270-83a8-8e574e3b812f" />
+   <include id="376ac1cc-9441-2916-6260-1290e1b1a86a" set="14a77374-7879-4270-83a8-8e574e3b812f" />
+   <include id="581765ea-a02d-ba27-fc50-75001ca272d3" set="14a77374-7879-4270-83a8-8e574e3b812f" />
+   <include id="d8155fa3-59ea-71a1-5cd7-bf8e921c741c" set="14a77374-7879-4270-83a8-8e574e3b812f" />
+   <include id="2709f644-130f-35cb-9ba7-cdd9a7465034" set="14a77374-7879-4270-83a8-8e574e3b812f" />
+   
+   <!-- Starting problems, Premiere -->
+   <include id="5b1ca583-1239-4b31-93f2-2546b9c8c810" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="7e3e3677-02b1-4717-9207-01a6f3e2dc4e" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="3fb34bed-b5c2-463e-9712-dc53045e4aa3" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="0760b742-8342-45fa-9e9b-d8f59a462a65" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="7d20e6f5-9bb5-45a9-b9a4-add7e1046080" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="faacdbeb-fb15-4466-a24b-68059d3cfa26" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="73e86ebf-7b32-4376-9a56-e915c7551506" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="f8a0c1aa-3ed1-4b08-8dcf-2fad1648ddcf" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="94e8ffa0-badc-4546-a8ba-300ab8145748" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="3d2872f9-bb34-45bd-92d7-a6100d9ebe34" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="1b6d137a-5bfe-4a2d-9ab8-29bc48d8c8a6" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <include id="bb32975a-83f3-48fa-9414-829e0a137ae6" set="01ae3bb2-c063-4b35-8372-d0531e27728d" />
+   <!-- Starting problems, Canterlot Nights -->
+   <include id="f6d4d13b-2bd1-40dd-a0d0-7dc2a2fd5b4d" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="8b94a9bf-416e-44b4-961f-f0dfb47ff7ca" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="a5209147-d48a-48db-9e29-d3a2b05d6678" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="2335a0c1-f23b-41ec-ae27-609ca7946bfd" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="45395e12-0fa0-4efe-a2f2-262d730e87ea" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <include id="e5e005a8-d419-4839-a8b3-a8d0888b72f1" set="02aa7133-abea-493e-b28f-8178ba6a5d85" />
+   <!-- Starting problems, Crystal Games -->
+   <include id="42ebff10-23f3-49a6-8fc9-843af12a7c4b" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="a819b14c-b6ee-4e77-9290-4e99b7352a91" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="0eeb817d-db1b-4941-8447-25fef7a0ae7b" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="381d8904-a60e-4986-be22-c7e55c879a44" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="b5f9daea-825d-4a7d-91ec-2f9f18fa1c48" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="79e66025-46d9-4452-93a3-5f01354dd958" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <include id="fb3c1e23-63ad-4873-ace8-67eebf92519d" set="05a22db8-0166-47ec-b3eb-23d070ee6ca6" />
+   <!-- Starting problems, Absolute Discord -->
+   <include id="f241b020-c44e-6863-68fe-d03d8624ba1e" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="b8cf1661-c0af-b1fa-5fb5-664792b3ae52" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="9403c599-d0a8-00f2-b3eb-640d10b5e793" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="00f40305-eaba-6e68-b3b5-81e5367dd85c" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="b623b5ba-6451-eb50-5f3e-a4204d032a29" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <include id="d84f9c89-5119-30ac-5c1f-f48f24946faa" set="06a8e246-8d2b-40bd-808e-09f7a48ce768" />
+   <!-- Starting problems, Equestrian Odysseys -->
+   <include id="25e6181c-3c6b-4dc5-9dca-92eb391cab97" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="554d13d6-7ec0-e64d-d268-5dc7e7fb26ed" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <include id="e7a539c0-624c-b3a2-ede1-a67b6e9f011c" set="07a4d44b-c36d-4c56-89ed-b45004f5099d" />
+   <!-- Starting problems, High Magic -->
+   <include id="f0b3c0cd-afb9-713c-1675-74df974d7f9c" set="08a02de6-cb1a-4a2c-8076-4827a6c63a7d" />
+   <include id="e11b486f-5882-0c70-93d2-30add61cbcfd" set="08a02de6-cb1a-4a2c-8076-4827a6c63a7d" />
+   <!-- Starting problems, Marks in Time -->
+   <include id="ed481191-c44f-4267-a049-3916358b1721" set="09a5072a-6214-49d3-9817-313e69b61302" />
+   <include id="f9c126d5-0fbf-4141-813c-9ff4c605d1ee" set="09a5072a-6214-49d3-9817-313e69b61302" />
+   <!-- Starting problems, Defenders of Equestria -->
+   <include id="8a49c0cb-277d-0eb2-53f4-3aef92a1e693" set="10a6b93b-26ba-4b28-830b-10a2e43cdd49" />
+   <include id="61c59109-30b4-ad9a-3c1d-e7c3c971e738" set="10a6b93b-26ba-4b28-830b-10a2e43cdd49" />
+   <!-- Starting problems, Seaquestria & Beyond -->
+   <include id="760a2c7f-2ad2-9f67-0a13-f2b5f26dccc5" set="11a048f2-68bf-4fe9-a437-0ee71c3bcfcd" />
+   <include id="a9b0028d-5a22-cafa-6e74-137c08afcc95" set="11a048f2-68bf-4fe9-a437-0ee71c3bcfcd" />
+   <!-- Starting problems, Friends Forever -->
+   <include id="6c30df00-5d42-1495-c2db-8425b1dea469" set="12a9d6fe-0732-4013-b443-34faed34ddee" />
+   <include id="e436ab31-fe60-fbe4-8085-e1bcd1ad36b5" set="12a9d6fe-0732-4013-b443-34faed34ddee" />
+   <!-- Starting problems, Leaders and Legends -->
+   <include id="c165bfbe-d0b2-7e99-2cf5-2016ea1474c4" set="14a77374-7879-4270-83a8-8e574e3b812f" />
+   <include id="c23a718c-ef2a-04c8-c684-c73265c06fc3" set="14a77374-7879-4270-83a8-8e574e3b812f" />
+   
+   <pick qty="unlimited" key="Type" value="Mane Character" /> <!-- To show all Mane Characters -->
+   <pick qty="unlimited" key="Keywords" value="Starting Problem." /> <!-- To show all Starting Problems -->
+  </pack>
+ </packaging>
+
+ <cards>
+  <card id="92fe2323-2cb1-4f7e-a252-548a1b3b739d" name="Rock">
+   <property name="Number" value="T1" />
+   <property name="Type" value="Friend" />
+   <property name="Element" value="Honesty" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="" />
+   <property name="Power" value="3" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="SecondaryPlayRequiredPower" value="" />
+   <property name="SecondaryPlayRequiredElement" value="" />
+   <property name="Traits" value="Rock" />
+   <property name="Keywords" value="" />
+   <property name="Text" value="" />
+   <property name="Bonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="" />
+  </card>
+  
+  <card id="b7747802-1231-426d-8edb-d8f6ebcc9af0" name="Critter">
+   <property name="Number" value="T1b" />
+   <property name="Type" value="Friend" />
+   <property name="Element" value="Kindness" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="" />
+   <property name="Power" value="1" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="SecondaryPlayRequiredPower" value="" />
+   <property name="SecondaryPlayRequiredElement" value="" />
+   <property name="Traits" value="Critter" />
+   <property name="Keywords" value="" />
+   <property name="Text" value="" />
+   <property name="Bonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="" />
+  </card>
+  
+  <card id="6d00d6dd-9b24-4938-9eb6-e412f64827d1" name="Unicorn">
+   <property name="Number" value="T2" />
+   <property name="Type" value="Friend" />
+   <property name="Element" value="Generosity" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="" />
+   <property name="Power" value="1" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="SecondaryPlayRequiredPower" value="" />
+   <property name="SecondaryPlayRequiredElement" value="" />
+   <property name="Traits" value="Unicorn" />
+   <property name="Keywords" value="Prepared" />
+   <property name="Text" value="(When an opponent starts a faceoff here, gain 1AT.)" />
+   <property name="Bonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="" />
+  </card>
+  
+  <card id="2f529241-9056-4765-a925-eb6c9270df43" name="Pegasus">
+   <property name="Number" value="T2b" />
+   <property name="Type" value="Friend" />
+   <property name="Element" value="Loyalty" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="" />
+   <property name="Power" value="1" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="SecondaryPlayRequiredPower" value="" />
+   <property name="SecondaryPlayRequiredElement" value="" />
+   <property name="Traits" value="Pegasus" />
+   <property name="Keywords" value="Swift" />
+   <property name="Text" value="(You pay -1AT to move this card.)" />
+   <property name="Bonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="" />
+  </card>
+  
+  <card id="a6a1fda0-9172-4f49-9aca-4709422c6493" name="Earth Pony">
+   <property name="Number" value="T3b" />
+   <property name="Type" value="Friend" />
+   <property name="Element" value="Laughter" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="" />
+   <property name="Power" value="1" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="SecondaryPlayRequiredPower" value="" />
+   <property name="SecondaryPlayRequiredElement" value="" />
+   <property name="Traits" value="Earth Pony" />
+   <property name="Keywords" value="" />
+   <property name="Text" value="" />
+   <property name="Bonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="" />
+  </card>
+  
+  <card id="1f72b17d-6051-4115-8ce4-0574acedc9e1" name="Figment">
+   <property name="Number" value="T4b" />
+   <property name="Type" value="Friend" />
+   <property name="Element" value="Magic" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="" />
+   <property name="Power" value="2" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="SecondaryPlayRequiredPower" value="" />
+   <property name="SecondaryPlayRequiredElement" value="" />
+   <property name="Traits" value="Figment" />
+   <property name="Keywords" value="" />
+   <property name="Text" value="" />
+   <property name="Bonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="" />
+  </card>
+  
+  <card id="034ac26f-1fc3-448c-b7b0-a61cc6e41f69" name="Changeling">
+   <property name="Number" value="T1" />
+   <property name="Type" value="Friend" />
+   <property name="Element" value="Colorless" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="" />
+   <property name="Power" value="2" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="SecondaryPlayRequiredPower" value="" />
+   <property name="SecondaryPlayRequiredElement" value="" />
+   <property name="Traits" value="" />
+   <property name="Keywords" value="" />
+   <property name="Text" value="" />
+   <property name="Bonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="" />
+  </card>
+  
+  <card id="d69e44ce-a527-4088-b8a8-0b59d70fffde" name="Seashell">
+   <property name="Number" value="T1" />
+   <property name="Type" value="Friend" />
+   <property name="Element" value="Laughter" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="" />
+   <property name="Power" value="2" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="SecondaryPlayRequiredPower" value="" />
+   <property name="SecondaryPlayRequiredElement" value="" />
+   <property name="Traits" value="" />
+   <property name="Keywords" value="" />
+   <property name="Text" value="" />
+   <property name="Bonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="" />
+  </card>
+  
+  <card id="15340acd-d3a9-464a-9f14-18ca15e27a27" name="Crystal Pony">
+   <property name="Number" value="T1" />
+   <property name="Type" value="Friend" />
+   <property name="Element" value="None" />
+   <property name="MultiPrimaryElement" value="" />
+   <property name="MultiSecondaryElement" value="" />
+   <property name="Subname" value="" />
+   <property name="Power" value="2" />
+   <property name="Cost" value="" />
+   <property name="PlayRequiredPower" value="" />
+   <property name="PlayRequiredElement" value="" />
+   <property name="SecondaryPlayRequiredPower" value="" />
+   <property name="SecondaryPlayRequiredElement" value="" />
+   <property name="Traits" value="Crystal Pony" />
+   <property name="Keywords" value="" />
+   <property name="Text" value="(While with King Sombra, Crystal Tyrant, this card has Competitive X, where X is the number of your Crystal Friends here.)" />
+   <property name="Bonus" value="" />
+   <property name="ProblemOpponentPower" value="" />
+   <property name="ProblemPlayerElement1" value="" />
+   <property name="ProblemPlayerElement1Power" value="" />
+   <property name="ProblemPlayerElement2" value="" />
+   <property name="ProblemPlayerElement2Power" value="" />
+   <property name="Rarity" value="" />
+  </card>
+ </cards>
+</set>

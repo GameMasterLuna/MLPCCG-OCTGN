@@ -179,7 +179,7 @@ def setup(group, x = 0, y = 0):
 
     rnd(1,2)  #allow the peeked card's properties to load
     
-    StartProblems = (card for card in me.piles['Problem Deck'] if re.search(r'Starting Problem.', card.Keywords))
+    StartProblems = (card for card in me.piles['Problem Deck'] if re.search(r'Starting Problem', card.Keywords))
                 
     buttons = []  #This list stores all the card objects for manipulations.
     OldProblem = ""
@@ -866,6 +866,12 @@ def turnTroublemaker(group, x = 0, y = 0):
         else:
             whisper("You can't set the phase when it isn't your turn.")
             return
+            
+    #Check if phaseLoop is True, if so, end the turn without doing anything. This acts as a buffer so the game doesn't jump into the next phase on pressing Tab
+    if getGlobalVariable("phaseLoop") == "True":
+        setGlobalVariable("phaseLoop", "False")
+        setPhase(3)
+        return #Prevent the rest of the code to run again
 
     #PPP Stop - Before TM uncover
     if "2.1" not in phaseStops and "Del 2.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
@@ -904,7 +910,12 @@ def turnTroublemaker(group, x = 0, y = 0):
         if "Del 2.2" in phaseStops:
             phaseStops.remove("Del 2.2")
             setGlobalVariable("phaseStops", str(phaseStops))
-        setPhase(3)
+            
+        #Check for any phaseLoop and loop the phase again if any
+        if getGlobalVariable("phaseLoop") == "True":
+            return
+        else:
+            setPhase(3)
 
 #Main Phase
 def turnMain(group, x = 0, y = 0):
@@ -1226,7 +1237,7 @@ def nextPhase(group, x = 0, y = 0):
                 VCactive = eval(getGlobalVariable("VillainChallengeActive"))
                 autoAT = eval(getGlobalVariable("toggleAutoAT"))
                 
-                whisper("Error with Phase 0! Report this message with the following text to GameMasterLuna ASAP!\n") #A debugging note to see if players do end up here
+                whisper("Error with Phase 0! Report this message with the following text to GameMasterLuna ASAP!\n\nNOTE: If you are using the green arrow to start the game, it will cause this bug. Please use Tab to start the game instead.") #A debugging note to see if players do end up here
                 whisper("Current ID: {}\nDeck Loaded: {}\nNo Draw First Turn: {}\nPhase Loop: {}\nPhase Stops: {}\nVC Active: {}\nAuto AT: {}".format(currentPhaseID, deckLoaded, noDraw, phaseLoop, phaseStops, VCactive, autoAT))
                 return
         else:

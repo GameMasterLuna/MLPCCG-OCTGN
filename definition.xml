@@ -4,7 +4,7 @@
 	id="65656467-b709-43b2-a5c6-80c2f216adf9" 
 	octgnVersion="3.3.106.0" 
 	scriptVersion ="3.1.0.2"
-	version="2.3.0.3"
+	version="2.4.0.0"
 	markersize="16"
 	tags="My Little Pony MLP CCG" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -25,6 +25,7 @@
 		   <event name="OnCardsMoved" action="chkMultiplayer" />
 		   <event name="OnCardsMoved" action="autoAT" />
            <event name="OnCardsMoved" action="autoRotateDilemma" />
+           <event name="OnCardsMoved" action="specialActionsEnterPlay" />  <!-- Perform certain actions when certain cards are played -->
            <event name="OverridePhaseClicked" action="triggerPhaseStop" /> <!-- Checks if player clicks the phase icon -->
    	</events>
 	
@@ -55,9 +56,9 @@
         <!--<globalvariable name="TurnStarted" value="False" />-->
         <!--<globalvariable name="Phase" value="Start" /> -->
         <globalvariable name="deckLoadedAndSet" value="False" /> <!-- check if deck is loaded and set -->
-        <globalvariable name="noDrawFirstTurn" value="False" /> <!-- define if player draws on first turn -->
-        <globalvariable name="phaseLoop" value="False" /> <!-- for phases to loop again -->
-        <globalvariable name="phaseStops" value="[]" /> <!-- Store all stops as a list -->
+        <globalvariable name="noDrawFirstTurn" value="False" />  <!-- define if player draws on first turn -->
+        <globalvariable name="phaseLoop" value="False" />        <!-- for phases to loop again -->
+        <globalvariable name="phaseStops" value="[]" />          <!-- Store all stops as a list -->
         <globalvariable name="Exhausted" value="Start" />
         <globalvariable name="PermExhausted" value="Start" />
         <globalvariable name="VillainChallengeActive" value="False" />
@@ -100,7 +101,7 @@
 		<property name="TertiaryPlayRequiredElement" type="String" />
 		<property name="TertiaryPlayRequiredPower" type="String" />
 		<property name="Power" type="String" />
-		<property name="ProblemBonus" type="String" />
+		<property name="Bonus" type="String" />
 		<property name="ProblemOpponentPower" type="String" />
 		<property name="ProblemPlayerElement1" type="String" />
 		<property name="ProblemPlayerElement1Power" type="String" />

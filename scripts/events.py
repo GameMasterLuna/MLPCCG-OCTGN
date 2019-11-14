@@ -51,7 +51,7 @@ def autoAT(args):
         #whisper("Card Pos: {}".format(card.position))
         
         type = card.properties["Type"]
-        cardNo = card.properties["Number"] #Only to find cards with special conditions Eg. The Fire of Friendship
+        #cardNo = card.properties["Number"] #Only to find cards with special conditions Eg. The Fire of Friendship
         cardCost = card.properties["Cost"]
         cardReqPower = card.properties["PlayRequiredPower"]
         cardReqElement = card.properties["PlayRequiredElement"]
@@ -372,6 +372,75 @@ def autoRotateDilemma(args):
                 card.filter = "#44ff0000"
                 permExhaustedList.append(cardID) #Adds to perm exhausted list
                 setGlobalVariable("PermExhausted", str(permExhaustedList))
+                
+def specialActionsEnterPlay(args):
+    mute()
+    #Prevent red errors from showing up if item is not found in the lists below
+    try:
+        toName = args.toGroups[0].name
+        fromName = args.fromGroups[0].name
+        card = args.cards[0]
+    except IndexError:
+        return
+    
+    #Information to retrieve from cards
+    cardNo = card.properties["Number"] #To find cards with special conditions
+
+    if toName == 'Table' and fromName == 'Hand' and card.controller == me and card.owner == me:
+        #For Zecora, Curative Cache
+        if cardNo == "LL41":
+            count = 4
+            
+            #Loop up to 4 times for player to choose up to 4 cards to banish
+            while not count <= 0:
+                #Placed here to prevent the loop from repeatedly appending cards from hand
+                handCardPower, handCardType, handCardName, handCardSubname, cardData, cardChoices = [], [], [], [], [], []
+                
+                #Get details of all cards in player hand
+                for cards in me.hand:
+                    handCardPower.append(cards.power)
+                    handCardType.append(cards.type)
+                    handCardName.append(cards.name)
+                    handCardSubname.append(cards.subname)
+                    cardData.append(cards)
+                
+                #Query player and display all cards in hand
+                desc = "{}/{} cards left!\n\nChoose up to 4 cards to be banished:".format(count, 4)
+                for i in range(0, len(handCardPower)):
+                    desc = desc + "\n\n({}) {}: {} - {}".format(handCardPower[i], handCardType[i], handCardName[i], handCardSubname[i])
+                    cardChoices.append("{} - {}".format( handCardName[i], handCardSubname[i]))
+                cardChoices.append("Cancel")
+                choiceNum = askChoice(desc, cardChoices)
+                
+                # Move card to table and add it to banish list
+                if choiceNum != len(cardChoices) and choiceNum != 0:
+                    cardToMove = cardData[choiceNum-1]
+                    if me.isInverted:
+                        cardToMove.moveToTable(-453, -241, True)
+                    else:
+                        cardToMove.moveToTable(392, 151, True)
+                    cardToMove.peek()
+                    cardToMove.highlight = "#990000"
+                    notify("{} moved a card to the Banish Pile on the table.".format(me))
+                elif choiceNum == len(cardChoices): #Checks if the player want to stop
+                    if confirm("Are you sure you do not want to banish any more cards?"):
+                        break
+                    else:
+                        count += 1
+                else: #Loop again if player tries to close the dialog box
+                    count += 1
+                
+                count -= 1 #End of Loop
+            
+            notify("{} has finished picking cards to banish.".format(me))
+            #Draw cards depending on how many cards were banished
+            cardsToDraw = me.deck.top(4 - count)
+            for c in cardsToDraw:
+                c.moveTo(me.hand)
+            notify("{} draw(s) {} cards.".format(me, 4 - count))
+            
+        else:
+            return
 
 def triggerPhaseStop(args):
     #Note for Improvement: Make it track the pause list for each player so the pause list will not clash between players
