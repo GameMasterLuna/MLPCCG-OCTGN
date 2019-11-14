@@ -688,21 +688,21 @@ def turnReady(group, x = 0, y = 0):
     phaseStops = eval(getGlobalVariable("phaseStops"))
 
     #Setup for tracking Challengers turn progress for VC 
-    if getGlobalVariable("VillainChallengeActive") == "True":
-        if getGlobalVariable("PlayerStartDone") == "Start": #If var running for the first time, create list
-            PlayerStartDone = []
-        else:
-            PlayerStartDone = eval(getGlobalVariable("PlayerStartDone"))
+    # if getGlobalVariable("VillainChallengeActive") == "True":
+        # if getGlobalVariable("PlayerStartDone") == "Start": #If var running for the first time, create list
+            # PlayerStartDone = []
+        # else:
+            # PlayerStartDone = eval(getGlobalVariable("PlayerStartDone"))
         
-        if getGlobalVariable("PlayerDone") != "Start": #Check if any challenger is done with their turns
-            PlayerDone = eval(getGlobalVariable("PlayerDone"))
+        # if getGlobalVariable("PlayerDone") != "Start": #Check if any challenger is done with their turns
+            # PlayerDone = eval(getGlobalVariable("PlayerDone"))
             
-            for player in range(len(PlayerDone)): #If player is in the PlayerDone list, stop player from starting turn again
-                if PlayerDone[player] == PlayerNo:
-                    whisper("Please wait for the other challenger(s) to finish their turn.")
-                    return
-    else:
-        pass
+            # for player in range(len(PlayerDone)): #If player is in the PlayerDone list, stop player from starting turn again
+                # if PlayerDone[player] == PlayerNo:
+                    # whisper("Please wait for the other challenger(s) to finish their turn.")
+                    # return
+    # else:
+        # pass
 
     #Check if player is active before continuing
     if getGlobalVariable("VillainChallengeActive") == "True":
@@ -735,13 +735,16 @@ def turnReady(group, x = 0, y = 0):
     if getGlobalVariable("phaseLoop") == "True":
         setGlobalVariable("phaseLoop", "False")
         setPhase(2)
-        return
+        return #Prevent the rest of the code to run again
 
     if "Del 1.1" not in phaseStops and "Del 1.2" not in phaseStops and "Stop" not in phaseStops:
         #Meticulous triggers here? Idk if it is before or after Ready and gain AT
-        meticulousCount = sum(1 for card in table if card.isFaceUp == True and card.controller == me and (re.search(r'Meticulous', card.Keywords) or re.search(r'Meticulous', card.Text)))
-        if meticulousCount > 0:
-            num = askChoice("You have {} Meticulous cards on the table. Use Meticulous?".format(meticulousCount), ["Yes","No"])
+        meticulous1Count = sum(1 for card in table if card.isFaceUp == True and card.controller == me and (re.search(r'Meticulous 1', card.Keywords) or re.search(r'Meticulous 1', card.Text)))
+        meticulous2Count = sum(1 for card in table if card.isFaceUp == True and card.controller == me and (re.search(r'Meticulous 2', card.Keywords) or re.search(r'Meticulous 2', card.Text)))
+        totalMeticulousCount = meticulous1Count + meticulous2Count
+        
+        if totalMeticulousCount > 0:
+            num = askChoice("You have {} Meticulous card(s) on the table. Use Meticulous?".format(totalMeticulousCount), ["Yes","No"])
             if num == 1:
                 meticulous(group, x, y)
 
@@ -864,12 +867,6 @@ def turnTroublemaker(group, x = 0, y = 0):
             whisper("You can't set the phase when it isn't your turn.")
             return
 
-    #Check if phaseLoop is True, if so, end the turn without doing anything. This acts as a buffer so the game doesn't jump into the next phase on pressing Tab
-    if getGlobalVariable("phaseLoop") == "True":
-        setGlobalVariable("phaseLoop", "False")
-        setPhase(3)
-        return
-
     #PPP Stop - Before TM uncover
     if "2.1" not in phaseStops and "Del 2.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
 
@@ -935,12 +932,6 @@ def turnMain(group, x = 0, y = 0):
         else:
             whisper("You can't set the phase when it isn't your turn.")
             return
-
-    #Check if phaseLoop is True, if so, end the turn without doing anything. This acts as a buffer so the game doesn't jump into the next phase on pressing Tab
-    if getGlobalVariable("phaseLoop") == "True":
-        setGlobalVariable("phaseLoop", "False")
-        setPhase(4)
-        return
 
     #PPP Stop - Before any main phase action
     if "3.1" not in phaseStops and "Del 3.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
@@ -1041,6 +1032,25 @@ def turnEnd(group, x = 0, y = 0):
     CountforHandLimitCards = None
     handCount = 0
     handLimit = 8
+    
+    #Check if player is active before continuing
+    if me.isActive:
+        if getGlobalVariable("VillainChallengeActive") == "True": #See if needed?
+            if PlayerNo == villainPlayerId:
+                notify("*The villain, {} begins their End Phase.*".format(me))
+            else:
+                notify("*Challenger {} begins their End Phase.*".format(me))
+        else:
+            pass
+    else:
+        #For the other challengers to get through the phase
+        if getGlobalVariable("VillainChallengeActive") == "True" and getGlobalVariable("VillainTurn") == "False": #See if needed?
+            notify("*Challenger {} begins their End Phase.*".format(me))
+        elif getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId: #Somehow if inactive player set villain to active, it doesn't work
+            notify("*The villain, {} begins their End Phase.*".format(me))
+        else:
+            whisper("You can't set the phase when it isn't your turn.")
+            return
 
     #PPP Stop - Before phase starts
     if "5.1" in phaseStops:
@@ -1072,6 +1082,8 @@ def turnEnd(group, x = 0, y = 0):
 
     #Retire down to Home Limit
     #End of Turn effects end
+    
+    #Maybe set this part to run when VC is being played
 
     if getGlobalVariable("PlayerDone") == "Start": #If var running for the first time, create list
         PlayerDone = []
@@ -1143,6 +1155,7 @@ def turnEnd(group, x = 0, y = 0):
             notify("*{} is done. It is now {}'s turn.*".format(me, players[0]))
         elif len(players) == 2:
             players[1].setActive()
+            #nextTurn(players[1], False)
             notify("*{} is done. It is now {}'s turn.*".format(me, players[1]))
         elif len(players) == 3 and getGlobalVariable("VillainChallengeActive") == "False":
             if PlayerNo == 3: #If last player, go back to first player
@@ -1205,10 +1218,20 @@ def nextPhase(group, x = 0, y = 0):
         if me.getGlobalVariable("deckLoadedAndSet") == "True": #Checks if player has loaded a deck and set it up
             if turnNumber() == 0:
                 firstTurn(group, x, y)
+            else:
+                deckLoaded = eval(getGlobalVariable("deckLoadedAndSet"))
+                noDraw = eval(getGlobalVariable("noDrawFirstTurn"))
+                phaseLoop = eval(getGlobalVariable("phaseLoop"))
+                phaseStops = eval(getGlobalVariable("phaseStops"))
+                VCactive = eval(getGlobalVariable("VillainChallengeActive"))
+                autoAT = eval(getGlobalVariable("toggleAutoAT"))
+                
+                whisper("Error with Phase 0! Report this message with the following text to GameMasterLuna ASAP!\n") #A debugging note to see if players do end up here
+                whisper("Current ID: {}\nDeck Loaded: {}\nNo Draw First Turn: {}\nPhase Loop: {}\nPhase Stops: {}\nVC Active: {}\nAuto AT: {}".format(currentPhaseID, deckLoaded, noDraw, phaseLoop, phaseStops, VCactive, autoAT))
+                return
         else:
             whisper("*Please load a deck and press F12 to setup your table to continue*")
-
-    if currentPhaseID == 1:
+    elif currentPhaseID == 1:
         turnReady(group, x, y)
     elif currentPhaseID == 2:
         turnTroublemaker(group, x, y)
@@ -1219,6 +1242,15 @@ def nextPhase(group, x = 0, y = 0):
     elif currentPhaseID == 5:
         turnEnd(group, x, y)
     else:
+        deckLoaded = eval(getGlobalVariable("deckLoadedAndSet"))
+        noDraw = eval(getGlobalVariable("noDrawFirstTurn"))
+        phaseLoop = eval(getGlobalVariable("phaseLoop"))
+        phaseStops = eval(getGlobalVariable("phaseStops"))
+        VCactive = eval(getGlobalVariable("VillainChallengeActive"))
+        autoAT = eval(getGlobalVariable("toggleAutoAT"))
+        
+        whisper("Phase is not within 0-5! Report this message with the following text to GameMasterLuna ASAP!\n") #A debugging note to see if players do end up here
+        whisper("Current ID: {}\nDeck Loaded: {}\nNo Draw First Turn: {}\nPhase Loop: {}\nPhase Stops: {}\nVC Active: {}\nAuto AT: {}".format(currentPhaseID, deckLoaded, noDraw, phaseLoop, phaseStops, VCactive, autoAT))
         return
 
 #Phase Stop Remover
@@ -1238,6 +1270,8 @@ def removeStop(group, x = 0, y = 0):
             phaseStops.append("Del {}.2".format(currentPhaseID))
             phaseStops[:] = (value for value in phaseStops if value != "Stop")
             notify("*The game is now unpaused! Press Tab when you are ready to go to the next phase*")
+        else:
+            return
 
         setGlobalVariable("phaseStops", str(phaseStops))
         setStop(currentPhaseID, False)
@@ -2273,63 +2307,130 @@ def inspired(targetgroup, x = 0, y = 0, count = None):
     notify("{} looked at {} cards and put {} on top and {} on bottom.".format(me, count, len(topList), len(bottomList)))
     
 def meticulous(targetgroup, x = 0, y = 0, count = None):
-    #Maybe ask the person how many meticulous in total he/she have then loop that many times until he/she cancels the meticulous
     mute()
     
     PlayerNo = me._id
     deck = me.Deck
-    deckCount = 0
+    met1Left = 0
+    met2Left = 0
     totalCount = 0
+    meticulousAgainChoice = 0 #Tells the program to keep to the same met (For when met 1 and 2 are in play)
+    met2LoopCount = 0 #To keep track of a smaller loop in met 2 so both cards can be processed
+
     
-    #Count how many met cards are on the table
-    meticulousCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Meticulous', card.Keywords) or re.search(r'Meticulous', card.Text)))
+    #Count how many met 1 cards are on the table
+    meticulous1Count = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Meticulous 1', card.Keywords) or re.search(r'Meticulous 1', card.Text)))
     
-    #Return if 0 or none, but it will use the amt of Met cards as a gauge of how many Met the player have. Player can change this as some cards have more than 1 Met
-    if meticulousCount != None and meticulousCount != 0:
-        count = askInteger("How many meticulous do you have?", meticulousCount)
-        totalCount = count #To keep track of what is the total Met entered
-    else:
+    #Count how many met 2 cards are on the table
+    meticulous2Count = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Meticulous 2', card.Keywords) or re.search(r'Meticulous 2', card.Text)))
+    
+    #Return if 0 or none for both Met 1 and Met 2 count
+    if (meticulous1Count == None or meticulous1Count == 0) and (meticulous2Count == None or meticulous2Count == 0):
+        #Return if 0 or none for both Met 1 and Met 2 count
         whisper("No Meticulous cards detected on table!")
         return
-
-    #Get the total number of cards in player deck
-    for card in deck:
-        deckCount += 1
-
-    #If players closes the dialog box or selects 0 or anything below 0
-    if count == None or count <= 0 or count > deckCount:
-        if count > deckCount:
-            whisper("Nice try, you think you could Meticulous more cards than your deck contains eh?!")
-        return
     
-    notify("{} uses {} Meticulous to look at the top card of {}'s deck.".format(me, count, me))
+    #Notify based on which met is used
+    if meticulous1Count > 0 and meticulous2Count > 0:
+        notify("{} uses '{}' Meticulous 1 and '{}' Meticulous 2 to look at the top card of {}'s deck.".format(me, meticulous1Count, meticulous2Count, me))
+    else:
+        if meticulous1Count > 0:
+            notify("{} uses '{}' Meticulous 1 to look at the top card of {}'s deck.".format(me, meticulous1Count, me))
+        else:
+            notify("{} uses '{}' Meticulous 2 to look at the top cards of {}'s deck.".format(me, meticulous2Count, me))
 
     #Loop though all the meticulous
-    while not count <= 0:
+    totalCount = meticulous1Count + meticulous2Count
+    met1Left = meticulous1Count
+    met2Left = meticulous2Count
+
+    while not totalCount <= 0:
         topCard = deck.top()
-
-        desc = "{}/{} Meticulous left!\n\nDo you want to place the card on the TOP or BOTTOM of the deck?\n\n({}) {}: {} - {}".format(count, totalCount, topCard.Power, topCard.Type, topCard.Name, topCard.Subname)
-        choiceNum = askChoice(desc, ["TOP", "BOTTOM"])
-
-        #If player picks top, end Met
-        if choiceNum == 1:
-            if confirm("Are you sure you want to leave this card on the top of your deck?"):
-                notify("{} leaves the card at the top, ending Meticulous.".format(me))
-                return
+        
+        #Show choice box if there is met 1 and 2, else just check which met is being used and set the choice permanently
+        if meticulous1Count > 0 and meticulous2Count > 0:
+            if meticulousAgainChoice == 0: #Check if the program is set to auto pick a met
+                meticulousChoice = askChoice("{}/{} Meticulous 1 left!\n\n{}/{} Meticulous 2 left!\n\nWhich Meticulous do you want to use?".format(met1Left, meticulous1Count, met2Left, meticulous2Count), ["Meticulous 1","Meticulous 2", "Cancel"])
             else:
-                count += 1 #Loop 1 additional time for player to make the choice again
-        #If player picks bottom, move the card to the bottom
-        elif choiceNum == 2:
-            topCard.moveToBottom(deck)
-            notify("{} moves the card to the bottom, {}/{} Meticulous left.".format(me, count-1, totalCount))
-        #If player closes the dialog box
+                meticulousChoice = meticulousAgainChoice #Make the choice to the auto picked met
+                meticulousAgainChoice = 0 # Reset meticulousAgainChoice
+        elif meticulous1Count > 0:
+            meticulousChoice = 1
         else:
-            if confirm("Are you sure you want to quit and leave this card on the top of your deck?"):
-                notify("{} leaves the card at the top, ending Meticulous.".format(me))
-                return
+            meticulousChoice = 2
+        
+        if meticulousChoice == 1 and met1Left > 0: #Met 1
+            desc = "{}/{} Meticulous 1 left!\n\nDo you want to place the card on the TOP or BOTTOM of the deck?\n\n({}) {}: {} - {}".format(met1Left, meticulous1Count, topCard.Power, topCard.Type, topCard.Name, topCard.Subname)
+            choiceNum = askChoice(desc, ["TOP", "BOTTOM", "Cancel"])
+            
+            if choiceNum == 1: #If player picks top
+                met1Left -= 1
+                notify("{} leaves the card at the top, {}/{} Meticulous 1 left.".format(me, met1Left, meticulous1Count))
+            elif choiceNum == 2: #If player picks bottom
+                met1Left -= 1
+                topCard.moveToBottom(deck)
+                notify("{} moves the card to the bottom, {}/{} Meticulous left.".format(me, met1Left, meticulous1Count))
+            elif choiceNum == 3: #If player picks Cancel
+                if confirm("Are you sure you want to quit Meticulous 1? Any remaining Meticulous 1 will be skipped!"):
+                    met1Left = 0
+                    notify("{} leaves the card at the top and skips any remaining Meticulous 1.".format(me))
+                else:
+                    totalCount += 1 #Loop 1 additional time for player to make the choice again
+                    meticulousAgainChoice = 1
+            else: #If player closes the dialog box
+                totalCount += 1 #Loop 1 additional time for player to make the choice again
+                meticulousAgainChoice = 1
+        elif meticulousChoice == 2 and met2Left > 0: #Met 2
+            if met2LoopCount == 0: #First card of met 2
+                topCard2 = list(deck.top(2)) #Returns an array of the top 2 cards
+                desc = "{}/{} Meticulous 2 left!\n\nDo you want to place the FIRST card on the TOP or BOTTOM of the deck?\n\n>({}) {}: {} - {}\n\n({}) {}: {} - {}".format(met2Left, meticulous2Count, topCard2[0].Power, topCard2[0].Type, topCard2[0].Name, topCard2[0].Subname, topCard2[1].Power, topCard2[1].Type, topCard2[1].Name, topCard2[1].Subname)
+                choiceNum = askChoice(desc, ["TOP", "BOTTOM", "Cancel"])
+                
+                if choiceNum == 1: #If player picks top
+                    met2LoopCount = 1 #Move to the second card on next loop
+                    notify("{} leaves the first card at the top.".format(me))
+                elif choiceNum == 2: #If player picks bottom
+                    topCard2[0].moveToBottom(deck)
+                    met2LoopCount = 1 #Move to the second card on next loop
+                    notify("{} moves the first card to the bottom.".format(me))
+                elif choiceNum == 3: #If player picks Cancel
+                    if confirm("Are you sure you want to quit Meticulous 2? Any remaining Meticulous 2 will be skipped!"):
+                        met2Left = 0
+                        notify("{} leaves both cards at the top and skips any remaining Meticulous 2.".format(me))
+                
+                #Any options the player pick, these 2 must be triggered
+                totalCount += 1 #Loop 1 additional time for player to make a choice again or go to the next met 2 loop
+                meticulousAgainChoice = 2 #Force the program to auto pick met 2
+            else: #Second card of met 2
+                desc = "{}/{} Meticulous 2 left!\n\nDo you want to place the SECOND card on the TOP or BOTTOM of the deck?\n\n({}) {}: {} - {}\n\n>({}) {}: {} - {}".format(met2Left, meticulous2Count, topCard2[0].Power, topCard2[0].Type, topCard2[0].Name, topCard2[0].Subname, topCard2[1].Power, topCard2[1].Type, topCard2[1].Name, topCard2[1].Subname)
+                choiceNum = askChoice(desc, ["TOP", "BOTTOM"])
+                
+                if choiceNum == 1: #If player picks top
+                    met2Left -= 1
+                    met2LoopCount = 0 #Resets the loop for the next met 2
+                    notify("{} leaves the second card at the top, {}/{} Meticulous 2 left.".format(me, met2Left, meticulous2Count))
+                elif choiceNum == 2: #If player picks bottom
+                    topCard2[1].moveToBottom(deck)
+                    met2Left -= 1
+                    met2LoopCount = 0 #Resets the loop for the next met 2
+                    notify("{} moves the second card to the bottom, {}/{} Meticulous 2 left.".format(me, met2Left, meticulous2Count))
+                else: #If player closes the dialog box
+                    totalCount += 1 #Loop 1 additional time for player to make the choice again
+                    meticulousAgainChoice = 2
+        elif meticulousChoice == 3:
+            if confirm("Are you sure you want to quit Meticulous? Any remaining Meticulous 1 or 2 will be skipped!"):
+                totalCount = 0
+                notify("{} leaves the card(s) at the top and skips any remaining Meticulous 1 or 2.".format(me))
             else:
-                count += 1 #Loop 1 additional time for player to make the choice again
-
-        count -= 1 #Reduce the amt of Met left
+                totalCount += 1 #Loop 1 additional time for player to make the choice again
+        
+        else:
+            if meticulous1Count > 0 and meticulous2Count > 0:
+                whisper("Please check if you have enough Meticulous left for the choice you picked and try again!")
+                totalCount += 1 #Loop 1 additional time for player to make the choice again
+            else:
+                totalCount = 0
+            
+        totalCount -= 1 #Reduce the amt of Met left
 
     notify("{} has no Meticulous left, ending Meticulous.".format(me))

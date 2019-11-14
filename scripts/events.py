@@ -37,6 +37,7 @@ def chkMultiplayer(args):
                     card.orientation = Rot270
     
 def autoAT(args):
+    mute()
     if me.getGlobalVariable("toggleAutoAT") == "True":
         #Prevent red errors from showing up if item is not found in the lists below
         try:
@@ -61,6 +62,7 @@ def autoAT(args):
         secColorReqFailed = False
         triColorReqFailed = False
         playerCounters = me.counters['Actions'].value
+        transformCard = False #A check for transformCard
         
         #GUID for Action and Colour Counters
         Action = ("Action", "ec99fdcb-ffea-4658-8e8f-5dc06e93f6fd")
@@ -82,6 +84,8 @@ def autoAT(args):
             intCardCost = 1
         elif cardCost == '': #For Manes, do not continue with this function
             return
+        elif re.search(r'Transform 2', card.Keywords) or re.search(r'Transform 2', card.Text):
+            transformCard = True
         else:
             intCardCost = int(card.properties["Cost"])
             
@@ -291,6 +295,16 @@ def autoAT(args):
                         else:
                             return
                 
+                #Check if the card is a Transform card which can reduce a card cost
+                if transformCard == True:
+                    transformChoice = confirm("Are you using Transform 2 to pay for the card?")
+                    
+                    if transformChoice == True:
+                        intCardCost = 2 #Change the card cost to 2
+                    else:
+                        intCardCost = int(card.properties["Cost"])
+
+                #Calculate if player has enough AT to pay for the card cost
                 checkPayable = playerCounters - intCardCost
                                 
                 if checkPayable < 0:
@@ -360,6 +374,8 @@ def autoRotateDilemma(args):
                 setGlobalVariable("PermExhausted", str(permExhaustedList))
 
 def triggerPhaseStop(args):
+    #Note for Improvement: Make it track the pause list for each player so the pause list will not clash between players
+    #Also there is a visual bug as setStop only removes the yellow square if the active player set the stop, the non active player will still have that square
     mute()
     currentPhaseName, currentPhaseID = currentPhase()
     phaseClickedID = args.id
@@ -368,104 +384,108 @@ def triggerPhaseStop(args):
     removeStop = False
     activeStops = []
     
-    for stops in phaseStops:
-        #Ensures the any "Del" in the list will not be counted
-        if "Del" not in stops:
-            activeStopsInPhase = re.match(r"{}\.".format(phaseClickedID), stops)
-            
-            #If re finds any stops matching the clicked phase
-            if activeStopsInPhase:
-                activeStops.append(stops) #Create a list of active stops
+    #Prevent pause during phase 0
+    if currentPhaseID != 0:
+        for stops in phaseStops:
+            #Ensures the any "Del" in the list will not be counted
+            if "Del" not in stops:
+                activeStopsInPhase = re.match(r"{}\.".format(phaseClickedID), stops)
                 
-                #Only remove all stops if there is 2 stops in the phase
-                if len(activeStops) == 2:
-                    removeStop = True
-    
-    if removeStop == True:
-        #Removes all stops in that phase to make it easier to code, might be changed in the future
-        num = askChoice("Are you sure you want to remove all pauses for this phase?", ["Yes","No"])
-        if num != 1:
-            return
-        else:
-            for stops in activeStops:
-                phaseStops.remove(stops)
-            whisper("All pause(s) for {} has been removed!".format(phaseClickedName))
-            setStop(phaseClickedID, False)
-            setGlobalVariable("phaseStops", str(phaseStops))
-    else:
-        #Adds stop depending on what phase was clicked
-        #Ready Phase
-        if phaseClickedID == 1:
-            phaseStopList = ["Before player draws card", "After player draws card", "Cancel"]
-            choice = askChoice("Which part of the phase do you want to pause?", phaseStopList)
-            
-            if choice == 1:
-                phaseStops.append("1.1")
-                setGlobalVariable("phaseStops", str(phaseStops))
-            elif choice == 2:
-                phaseStops.append("1.2")
-                setGlobalVariable("phaseStops", str(phaseStops))
-            else:
-                return
-            
-            setStop(1, True)
-        #Troublemaker Phase
-        elif phaseClickedID == 2:
-            phaseStopList = ["Before uncovering Troublemaker", "Before ending the phase", "Cancel"]
-            choice = askChoice("Which part of the phase do you want to pause?", phaseStopList)
-            
-            if choice == 1:
-                phaseStops.append("2.1")
-                setGlobalVariable("phaseStops", str(phaseStops))
-            elif choice == 2:
-                phaseStops.append("2.2")
-                setGlobalVariable("phaseStops", str(phaseStops))
-            else:
-                return
-            
-            setStop(2, True)
-        #Main Phase
-        elif phaseClickedID == 3:
-            phaseStopList = ["Before any Main Phase Action", "Before ending the phase", "Cancel"]
-            choice = askChoice("Which part of the phase do you want to pause?", phaseStopList)
-            
-            if choice == 1:
-                phaseStops.append("3.1")
-                setGlobalVariable("phaseStops", str(phaseStops))
-            elif choice == 2:
-                phaseStops.append("3.2")
-                setGlobalVariable("phaseStops", str(phaseStops))
-            else:
-                return
-            
-            setStop(3, True)
-        #Score Phase
-        elif phaseClickedID == 4:
-            phaseStopList = ["Before confronting problems", "Before ending the phase", "Cancel"]
-            choice = askChoice("Which part of the phase do you want to pause?", phaseStopList)
-            
-            if choice == 1:
-                phaseStops.append("4.1")
-                setGlobalVariable("phaseStops", str(phaseStops))
-            elif choice == 2:
-                phaseStops.append("4.2")
-                setGlobalVariable("phaseStops", str(phaseStops))
-            else:
-                return
-            
-            setStop(4, True)
-        elif phaseClickedID == 5:
-            phaseStopList = ["Before end phase actions", "Cancel"]
-            choice = askChoice("Which part of the phase do you want to pause?", phaseStopList)
-            
-            if choice == 1:
-                phaseStops.append("5.1")
-                setGlobalVariable("phaseStops", str(phaseStops))
-            else:
-                return
-            
-            setStop(5, True)
-        else:
-            return
+                #If re finds any stops matching the clicked phase
+                if activeStopsInPhase:
+                    activeStops.append(stops) #Create a list of active stops
+                    
+                    #Only remove all stops if there is 2 stops in the phase
+                    if len(activeStops) == 2:
+                        removeStop = True
         
-        whisper("Your pause is now active!")
+        if removeStop == True:
+            #Removes all stops in that phase to make it easier to code, might be changed in the future
+            num = askChoice("Are you sure you want to remove all pauses for this phase?", ["Yes","No"])
+            if num != 1:
+                return
+            else:
+                for stops in activeStops:
+                    phaseStops.remove(stops)
+                whisper("All pause(s) for {} has been removed!".format(phaseClickedName))
+                setStop(phaseClickedID, False)
+                setGlobalVariable("phaseStops", str(phaseStops))
+        else:
+            #Adds stop depending on what phase was clicked
+            #Ready Phase
+            if phaseClickedID == 1:
+                phaseStopList = ["Before player draws card", "After player draws card", "Cancel"]
+                choice = askChoice("Which part of the phase do you want to pause?", phaseStopList)
+                
+                if choice == 1:
+                    phaseStops.append("1.1")
+                    setGlobalVariable("phaseStops", str(phaseStops))
+                elif choice == 2:
+                    phaseStops.append("1.2")
+                    setGlobalVariable("phaseStops", str(phaseStops))
+                else:
+                    return
+                
+                setStop(1, True)
+            #Troublemaker Phase
+            elif phaseClickedID == 2:
+                phaseStopList = ["Before uncovering Troublemaker", "Before ending the phase", "Cancel"]
+                choice = askChoice("Which part of the phase do you want to pause?", phaseStopList)
+                
+                if choice == 1:
+                    phaseStops.append("2.1")
+                    setGlobalVariable("phaseStops", str(phaseStops))
+                elif choice == 2:
+                    phaseStops.append("2.2")
+                    setGlobalVariable("phaseStops", str(phaseStops))
+                else:
+                    return
+                
+                setStop(2, True)
+            #Main Phase
+            elif phaseClickedID == 3:
+                phaseStopList = ["Before any Main Phase Action", "Before ending the phase", "Cancel"]
+                choice = askChoice("Which part of the phase do you want to pause?", phaseStopList)
+                
+                if choice == 1:
+                    phaseStops.append("3.1")
+                    setGlobalVariable("phaseStops", str(phaseStops))
+                elif choice == 2:
+                    phaseStops.append("3.2")
+                    setGlobalVariable("phaseStops", str(phaseStops))
+                else:
+                    return
+                
+                setStop(3, True)
+            #Score Phase
+            elif phaseClickedID == 4:
+                phaseStopList = ["Before confronting problems", "Before ending the phase", "Cancel"]
+                choice = askChoice("Which part of the phase do you want to pause?", phaseStopList)
+                
+                if choice == 1:
+                    phaseStops.append("4.1")
+                    setGlobalVariable("phaseStops", str(phaseStops))
+                elif choice == 2:
+                    phaseStops.append("4.2")
+                    setGlobalVariable("phaseStops", str(phaseStops))
+                else:
+                    return
+                
+                setStop(4, True)
+            elif phaseClickedID == 5:
+                phaseStopList = ["Before end phase actions", "Cancel"]
+                choice = askChoice("Which part of the phase do you want to pause?", phaseStopList)
+                
+                if choice == 1:
+                    phaseStops.append("5.1")
+                    setGlobalVariable("phaseStops", str(phaseStops))
+                else:
+                    return
+                
+                setStop(5, True)
+            else:
+                return
+            
+            whisper("Your pause is now active!")
+    else:
+        whisper("You cannot set a pause when the game has not started!")
