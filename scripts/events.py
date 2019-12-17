@@ -3,6 +3,7 @@ import re
 def loadPlayerGlobalVars():
    mute()
    me.setGlobalVariable("toggleAutoAT", "True")
+   me.setGlobalVariable("toggleAutoMeticulous", "True")
    me.setGlobalVariable("deckLoadedAndSet", "False") #For nextPhase function to check if a deck is loaded and set before continuing
    me.setGlobalVariable("noDrawFirstTurn", "False")
 

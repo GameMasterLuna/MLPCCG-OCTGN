@@ -4,7 +4,7 @@
 	id="65656467-b709-43b2-a5c6-80c2f216adf9" 
 	octgnVersion="3.3.106.0" 
 	scriptVersion ="3.1.0.2"
-	version="2.4.0.0"
+	version="2.4.0.001"
 	markersize="16"
 	tags="My Little Pony MLP CCG" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -57,7 +57,7 @@
         <!--<globalvariable name="Phase" value="Start" /> -->
         <globalvariable name="deckLoadedAndSet" value="False" /> <!-- check if deck is loaded and set -->
         <globalvariable name="noDrawFirstTurn" value="False" />  <!-- define if player draws on first turn -->
-        <globalvariable name="phaseLoop" value="False" />        <!-- for phases to loop again -->
+        <globalvariable name="phaseLoopCounter" value="1" />        <!-- for phases to loop again -->
         <globalvariable name="phaseStops" value="[]" />          <!-- Store all stops as a list -->
         <globalvariable name="Exhausted" value="Start" />
         <globalvariable name="PermExhausted" value="Start" />
@@ -71,6 +71,7 @@
         <globalvariable name="PlayerStartDone" value="Start" />
         <globalvariable name="VillainTurn" value="False" />
         <globalvariable name="toggleAutoAT" value="True" />
+        <globalvariable name="toggleAutoMeticulous" value="True" />
 	</globalvariables>
     
     <!-- <gameboards src="boards/noPlaymat.png" x="-300" y="0" width="900" height="250">
@@ -201,6 +202,7 @@
 			<groupaction menu="Random Discard Many" shortcut="ALT+SHIFT+D" execute="discardMany" />
 			<groupaction menu="Take a Mulligan" shortcut="CTRL+M" execute="mulligan" />
 			<groupaction menu="Toggle Auto AT and Color Req Check" shortcut="CTRL+C" execute="toggleAutoAT" />
+            <groupaction menu="Toggle Auto Meticulous" shortcut="CTRL+SHIFT+C" execute="toggleAutoMeticulous" />
 		</hand>
 
 		<group name="Deck" visibility="none" icon="groups/deck.png">

@@ -677,7 +677,7 @@ def firstTurn(group, x = 0, y = 0):
         setPhase(1) #Go to ready phase
 
 #Ready Phase
-def turnReady(group, x = 0, y = 0):
+def turnReady(group, phaseLoopCounter, x = 0, y = 0):
     mute()
     maxPoints = 0
     maxName = ""
@@ -730,49 +730,68 @@ def turnReady(group, x = 0, y = 0):
         else:
             whisper("You can't start the turn when it isn't your turn.")
             return
-
-    #Check if phaseLoop is True, if so, end the turn without doing anything. This acts as a buffer so the game doesn't jump into the next phase on pressing Tab
-    if getGlobalVariable("phaseLoop") == "True":
-        setGlobalVariable("phaseLoop", "False")
-        setPhase(2)
-        return #Prevent the rest of the code to run again
-
-    if "Del 1.1" not in phaseStops and "Del 1.2" not in phaseStops and "Stop" not in phaseStops:
-        #Meticulous triggers here? Idk if it is before or after Ready and gain AT
-        meticulous1Count = sum(1 for card in table if card.isFaceUp == True and card.controller == me and (re.search(r'Meticulous 1', card.Keywords) or re.search(r'Meticulous 1', card.Text)))
-        meticulous2Count = sum(1 for card in table if card.isFaceUp == True and card.controller == me and (re.search(r'Meticulous 2', card.Keywords) or re.search(r'Meticulous 2', card.Text)))
-        totalMeticulousCount = meticulous1Count + meticulous2Count
-        
-        if totalMeticulousCount > 0:
-            num = askChoice("You have {} Meticulous card(s) on the table. Use Meticulous?".format(totalMeticulousCount), ["Yes","No"])
-            if num == 1:
-                meticulous(group, x, y)
-
-        #Ready all cards
-        readyAll(group, x, y)
-        notify("{} readies all their cards.".format(me))
-
-        #Gain AT
-        for person in players:
-            if maxPoints < person.counters['Points'].value:
-                maxPoints = person.counters['Points'].value
-                maxName = person.name
-
-        if getGlobalVariable("VillainChallengeActive") == "True":
-            if getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId:
-                if maxPoints < 2:
-                    addActions = 4
-                elif maxPoints < 6:
-                    addActions = 5
-                elif maxPoints < 11:
-                    addActions = 6
+    
+    #First Loop
+    if phaseLoopCounter == 1:
+        if "Del 1.1" not in phaseStops and "Del 1.2" not in phaseStops and "Stop" not in phaseStops:
+            #Meticulous triggers here? Idk if it is before or after Ready and gain AT
+            meticulous1Count = sum(1 for card in table if card.isFaceUp == True and card.controller == me and (re.search(r'Meticulous 1', card.Keywords) or re.search(r'Meticulous 1', card.Text)))
+            meticulous2Count = sum(1 for card in table if card.isFaceUp == True and card.controller == me and (re.search(r'Meticulous 2', card.Keywords) or re.search(r'Meticulous 2', card.Text)))
+            totalMeticulousCount = meticulous1Count + meticulous2Count
+            
+            if totalMeticulousCount > 0:
+                #Check if auto Meticulous is on or off. If off, whisper to player instead
+                if me.getGlobalVariable("toggleAutoMeticulous") == "True":
+                    num = askChoice("You have {} Meticulous card(s) on the table. Use Meticulous?".format(totalMeticulousCount), ["Yes","No"])
+                    if num == 1:
+                        meticulous(group, x, y)
                 else:
-                    addActions = 7
+                    whisper("You have {} Meticulous card(s) on the table that you can use.".format(totalMeticulousCount))
+
+            #Ready all cards
+            readyAll(group, x, y)
+            notify("{} readies all their cards.".format(me))
+            setGlobalVariable("phaseLoopCounter", "2")
+            return
+    
+    #Second Loop
+    if phaseLoopCounter == 2:
+        if "Del 1.1" not in phaseStops and "Del 1.2" not in phaseStops and "Stop" not in phaseStops:
+            #Gain AT
+            for person in players:
+                if maxPoints < person.counters['Points'].value:
+                    maxPoints = person.counters['Points'].value
+                    maxName = person.name
+
+            if getGlobalVariable("VillainChallengeActive") == "True":
+                if getGlobalVariable("VillainTurn") == "True" and PlayerNo == villainPlayerId:
+                    if maxPoints < 2:
+                        addActions = 4
+                    elif maxPoints < 6:
+                        addActions = 5
+                    elif maxPoints < 11:
+                        addActions = 6
+                    else:
+                        addActions = 7
+                    
+                    if maxPoints == 0:
+                        notify("*Nobody has Points yet. Being the villain, {} adds {} Action Tokens.*".format(me,addActions))
+                    else:   
+                        notify("*{} has {} Points. Being the villain, {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
+                else:
+                    if maxPoints < 2:
+                        addActions = 2
+                    elif maxPoints < 6:
+                        addActions = 3
+                    elif maxPoints < 11:
+                        addActions = 4
+                    else:
+                        addActions = 5
                 
-                if maxPoints == 0:
-                    notify("*Nobody has Points yet. Being the villain, {} adds {} Action Tokens.*".format(me,addActions))
-                else:   
-                    notify("*{} has {} Points. Being the villain, {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
+                    if maxPoints == 0:
+                        notify("*Nobody has Points yet. Challenger {} adds {} Action Tokens.*".format(me,addActions))
+                    else:   
+                        notify("*{} has {} Points. Challenger {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
             else:
                 if maxPoints < 2:
                     addActions = 2
@@ -782,66 +801,58 @@ def turnReady(group, x = 0, y = 0):
                     addActions = 4
                 else:
                     addActions = 5
-            
+                
                 if maxPoints == 0:
-                    notify("*Nobody has Points yet. Challenger {} adds {} Action Tokens.*".format(me,addActions))
+                    notify("*Nobody has Points yet. {} adds {} Action Tokens.*".format(me,addActions))
                 else:   
-                    notify("*{} has {} Points. Challenger {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
-        else:
-            if maxPoints < 2:
-                addActions = 2
-            elif maxPoints < 6:
-                addActions = 3
-            elif maxPoints < 11:
-                addActions = 4
-            else:
-                addActions = 5
+                    notify("*{} has {} Points. {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
             
-            if maxPoints == 0:
-                notify("*Nobody has Points yet. {} adds {} Action Tokens.*".format(me,addActions))
-            else:   
-                notify("*{} has {} Points. {} adds {} Action Tokens.*".format(maxName,maxPoints,me,addActions))
-        
-        me.counters['Actions'].value = me.counters['Actions'].value + addActions
-
-    #PPP Stop - Before drawing cards
-    if "1.1" not in phaseStops and "Del 1.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
-
-        #Draw cards
-        if me.getGlobalVariable("noDrawFirstTurn") == "True":
-            notify("{} does not draw on the game's first turn.".format(me))
-            me.setGlobalVariable("noDrawFirstTurn", "False")
-        else:
-            draw(me.deck)
-
-    elif "Del 1.2" in phaseStops: #If .2 has triggered, skip this portion
-        pass
-    else:
-        notify("*A player has set a pause before drawing card! Once done, {} please press Spacebar to continue*".format(me))
-        phaseStops.append("Stop")
-        setGlobalVariable("phaseStops", str(phaseStops))
-        return
-
-    #PPP Stop - Before phase ends
-    if "1.2" in phaseStops:
-        phaseStops.append("Stop")
-        notify("*A player has set a pause before ending this phase! Once done, {} please press Spacebar to continue*".format(me))
-        return
-    else:
-        #Remove Del if any but loop the phase again if it is Del .1
-        if "Del 1.1" in phaseStops:
-            phaseStops.remove("Del 1.1")
-            setGlobalVariable("phaseStops", str(phaseStops))
-            setGlobalVariable("phaseLoop", "True") #Without this, it will loop into phaseLoop again causing a double loop
+            me.counters['Actions'].value = me.counters['Actions'].value + addActions
+            setGlobalVariable("phaseLoopCounter", "3")
             return
-        if "Del 1.2" in phaseStops:
-            phaseStops.remove("Del 1.2")
-            setGlobalVariable("phaseStops", str(phaseStops))
 
-        setGlobalVariable("phaseLoop", "True")
+    if phaseLoopCounter == 3:
+        #PPP Stop - Before drawing cards
+        if "1.1" not in phaseStops and "Del 1.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
+
+            #Draw cards
+            if me.getGlobalVariable("noDrawFirstTurn") == "True":
+                notify("{} does not draw on the game's first turn.".format(me))
+                me.setGlobalVariable("noDrawFirstTurn", "False")
+            else:
+                draw(me.deck)
+            setGlobalVariable("phaseLoopCounter", "4")
+            return
+
+        elif "Del 1.2" in phaseStops: #If .2 has triggered, skip this portion
+            pass
+        else:
+            notify("*A player has set a pause before drawing card! Once done, {} please press Spacebar to continue*".format(me))
+            phaseStops.append("Stop")
+            setGlobalVariable("phaseStops", str(phaseStops))
+            return
+
+    if phaseLoopCounter == 4:
+        #PPP Stop - Before phase ends
+        if "1.2" in phaseStops:
+            phaseStops.append("Stop")
+            notify("*A player has set a pause before ending this phase! Once done, {} please press Spacebar to continue*".format(me))
+            return
+        else:
+            #Remove Del if any but loop the phase again if it is Del .1
+            if "Del 1.1" in phaseStops:
+                phaseStops.remove("Del 1.1")
+                setGlobalVariable("phaseStops", str(phaseStops))
+                return
+            if "Del 1.2" in phaseStops:
+                phaseStops.remove("Del 1.2")
+                setGlobalVariable("phaseStops", str(phaseStops))
+
+            setGlobalVariable("phaseLoopCounter", "1")
+            setPhase(2)
 
 #Troublemaker Phase
-def turnTroublemaker(group, x = 0, y = 0):
+def turnTroublemaker(group, phaseLoopCounter, x = 0, y = 0):
     mute()
     PlayerNo = me._id
     mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
@@ -866,38 +877,32 @@ def turnTroublemaker(group, x = 0, y = 0):
         else:
             whisper("You can't set the phase when it isn't your turn.")
             return
+
+    if phaseLoopCounter == 1:
+        #PPP Stop - Before TM uncover
+        if "2.1" not in phaseStops and "Del 2.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
+
+            #Uncover Troublemakers
+            clearFaceoff(group, x, y)
+            peekAll(group, x, y)        
+            rnd(1,2)
             
-    #Check if phaseLoop is True, if so, end the turn without doing anything. This acts as a buffer so the game doesn't jump into the next phase on pressing Tab
-    if getGlobalVariable("phaseLoop") == "True":
-        setGlobalVariable("phaseLoop", "False")
-        setPhase(3)
-        return #Prevent the rest of the code to run again
-
-    #PPP Stop - Before TM uncover
-    if "2.1" not in phaseStops and "Del 2.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
-
-        #Uncover Troublemakers
-        clearFaceoff(group, x, y)
-        peekAll(group, x, y)        
-        rnd(1,2)
-        
-        troublemakerCount = sum(1 for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
-        if troublemakerCount > 0:
-            num = askChoice("You have facedown Troublemakers. Flip them up?", ["Yes","No"])
-            if num == 1:
-                setGlobalVariable("phaseLoop", "True") #Only trigger a loop if there is facedown TM to flip up
-                troublemakers = (card for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
-                for c in troublemakers:
-                    c.isFaceUp = True
-    elif "Del 2.2" in phaseStops: #If .2 has triggered, skip this portion
-        pass
-    else:
-        notify("*A player has set a pause before uncovering Troublemaker(s)! Once done, {} please press Spacebar to continue*".format(me))
-        return
+            troublemakerCount = sum(1 for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
+            if troublemakerCount > 0:
+                setGlobalVariable("phaseLoopCounter", "2") #Trigger a loop if there is facedown TM 
+                num = askChoice("You have facedown Troublemakers. Flip them up?", ["Yes","No"])
+                if num == 1:
+                    troublemakers = (card for card in table if card.controller == me and card.Type == 'Troublemaker' and card.isFaceUp == False)
+                    for c in troublemakers:
+                        c.isFaceUp = True
+        elif "Del 2.2" in phaseStops: #If .2 has triggered, skip this portion
+            pass #Might be redundant due to phaseLoopCounter
+        else:
+            notify("*A player has set a pause before uncovering Troublemaker(s)! Once done, {} please press Spacebar to continue*".format(me))
+            return
 
     #PPP Stop - Before phase ends
     if "2.2" in phaseStops:
-        setGlobalVariable("phaseLoop", "False") #Disable phaseLoop so that it cannot let the player bypass the stop
         phaseStops.append("Stop")
         notify("*A player has set a pause before ending this phase! Once done, {} please press Spacebar to continue*".format(me))
         return
@@ -906,19 +911,20 @@ def turnTroublemaker(group, x = 0, y = 0):
         if "Del 2.1" in phaseStops:
             phaseStops.remove("Del 2.1")
             setGlobalVariable("phaseStops", str(phaseStops))
-            return
         if "Del 2.2" in phaseStops:
             phaseStops.remove("Del 2.2")
             setGlobalVariable("phaseStops", str(phaseStops))
             
-        #Check for any phaseLoop and loop the phase again if any
-        if getGlobalVariable("phaseLoop") == "True":
+        #Check for any TM cards covered and loop the phase again if any
+        if getGlobalVariable("phaseLoopCounter") == "2":
+            setGlobalVariable("phaseLoopCounter", "3") #Tell it not to go into uncover portion again
             return
         else:
+            setGlobalVariable("phaseLoopCounter", "1") #Reset phaseLoopCounter for other phases
             setPhase(3)
 
 #Main Phase
-def turnMain(group, x = 0, y = 0):
+def turnMain(group, phaseLoopCounter, x = 0, y = 0):
     mute()
     PlayerNo = me._id
     mainPlayerId = eval(getGlobalVariable("mainPlayerId"))
@@ -944,26 +950,27 @@ def turnMain(group, x = 0, y = 0):
             whisper("You can't set the phase when it isn't your turn.")
             return
 
-    #PPP Stop - Before any main phase action
-    if "3.1" not in phaseStops and "Del 3.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
+    if phaseLoopCounter == 1:
+        #PPP Stop - Before any main phase action
+        if "3.1" not in phaseStops and "Del 3.2" not in phaseStops and "Stop" not in phaseStops: #Check if there is a stop here and if .2 has been triggered before
 
-        #Inspired triggers here?
-        inspiredCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Inspired', card.Keywords) or re.search(r'Inspired', card.Text)))
-        if inspiredCount > 0:
-            num = askChoice("You have {} Inspired on the table. Use Inspired?".format(inspiredCount), ["Yes","No"])
-            if num == 1:
-                setGlobalVariable("phaseLoop", "True") #Only trigger a loop if inspired is used
-                inspired(group, x, y)
-    elif "Del 3.2" in phaseStops: #If .2 has triggered, skip this portion
-        pass
-    else:
-        phaseStops.append("Stop")
-        notify("*A player has set a pause before any Main Phase action! Once done, {} please press Spacebar to continue*".format(me))
-        return
+            #Inspired triggers here?
+            inspiredCount = sum(1 for card in table if card.controller == me and card.isFaceUp == True and (re.search(r'Inspired', card.Keywords) or re.search(r'Inspired', card.Text)))
+            if inspiredCount > 0:
+                setGlobalVariable("phaseLoopCounter", "2") #Trigger a loop if there is inspired
+                num = askChoice("You have {} Inspired on the table. Use Inspired?".format(inspiredCount), ["Yes","No"])
+                if num == 1:
+                    inspired(group, x, y)
+        elif "Del 3.2" in phaseStops: #If .2 has triggered, skip this portion
+            pass
+        else:
+            phaseStops.append("Stop")
+            notify("*A player has set a pause before any Main Phase action! Once done, {} please press Spacebar to continue*".format(me))
+            return
 
     #PPP Stop - Before phase ends
     if "3.2" in phaseStops:
-        setGlobalVariable("phaseLoop", "False") #Disable phaseLoop so that it cannot let the player bypass the stop
+        #setGlobalVariable("phaseLoop", "False") #Disable phaseLoop so that it cannot let the player bypass the stop
         phaseStops.append("Stop")
         notify("*A player has set a pause before ending this phase! Once done, {} please press Spacebar to continue*".format(me))
         return
@@ -972,11 +979,17 @@ def turnMain(group, x = 0, y = 0):
         if "Del 3.1" in phaseStops:
             phaseStops.remove("Del 3.1")
             setGlobalVariable("phaseStops", str(phaseStops))
-            return
         if "Del 3.2" in phaseStops:
             phaseStops.remove("Del 3.2")
             setGlobalVariable("phaseStops", str(phaseStops))
-        setPhase(4)
+            
+        #Check for any inspired cards is on the table and loop the phase again if any
+        if getGlobalVariable("phaseLoopCounter") == "2":
+            setGlobalVariable("phaseLoopCounter", "3") #Tell it not to go into the inspired portion again
+            return
+        else:
+            setGlobalVariable("phaseLoopCounter", "1") #Reset phaseLoopCounter for other phases
+            setPhase(4)
 
 #Score Phase
 def turnScore(group, x = 0, y = 0):
@@ -1227,41 +1240,42 @@ def nextPhase(group, x = 0, y = 0):
 
     if currentPhaseID == 0:
         if me.getGlobalVariable("deckLoadedAndSet") == "True": #Checks if player has loaded a deck and set it up
-            if turnNumber() == 0:
+            #Turn Number 0 for Tab, Turn Number 1 for Green Arrow
+            if turnNumber() == 0 or turnNumber() == 1:
                 firstTurn(group, x, y)
             else:
-                deckLoaded = eval(getGlobalVariable("deckLoadedAndSet"))
+                deckLoaded = eval(me.getGlobalVariable("deckLoadedAndSet"))
                 noDraw = eval(getGlobalVariable("noDrawFirstTurn"))
-                phaseLoop = eval(getGlobalVariable("phaseLoop"))
+                phaseLoopCounter = eval(getGlobalVariable("phaseLoopCounter"))
                 phaseStops = eval(getGlobalVariable("phaseStops"))
                 VCactive = eval(getGlobalVariable("VillainChallengeActive"))
                 autoAT = eval(getGlobalVariable("toggleAutoAT"))
                 
-                whisper("Error with Phase 0! Report this message with the following text to GameMasterLuna ASAP!\n\nNOTE: If you are using the green arrow to start the game, it will cause this bug. Please use Tab to start the game instead.") #A debugging note to see if players do end up here
-                whisper("Current ID: {}\nDeck Loaded: {}\nNo Draw First Turn: {}\nPhase Loop: {}\nPhase Stops: {}\nVC Active: {}\nAuto AT: {}".format(currentPhaseID, deckLoaded, noDraw, phaseLoop, phaseStops, VCactive, autoAT))
+                whisper("Error with Phase 0! Report this message with the following text to GameMasterLuna ASAP!") #A debugging note to see if players do end up here
+                whisper("Current ID: {}\nDeck Loaded: {}\nNo Draw First Turn: {}\nPhase Loop: {}\nPhase Stops: {}\nVC Active: {}\nAuto AT: {}\nTurn Number: {}".format(currentPhaseID, deckLoaded, noDraw, phaseLoopCounter, phaseStops, VCactive, autoAT, turnNumber()))
                 return
         else:
             whisper("*Please load a deck and press F12 to setup your table to continue*")
     elif currentPhaseID == 1:
-        turnReady(group, x, y)
+        turnReady(group, eval(getGlobalVariable("phaseLoopCounter")), x, y)
     elif currentPhaseID == 2:
-        turnTroublemaker(group, x, y)
+        turnTroublemaker(group, eval(getGlobalVariable("phaseLoopCounter")), x, y)
     elif currentPhaseID == 3:
-        turnMain(group, x, y)
+        turnMain(group, eval(getGlobalVariable("phaseLoopCounter")), x, y)
     elif currentPhaseID == 4:
         turnScore(group, x, y)
     elif currentPhaseID == 5:
         turnEnd(group, x, y)
     else:
-        deckLoaded = eval(getGlobalVariable("deckLoadedAndSet"))
+        deckLoaded = eval(me.getGlobalVariable("deckLoadedAndSet"))
         noDraw = eval(getGlobalVariable("noDrawFirstTurn"))
-        phaseLoop = eval(getGlobalVariable("phaseLoop"))
+        phaseLoopCounter = eval(getGlobalVariable("phaseLoopCounter"))
         phaseStops = eval(getGlobalVariable("phaseStops"))
         VCactive = eval(getGlobalVariable("VillainChallengeActive"))
         autoAT = eval(getGlobalVariable("toggleAutoAT"))
         
         whisper("Phase is not within 0-5! Report this message with the following text to GameMasterLuna ASAP!\n") #A debugging note to see if players do end up here
-        whisper("Current ID: {}\nDeck Loaded: {}\nNo Draw First Turn: {}\nPhase Loop: {}\nPhase Stops: {}\nVC Active: {}\nAuto AT: {}".format(currentPhaseID, deckLoaded, noDraw, phaseLoop, phaseStops, VCactive, autoAT))
+        whisper("Current ID: {}\nDeck Loaded: {}\nNo Draw First Turn: {}\nPhase Loop: {}\nPhase Stops: {}\nVC Active: {}\nAuto AT: {}\nTurn Number: {}".format(currentPhaseID, deckLoaded, noDraw, phaseLoopCounter, phaseStops, VCactive, autoAT, turnNumber()))
         return
 
 #Phase Stop Remover
@@ -1896,6 +1910,14 @@ def toggleAutoAT(group): #Just a on/off for the Auto AT feature
     else:
         me.setGlobalVariable("toggleAutoAT", True)
         whisper("Auto AT and Color Req Check is now turned on.")
+
+def toggleAutoMeticulous(group): #Just a on/off for the Auto Meticulous feature
+    if me.getGlobalVariable("toggleAutoMeticulous") == "True":
+        me.setGlobalVariable("toggleAutoMeticulous", False)
+        whisper("Auto Meticulous is now turned off. You will still be alerted via chat if there are any Meticulous cards you can use.")
+    else:
+        me.setGlobalVariable("toggleAutoMeticulous", True)
+        whisper("Auto Meticulous is now turned on.")
 
 #---------------------------------------------------------------------------
 # Pile Actions
