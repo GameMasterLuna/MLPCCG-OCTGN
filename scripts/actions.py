@@ -120,13 +120,14 @@ def setup(group, x = 0, y = 0):
         if len(me.Deck) < 6:
             drawAmount = len(group)
         
-        for card in me.Deck.top(6):
-            card.moveTo(me.hand)
+        #Removed this to prevent automatic drawing of 6 cards for now due to sideboard addition to the game
+        #for card in me.Deck.top(6):
+            #card.moveTo(me.hand)
 
         me.counters['Points'].value = 0
         me.counters['Actions'].value = 0
 
-        notify("{} draws their opening hand of {} cards.".format(me, 6))    
+        #notify("{} draws their opening hand of {} cards.".format(me, 6))    
         notify("{} has set up their side of the table.".format(me))
 
         me.setGlobalVariable("deckLoadedAndSet", "True")
@@ -266,13 +267,14 @@ def setup(group, x = 0, y = 0):
     if len(me.Deck) < 6:
         drawAmount = len(group)
     
-    for card in me.Deck.top(6):
-        card.moveTo(me.hand)
+    #Removed this to prevent automatic drawing of 6 cards for now due to sideboard addition to the game
+    #for card in me.Deck.top(6):
+        #card.moveTo(me.hand)
 
     me.counters['Points'].value = 0
     me.counters['Actions'].value = 0
 
-    notify("{} draws their opening hand of {} cards.".format(me, 6))    
+    #notify("{} draws their opening hand of {} cards.".format(me, 6))    
     notify("{} has set up their side of the table.".format(me))
 
     me.setGlobalVariable("deckLoadedAndSet", "True")

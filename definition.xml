@@ -4,7 +4,7 @@
 	id="65656467-b709-43b2-a5c6-80c2f216adf9" 
 	octgnVersion="3.3.106.0" 
 	scriptVersion ="3.1.0.2"
-	version="2.4.0.001"
+	version="2.4.0.1"
 	markersize="16"
 	tags="My Little Pony MLP CCG" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -224,6 +224,9 @@
 		</group>
 		
 		<group name="Banished Pile" visibility="all" icon="groups/banished.png">      
+		</group>
+        
+        <group name="Sideboard Pile" visibility="none" icon="groups/sideboard.png">      
 		</group>
 
 	</player>
