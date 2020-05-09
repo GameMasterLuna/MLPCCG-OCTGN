@@ -121,13 +121,14 @@ def setup(group, x = 0, y = 0):
             drawAmount = len(group)
         
         #Removed this to prevent automatic drawing of 6 cards for now due to sideboard addition to the game
-        #for card in me.Deck.top(6):
-            #card.moveTo(me.hand)
+        #Allowed for now since idk if villain challenge will have sideboarding
+        for card in me.Deck.top(6):
+            card.moveTo(me.hand)
 
         me.counters['Points'].value = 0
         me.counters['Actions'].value = 0
 
-        #notify("{} draws their opening hand of {} cards.".format(me, 6))    
+        notify("{} draws their opening hand of {} cards.".format(me, 6))    
         notify("{} has set up their side of the table.".format(me))
 
         me.setGlobalVariable("deckLoadedAndSet", "True")
@@ -152,6 +153,16 @@ def setup(group, x = 0, y = 0):
                 card.moveTo(me.Deck)
         
         for card in me.piles['Banished Pile']: 
+            if card.Type == 'Mane Character': 
+                card.moveTo(me.hand)
+            elif card.Type == 'Mane Character Boosted': 
+                card.moveTo(me.hand)
+            elif card.Type == 'Problem': 
+                card.moveTo(me.piles['Problem Deck'])
+            else: 
+                card.moveTo(me.Deck)
+        
+        for card in me.piles['Sideboard Pile']: 
             if card.Type == 'Mane Character': 
                 card.moveTo(me.hand)
             elif card.Type == 'Mane Character Boosted': 
@@ -260,21 +271,38 @@ def setup(group, x = 0, y = 0):
     if ManeCheck != 1:
         notify("{}: Invalid Setup! Must have exactly one copy of a Mane Character in your deck!".format(me))
         return
-
+        
+    #Sideboard function
+    if confirm("Do you have cards in your deck that you want to sideboard?"):
+        #Create cardDlg object
+        dlg = cardDlg(me.piles['Sideboard Pile'], me.Deck)
+        dlg.title = "Choose Sideboard Cards"
+        dlg.text = "Select 1-5 cards to be moved to the sideboard"
+        dlg.label = "Sideboard:" #Label text for sideboard
+        dlg.bottomLabel = "Deck:" #Label text for deck
+        dlg.min = 1 #Min amt of cards that can be in the sideboard pile
+        dlg.max = 5 #Max amt of cards that can be in the sideboard pile
+        dlg.show() #Show the dialog box
+        
+        #Move the cards selected into the sideboard pile
+        for c in dlg.list:
+            c.moveTo(me.piles['Sideboard Pile'])
+        if len(dlg.list) != 0:
+            notify("{} moved {} card(s) to their sideboard.".format(me, len(dlg.list)))
+        
     shuffle(me.Deck)
     
     if len(me.Deck) == 0: return
     if len(me.Deck) < 6:
         drawAmount = len(group)
     
-    #Removed this to prevent automatic drawing of 6 cards for now due to sideboard addition to the game
-    #for card in me.Deck.top(6):
-        #card.moveTo(me.hand)
+    for card in me.Deck.top(6):
+        card.moveTo(me.hand)
 
     me.counters['Points'].value = 0
     me.counters['Actions'].value = 0
 
-    #notify("{} draws their opening hand of {} cards.".format(me, 6))    
+    notify("{} draws their opening hand of {} cards.".format(me, 6))
     notify("{} has set up their side of the table.".format(me))
 
     me.setGlobalVariable("deckLoadedAndSet", "True")

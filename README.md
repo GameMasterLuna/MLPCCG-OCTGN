@@ -2,9 +2,9 @@
 
 This is the current updated game definition source code for MLPCCG on OCTGN. The Master branch is used for testing builds while the Live branch is used for hosting the game's current build.
 
-If you are looking for patch notes of official updates for the game, please visit http://www.octgngames.com/mlpccg
+If you are looking for patch notes of official updates for the game, please visit the discord group at https://discord.gg/QkGx4FT
 
-If you find any bug/issues with the game, please report it in the issue section or in the discord group (https://discord.gg/QkGx4FT)
+If you find any bug/issues with the game, please report it in the issue section or in the discord group
 
 Contributors are welcomed but any user-submitted code/changes will be reviewed in the Master branch before being merged into the Live branch.
 

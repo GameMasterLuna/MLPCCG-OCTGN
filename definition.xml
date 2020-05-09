@@ -4,16 +4,17 @@
 	id="65656467-b709-43b2-a5c6-80c2f216adf9" 
 	octgnVersion="3.3.106.0" 
 	scriptVersion ="3.1.0.2"
-	version="2.4.0.1"
+	version="2.4.0.2"
 	markersize="16"
 	tags="My Little Pony MLP CCG" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	description="My Little Pony CCG for two players.
-	&#xD;&#xD;Set in the magical land of Equestria, two players compete to see who can form the best teams and solve the most problems."
+	&#xD;&#xD;Set in the magical land of Equestria, two players compete to see who can form the best teams and solve the most problems.
+    &#xD;&#xD;If you have any questions or suggestions, feel free to join the Discord server at https://discord.gg/QkGx4FT"
 	authors="Gabby Gums/GameMasterLuna" 
 	iconurl="http://i.imgur.com/yb30u50.jpg" 
-	setsurl="http://octgn.gamersjudgement.com/wordpress/mlpccg" 
-	gameurl="http://octgn.gamersjudgement.com/wordpress/mlpccg">
+	setsurl="https://discord.gg/QkGx4FT" 
+	gameurl="https://discord.gg/QkGx4FT">
 
 	<scripts>
 		<script src="scripts/actions.py" />
